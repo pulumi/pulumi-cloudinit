@@ -1,0 +1,25 @@
+{
+    "name": "@pulumi/cloudinit",
+    "version": "${VERSION}",
+    "description": "A Pulumi package for creating and managing cloudinit cloud resources.",
+    "keywords": [
+        "pulumi",
+        "cloudinit"
+    ],
+    "homepage": "https://pulumi.io",
+    "repository": "https://github.com/pulumi/pulumi-cloudinit",
+    "license": "Apache-2.0",
+    "scripts": {
+        "build": "tsc"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^2.15.0"
+    },
+    "devDependencies": {
+        "@types/mime": "^2.0.0",
+        "@types/node": "^8.0.25"
+    },
+    "pulumi": {
+        "resource": true
+    }
+}
