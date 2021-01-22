@@ -2,6 +2,9 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Initial creation of the provider against v2.1.0 of the CloudInit Terraform Provider
+_(none)_
 
 ---
+
+## 0.1.0 (2021-01-22)
+* Initial creation of the provider against v2.1.0 of the CloudInit Terraform Provider
