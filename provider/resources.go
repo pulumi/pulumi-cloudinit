@@ -17,10 +17,10 @@ package cloudinit
 import (
 	"unicode"
 
+	"github.com/hashicorp/terraform-provider-cloudinit/shim"
 	"github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfbridge"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/hashicorp/terraform-provider-cloudinit/shim"
 )
 
 // all of the token components used below.
@@ -71,9 +71,9 @@ func Provider() tfbridge.ProviderInfo {
 		License:     "Apache-2.0",
 		Homepage:    "https://pulumi.io",
 		Repository:  "https://github.com/pulumi/pulumi-cloudinit",
-		GitHubOrg: "hashicorp",
+		GitHubOrg:   "hashicorp",
 		Config:      map[string]*tfbridge.SchemaInfo{},
-		Resources:            map[string]*tfbridge.ResourceInfo{
+		Resources: map[string]*tfbridge.ResourceInfo{
 			"cloudinit_config": {Tok: makeResource(mainMod, "Config")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
