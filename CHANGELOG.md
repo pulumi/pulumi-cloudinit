@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+*+ Regenerate Go SDK to remove duplicate functionality
 
 ---
 
