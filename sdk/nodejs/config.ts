@@ -52,7 +52,8 @@ export class Config extends pulumi.CustomResource {
     constructor(name: string, args: ConfigArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConfigArgs | ConfigState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as ConfigState | undefined;
             inputs["base64Encode"] = state ? state.base64Encode : undefined;
             inputs["boundary"] = state ? state.boundary : undefined;
@@ -61,7 +62,7 @@ export class Config extends pulumi.CustomResource {
             inputs["rendered"] = state ? state.rendered : undefined;
         } else {
             const args = argsOrState as ConfigArgs | undefined;
-            if ((!args || args.parts === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.parts === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'parts'");
             }
             inputs["base64Encode"] = args ? args.base64Encode : undefined;
@@ -70,12 +71,8 @@ export class Config extends pulumi.CustomResource {
             inputs["parts"] = args ? args.parts : undefined;
             inputs["rendered"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Config.__pulumiType, name, inputs, opts);
     }
