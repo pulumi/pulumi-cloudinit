@@ -5,15 +5,70 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities, _tables
 from . import outputs
 from ._inputs import *
 
-__all__ = ['Config']
+__all__ = ['ConfigArgs', 'Config']
+
+@pulumi.input_type
+class ConfigArgs:
+    def __init__(__self__, *,
+                 parts: pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]],
+                 base64_encode: Optional[pulumi.Input[bool]] = None,
+                 boundary: Optional[pulumi.Input[str]] = None,
+                 gzip: Optional[pulumi.Input[bool]] = None):
+        """
+        The set of arguments for constructing a Config resource.
+        """
+        pulumi.set(__self__, "parts", parts)
+        if base64_encode is not None:
+            pulumi.set(__self__, "base64_encode", base64_encode)
+        if boundary is not None:
+            pulumi.set(__self__, "boundary", boundary)
+        if gzip is not None:
+            pulumi.set(__self__, "gzip", gzip)
+
+    @property
+    @pulumi.getter
+    def parts(self) -> pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]:
+        return pulumi.get(self, "parts")
+
+    @parts.setter
+    def parts(self, value: pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]):
+        pulumi.set(self, "parts", value)
+
+    @property
+    @pulumi.getter(name="base64Encode")
+    def base64_encode(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "base64_encode")
+
+    @base64_encode.setter
+    def base64_encode(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "base64_encode", value)
+
+    @property
+    @pulumi.getter
+    def boundary(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "boundary")
+
+    @boundary.setter
+    def boundary(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "boundary", value)
+
+    @property
+    @pulumi.getter
+    def gzip(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "gzip")
+
+    @gzip.setter
+    def gzip(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "gzip", value)
 
 
 class Config(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -29,6 +84,36 @@ class Config(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: ConfigArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Create a Config resource with the given unique name, props, and options.
+        :param str resource_name: The name of the resource.
+        :param ConfigArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(ConfigArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 base64_encode: Optional[pulumi.Input[bool]] = None,
+                 boundary: Optional[pulumi.Input[str]] = None,
+                 gzip: Optional[pulumi.Input[bool]] = None,
+                 parts: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConfigPartArgs']]]]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__
