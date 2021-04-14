@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 
 __all__ = [
     'ConfigPart',
@@ -15,6 +15,25 @@ __all__ = [
 
 @pulumi.output_type
 class ConfigPart(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "contentType":
+            suggest = "content_type"
+        elif key == "mergeType":
+            suggest = "merge_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConfigPart. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConfigPart.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConfigPart.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  content: str,
                  content_type: Optional[str] = None,
@@ -47,9 +66,6 @@ class ConfigPart(dict):
     @pulumi.getter(name="mergeType")
     def merge_type(self) -> Optional[str]:
         return pulumi.get(self, "merge_type")
-
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
 
 @pulumi.output_type
