@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -65,6 +65,78 @@ class ConfigArgs:
     @gzip.setter
     def gzip(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "gzip", value)
+
+
+@pulumi.input_type
+class _ConfigState:
+    def __init__(__self__, *,
+                 base64_encode: Optional[pulumi.Input[bool]] = None,
+                 boundary: Optional[pulumi.Input[str]] = None,
+                 gzip: Optional[pulumi.Input[bool]] = None,
+                 parts: Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]] = None,
+                 rendered: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering Config resources.
+        :param pulumi.Input[str] rendered: rendered cloudinit configuration
+        """
+        if base64_encode is not None:
+            pulumi.set(__self__, "base64_encode", base64_encode)
+        if boundary is not None:
+            pulumi.set(__self__, "boundary", boundary)
+        if gzip is not None:
+            pulumi.set(__self__, "gzip", gzip)
+        if parts is not None:
+            pulumi.set(__self__, "parts", parts)
+        if rendered is not None:
+            pulumi.set(__self__, "rendered", rendered)
+
+    @property
+    @pulumi.getter(name="base64Encode")
+    def base64_encode(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "base64_encode")
+
+    @base64_encode.setter
+    def base64_encode(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "base64_encode", value)
+
+    @property
+    @pulumi.getter
+    def boundary(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "boundary")
+
+    @boundary.setter
+    def boundary(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "boundary", value)
+
+    @property
+    @pulumi.getter
+    def gzip(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "gzip")
+
+    @gzip.setter
+    def gzip(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "gzip", value)
+
+    @property
+    @pulumi.getter
+    def parts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]]:
+        return pulumi.get(self, "parts")
+
+    @parts.setter
+    def parts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]]):
+        pulumi.set(self, "parts", value)
+
+    @property
+    @pulumi.getter
+    def rendered(self) -> Optional[pulumi.Input[str]]:
+        """
+        rendered cloudinit configuration
+        """
+        return pulumi.get(self, "rendered")
+
+    @rendered.setter
+    def rendered(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "rendered", value)
 
 
 class Config(pulumi.CustomResource):
@@ -129,15 +201,15 @@ class Config(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = ConfigArgs.__new__(ConfigArgs)
 
-            __props__['base64_encode'] = base64_encode
-            __props__['boundary'] = boundary
-            __props__['gzip'] = gzip
+            __props__.__dict__["base64_encode"] = base64_encode
+            __props__.__dict__["boundary"] = boundary
+            __props__.__dict__["gzip"] = gzip
             if parts is None and not opts.urn:
                 raise TypeError("Missing required property 'parts'")
-            __props__['parts'] = parts
-            __props__['rendered'] = None
+            __props__.__dict__["parts"] = parts
+            __props__.__dict__["rendered"] = None
         super(Config, __self__).__init__(
             'cloudinit:index/config:Config',
             resource_name,
@@ -164,13 +236,13 @@ class Config(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _ConfigState.__new__(_ConfigState)
 
-        __props__["base64_encode"] = base64_encode
-        __props__["boundary"] = boundary
-        __props__["gzip"] = gzip
-        __props__["parts"] = parts
-        __props__["rendered"] = rendered
+        __props__.__dict__["base64_encode"] = base64_encode
+        __props__.__dict__["boundary"] = boundary
+        __props__.__dict__["gzip"] = gzip
+        __props__.__dict__["parts"] = parts
+        __props__.__dict__["rendered"] = rendered
         return Config(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -200,10 +272,4 @@ class Config(pulumi.CustomResource):
         rendered cloudinit configuration
         """
         return pulumi.get(self, "rendered")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 
