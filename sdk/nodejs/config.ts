@@ -82,22 +82,22 @@ export class Config extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Config resources.
  */
 export interface ConfigState {
-    readonly base64Encode?: pulumi.Input<boolean>;
-    readonly boundary?: pulumi.Input<string>;
-    readonly gzip?: pulumi.Input<boolean>;
-    readonly parts?: pulumi.Input<pulumi.Input<inputs.ConfigPart>[]>;
+    base64Encode?: pulumi.Input<boolean>;
+    boundary?: pulumi.Input<string>;
+    gzip?: pulumi.Input<boolean>;
+    parts?: pulumi.Input<pulumi.Input<inputs.ConfigPart>[]>;
     /**
      * rendered cloudinit configuration
      */
-    readonly rendered?: pulumi.Input<string>;
+    rendered?: pulumi.Input<string>;
 }
 
 /**
  * The set of arguments for constructing a Config resource.
  */
 export interface ConfigArgs {
-    readonly base64Encode?: pulumi.Input<boolean>;
-    readonly boundary?: pulumi.Input<string>;
-    readonly gzip?: pulumi.Input<boolean>;
-    readonly parts: pulumi.Input<pulumi.Input<inputs.ConfigPart>[]>;
+    base64Encode?: pulumi.Input<boolean>;
+    boundary?: pulumi.Input<string>;
+    gzip?: pulumi.Input<boolean>;
+    parts: pulumi.Input<pulumi.Input<inputs.ConfigPart>[]>;
 }
