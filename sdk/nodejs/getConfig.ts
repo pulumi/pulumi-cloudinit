@@ -33,7 +33,7 @@ import * as utilities from "./utilities";
  *         contentType: "text/x-shellscript",
  *         filename: "foobar.sh",
  *     }],
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getConfig(args: GetConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigResult> {
@@ -60,22 +60,22 @@ export interface GetConfigArgs {
      * Base64 encoding of the rendered output. Defaults to `true`,
      * and cannot be disabled if `gzip` is `true`.
      */
-    readonly base64Encode?: boolean;
+    base64Encode?: boolean;
     /**
      * Define the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
      */
-    readonly boundary?: string;
+    boundary?: string;
     /**
      * Specify whether or not to gzip the rendered output. Defaults to `true`.
      */
-    readonly gzip?: boolean;
+    gzip?: boolean;
     /**
      * A nested block type which adds a file to the generated
      * cloud-init configuration. Use multiple `part` blocks to specify multiple
      * files, which will be included in order of declaration in the final MIME
      * document.
      */
-    readonly parts: inputs.GetConfigPart[];
+    parts: inputs.GetConfigPart[];
 }
 
 /**
