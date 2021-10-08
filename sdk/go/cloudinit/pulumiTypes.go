@@ -250,6 +250,10 @@ func (o GetConfigPartArrayOutput) Index(i pulumi.IntInput) GetConfigPartOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigPartInput)(nil)).Elem(), ConfigPartArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConfigPartArrayInput)(nil)).Elem(), ConfigPartArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigPartInput)(nil)).Elem(), GetConfigPartArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigPartArrayInput)(nil)).Elem(), GetConfigPartArray{})
 	pulumi.RegisterOutputType(ConfigPartOutput{})
 	pulumi.RegisterOutputType(ConfigPartArrayOutput{})
 	pulumi.RegisterOutputType(GetConfigPartOutput{})

@@ -30,3 +30,23 @@ export interface GetConfigPart {
      */
     mergeType?: string;
 }
+
+export interface GetConfigPartArgs {
+    /**
+     * Body content for the part.
+     */
+    content: pulumi.Input<string>;
+    /**
+     * A MIME-style content type to report in the header for the part.
+     */
+    contentType?: pulumi.Input<string>;
+    /**
+     * A filename to report in the header for the part.
+     */
+    filename?: pulumi.Input<string>;
+    /**
+     * A value for the `X-Merge-Type` header of the part,
+     * to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+     */
+    mergeType?: pulumi.Input<string>;
+}
