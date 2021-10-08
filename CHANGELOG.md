@@ -6,6 +6,9 @@ _(none)_
 
 ---
 
+## 1.2.1 (2021-10-08)
+* Upgrade the version of pulumi/pulumi in the go sdk dependency
+
 ## 1.2.0 (2021-10-08)
 * Upgrade to v3.9.0 of the pulumi-terraform-bridge. This includes a change to emit input type registrations.
 
