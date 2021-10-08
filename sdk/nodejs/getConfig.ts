@@ -95,3 +95,33 @@ export interface GetConfigResult {
      */
     readonly rendered: string;
 }
+
+export function getConfigOutput(args: GetConfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConfigResult> {
+    return pulumi.output(args).apply(a => getConfig(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getConfig.
+ */
+export interface GetConfigOutputArgs {
+    /**
+     * Base64 encoding of the rendered output. Defaults to `true`,
+     * and cannot be disabled if `gzip` is `true`.
+     */
+    base64Encode?: pulumi.Input<boolean>;
+    /**
+     * Define the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+     */
+    boundary?: pulumi.Input<string>;
+    /**
+     * Specify whether or not to gzip the rendered output. Defaults to `true`.
+     */
+    gzip?: pulumi.Input<boolean>;
+    /**
+     * A nested block type which adds a file to the generated
+     * cloud-init configuration. Use multiple `part` blocks to specify multiple
+     * files, which will be included in order of declaration in the final MIME
+     * document.
+     */
+    parts: pulumi.Input<pulumi.Input<inputs.GetConfigPartArgs>[]>;
+}

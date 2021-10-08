@@ -30,3 +30,4 @@ export interface GetConfigPart {
      */
     mergeType?: string;
 }
+

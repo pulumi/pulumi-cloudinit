@@ -14,6 +14,7 @@ __all__ = [
     'GetConfigResult',
     'AwaitableGetConfigResult',
     'get_config',
+    'get_config_output',
 ]
 
 @pulumi.output_type
@@ -154,3 +155,51 @@ def get_config(base64_encode: Optional[bool] = None,
         id=__ret__.id,
         parts=__ret__.parts,
         rendered=__ret__.rendered)
+
+
+@_utilities.lift_output_func(get_config)
+def get_config_output(base64_encode: Optional[pulumi.Input[Optional[bool]]] = None,
+                      boundary: Optional[pulumi.Input[Optional[str]]] = None,
+                      gzip: Optional[pulumi.Input[Optional[bool]]] = None,
+                      parts: Optional[pulumi.Input[Sequence[pulumi.InputType['GetConfigPartArgs']]]] = None,
+                      opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetConfigResult]:
+    """
+    Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
+    for use with [cloud-init](https://cloudinit.readthedocs.io/).
+
+    Cloud-init is a commonly-used startup configuration utility for cloud compute
+    instances. It accepts configuration via provider-specific user data mechanisms,
+    such as `user_data` for Amazon EC2 instances. Multipart MIME is one of the
+    data formats it accepts. For more information, see
+    [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html)
+    in the cloud-init manual.
+
+    This is not a generalized utility for producing multipart MIME messages. Its
+    featureset is specialized for the features of cloud-init.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cloudinit as cloudinit
+
+    foo = cloudinit.get_config(base64_encode=False,
+        gzip=False,
+        parts=[cloudinit.GetConfigPartArgs(
+            content="baz",
+            content_type="text/x-shellscript",
+            filename="foobar.sh",
+        )])
+    ```
+
+
+    :param bool base64_encode: Base64 encoding of the rendered output. Defaults to `true`,
+           and cannot be disabled if `gzip` is `true`.
+    :param str boundary: Define the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+    :param bool gzip: Specify whether or not to gzip the rendered output. Defaults to `true`.
+    :param Sequence[pulumi.InputType['GetConfigPartArgs']] parts: A nested block type which adds a file to the generated
+           cloud-init configuration. Use multiple `part` blocks to specify multiple
+           files, which will be included in order of declaration in the final MIME
+           document.
+    """
+    ...
