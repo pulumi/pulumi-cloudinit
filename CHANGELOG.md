@@ -6,6 +6,9 @@ _(none)_
 
 ---
 
+## 1.2.2 (2021-10-11)
+* Ensuring sdk dependency on pulumi/pulumi is 3.14.0
+
 ## 1.2.1 (2021-10-08)
 * Upgrade the version of pulumi/pulumi in the go sdk dependency
 
