@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
-using Pulumi.Utilities;
 
 namespace Pulumi.CloudInit
 {
@@ -60,7 +59,7 @@ namespace Pulumi.CloudInit
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetConfigResult> InvokeAsync(GetConfigArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetConfigResult>("cloudinit:index/getConfig:getConfig", args ?? new GetConfigArgs(), options.WithVersion());
+            => Pulumi.Deployment.Instance.InvokeAsync<GetConfigResult>("cloudinit:index/getConfig:getConfig", args ?? new GetConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
@@ -110,7 +109,7 @@ namespace Pulumi.CloudInit
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetConfigResult> Invoke(GetConfigInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetConfigResult>("cloudinit:index/getConfig:getConfig", args ?? new GetConfigInvokeArgs(), options.WithVersion());
+            => Pulumi.Deployment.Instance.Invoke<GetConfigResult>("cloudinit:index/getConfig:getConfig", args ?? new GetConfigInvokeArgs(), options.WithDefaults());
     }
 
 
