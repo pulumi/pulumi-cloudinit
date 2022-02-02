@@ -51,30 +51,28 @@ export class Config extends pulumi.CustomResource {
      */
     constructor(name: string, args: ConfigArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConfigArgs | ConfigState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConfigState | undefined;
-            inputs["base64Encode"] = state ? state.base64Encode : undefined;
-            inputs["boundary"] = state ? state.boundary : undefined;
-            inputs["gzip"] = state ? state.gzip : undefined;
-            inputs["parts"] = state ? state.parts : undefined;
-            inputs["rendered"] = state ? state.rendered : undefined;
+            resourceInputs["base64Encode"] = state ? state.base64Encode : undefined;
+            resourceInputs["boundary"] = state ? state.boundary : undefined;
+            resourceInputs["gzip"] = state ? state.gzip : undefined;
+            resourceInputs["parts"] = state ? state.parts : undefined;
+            resourceInputs["rendered"] = state ? state.rendered : undefined;
         } else {
             const args = argsOrState as ConfigArgs | undefined;
             if ((!args || args.parts === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'parts'");
             }
-            inputs["base64Encode"] = args ? args.base64Encode : undefined;
-            inputs["boundary"] = args ? args.boundary : undefined;
-            inputs["gzip"] = args ? args.gzip : undefined;
-            inputs["parts"] = args ? args.parts : undefined;
-            inputs["rendered"] = undefined /*out*/;
+            resourceInputs["base64Encode"] = args ? args.base64Encode : undefined;
+            resourceInputs["boundary"] = args ? args.boundary : undefined;
+            resourceInputs["gzip"] = args ? args.gzip : undefined;
+            resourceInputs["parts"] = args ? args.parts : undefined;
+            resourceInputs["rendered"] = undefined /*out*/;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(Config.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(Config.__pulumiType, name, resourceInputs, opts);
     }
 }
 

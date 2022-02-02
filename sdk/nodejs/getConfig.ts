@@ -41,9 +41,7 @@ export function getConfig(args: GetConfigArgs, opts?: pulumi.InvokeOptions): Pro
         opts = {}
     }
 
-    if (!opts.version) {
-        opts.version = utilities.getVersion();
-    }
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
     return pulumi.runtime.invoke("cloudinit:index/getConfig:getConfig", {
         "base64Encode": args.base64Encode,
         "boundary": args.boundary,
