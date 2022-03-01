@@ -35,16 +35,14 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		opt0 := false
-// 		opt1 := false
 // 		_, err := cloudinit.LookupConfig(ctx, &GetConfigArgs{
-// 			Base64Encode: &opt0,
-// 			Gzip:         &opt1,
+// 			Base64Encode: pulumi.BoolRef(false),
+// 			Gzip:         pulumi.BoolRef(false),
 // 			Parts: []GetConfigPart{
 // 				GetConfigPart{
 // 					Content:     "baz",
-// 					ContentType: "text/x-shellscript",
-// 					Filename:    "foobar.sh",
+// 					ContentType: pulumi.StringRef("text/x-shellscript"),
+// 					Filename:    pulumi.StringRef("foobar.sh"),
 // 				},
 // 			},
 // 		}, nil)
