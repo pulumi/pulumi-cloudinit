@@ -116,7 +116,7 @@ func (i *Config) ToConfigOutputWithContext(ctx context.Context) ConfigOutput {
 // ConfigArrayInput is an input type that accepts ConfigArray and ConfigArrayOutput values.
 // You can construct a concrete instance of `ConfigArrayInput` via:
 //
-//          ConfigArray{ ConfigArgs{...} }
+//	ConfigArray{ ConfigArgs{...} }
 type ConfigArrayInput interface {
 	pulumi.Input
 
@@ -141,7 +141,7 @@ func (i ConfigArray) ToConfigArrayOutputWithContext(ctx context.Context) ConfigA
 // ConfigMapInput is an input type that accepts ConfigMap and ConfigMapOutput values.
 // You can construct a concrete instance of `ConfigMapInput` via:
 //
-//          ConfigMap{ "key": ConfigArgs{...} }
+//	ConfigMap{ "key": ConfigArgs{...} }
 type ConfigMapInput interface {
 	pulumi.Input
 
@@ -175,6 +175,27 @@ func (o ConfigOutput) ToConfigOutput() ConfigOutput {
 
 func (o ConfigOutput) ToConfigOutputWithContext(ctx context.Context) ConfigOutput {
 	return o
+}
+
+func (o ConfigOutput) Base64Encode() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Config) pulumi.BoolPtrOutput { return v.Base64Encode }).(pulumi.BoolPtrOutput)
+}
+
+func (o ConfigOutput) Boundary() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Config) pulumi.StringPtrOutput { return v.Boundary }).(pulumi.StringPtrOutput)
+}
+
+func (o ConfigOutput) Gzip() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Config) pulumi.BoolPtrOutput { return v.Gzip }).(pulumi.BoolPtrOutput)
+}
+
+func (o ConfigOutput) Parts() ConfigPartArrayOutput {
+	return o.ApplyT(func(v *Config) ConfigPartArrayOutput { return v.Parts }).(ConfigPartArrayOutput)
+}
+
+// rendered cloudinit configuration
+func (o ConfigOutput) Rendered() pulumi.StringOutput {
+	return o.ApplyT(func(v *Config) pulumi.StringOutput { return v.Rendered }).(pulumi.StringOutput)
 }
 
 type ConfigArrayOutput struct{ *pulumi.OutputState }

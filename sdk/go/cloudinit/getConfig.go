@@ -29,29 +29,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-cloudinit/sdk/go/cloudinit"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/pulumi/pulumi-cloudinit/sdk/go/cloudinit"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := cloudinit.LookupConfig(ctx, &GetConfigArgs{
-// 			Base64Encode: pulumi.BoolRef(false),
-// 			Gzip:         pulumi.BoolRef(false),
-// 			Parts: []GetConfigPart{
-// 				GetConfigPart{
-// 					Content:     "baz",
-// 					ContentType: pulumi.StringRef("text/x-shellscript"),
-// 					Filename:    pulumi.StringRef("foobar.sh"),
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cloudinit.LookupConfig(ctx, &GetConfigArgs{
+//				Base64Encode: pulumi.BoolRef(false),
+//				Gzip:         pulumi.BoolRef(false),
+//				Parts: []GetConfigPart{
+//					GetConfigPart{
+//						Content:     "baz",
+//						ContentType: pulumi.StringRef("text/x-shellscript"),
+//						Filename:    pulumi.StringRef("foobar.sh"),
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupConfig(ctx *pulumi.Context, args *LookupConfigArgs, opts ...pulumi.InvokeOption) (*LookupConfigResult, error) {
 	var rv LookupConfigResult

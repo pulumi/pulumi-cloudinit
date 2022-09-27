@@ -20,7 +20,7 @@ type ConfigPart struct {
 // ConfigPartInput is an input type that accepts ConfigPartArgs and ConfigPartOutput values.
 // You can construct a concrete instance of `ConfigPartInput` via:
 //
-//          ConfigPartArgs{...}
+//	ConfigPartArgs{...}
 type ConfigPartInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i ConfigPartArgs) ToConfigPartOutputWithContext(ctx context.Context) Confi
 // ConfigPartArrayInput is an input type that accepts ConfigPartArray and ConfigPartArrayOutput values.
 // You can construct a concrete instance of `ConfigPartArrayInput` via:
 //
-//          ConfigPartArray{ ConfigPartArgs{...} }
+//	ConfigPartArray{ ConfigPartArgs{...} }
 type ConfigPartArrayInput interface {
 	pulumi.Input
 
@@ -137,7 +137,7 @@ type GetConfigPart struct {
 // GetConfigPartInput is an input type that accepts GetConfigPartArgs and GetConfigPartOutput values.
 // You can construct a concrete instance of `GetConfigPartInput` via:
 //
-//          GetConfigPartArgs{...}
+//	GetConfigPartArgs{...}
 type GetConfigPartInput interface {
 	pulumi.Input
 
@@ -172,7 +172,7 @@ func (i GetConfigPartArgs) ToGetConfigPartOutputWithContext(ctx context.Context)
 // GetConfigPartArrayInput is an input type that accepts GetConfigPartArray and GetConfigPartArrayOutput values.
 // You can construct a concrete instance of `GetConfigPartArrayInput` via:
 //
-//          GetConfigPartArray{ GetConfigPartArgs{...} }
+//	GetConfigPartArray{ GetConfigPartArgs{...} }
 type GetConfigPartArrayInput interface {
 	pulumi.Input
 

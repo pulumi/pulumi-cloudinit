@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.CloudInit.Inputs
 {
 
-    public sealed class ConfigPartGetArgs : Pulumi.ResourceArgs
+    public sealed class ConfigPartGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("content", required: true)]
         public Input<string> Content { get; set; } = null!;
@@ -27,5 +27,6 @@ namespace Pulumi.CloudInit.Inputs
         public ConfigPartGetArgs()
         {
         }
+        public static new ConfigPartGetArgs Empty => new ConfigPartGetArgs();
     }
 }

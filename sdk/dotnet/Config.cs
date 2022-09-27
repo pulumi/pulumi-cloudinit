@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.CloudInit
 {
     [CloudInitResourceType("cloudinit:index/config:Config")]
-    public partial class Config : Pulumi.CustomResource
+    public partial class Config : global::Pulumi.CustomResource
     {
         [Output("base64Encode")]
         public Output<bool?> Base64Encode { get; private set; } = null!;
@@ -74,7 +74,7 @@ namespace Pulumi.CloudInit
         }
     }
 
-    public sealed class ConfigArgs : Pulumi.ResourceArgs
+    public sealed class ConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("base64Encode")]
         public Input<bool>? Base64Encode { get; set; }
@@ -96,9 +96,10 @@ namespace Pulumi.CloudInit
         public ConfigArgs()
         {
         }
+        public static new ConfigArgs Empty => new ConfigArgs();
     }
 
-    public sealed class ConfigState : Pulumi.ResourceArgs
+    public sealed class ConfigState : global::Pulumi.ResourceArgs
     {
         [Input("base64Encode")]
         public Input<bool>? Base64Encode { get; set; }
@@ -126,5 +127,6 @@ namespace Pulumi.CloudInit
         public ConfigState()
         {
         }
+        public static new ConfigState Empty => new ConfigState();
     }
 }

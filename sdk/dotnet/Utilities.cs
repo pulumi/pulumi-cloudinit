@@ -74,7 +74,7 @@ namespace Pulumi.CloudInit
         }
     }
 
-    internal sealed class CloudInitResourceTypeAttribute : Pulumi.ResourceTypeAttribute
+    internal sealed class CloudInitResourceTypeAttribute : global::Pulumi.ResourceTypeAttribute
     {
         public CloudInitResourceTypeAttribute(string type) : base(type, Utilities.Version)
         {

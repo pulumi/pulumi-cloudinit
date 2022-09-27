@@ -30,36 +30,34 @@ namespace Pulumi.CloudInit
         /// {{% example %}}
         /// 
         /// ```csharp
+        /// using System.Collections.Generic;
         /// using Pulumi;
         /// using CloudInit = Pulumi.CloudInit;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = CloudInit.GetConfig.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(CloudInit.GetConfig.InvokeAsync(new CloudInit.GetConfigArgs
+        ///         Base64Encode = false,
+        ///         Gzip = false,
+        ///         Parts = new[]
         ///         {
-        ///             Base64Encode = false,
-        ///             Gzip = false,
-        ///             Parts = 
+        ///             new CloudInit.Inputs.GetConfigPartInputArgs
         ///             {
-        ///                 new CloudInit.Inputs.GetConfigPartArgs
-        ///                 {
-        ///                     Content = "baz",
-        ///                     ContentType = "text/x-shellscript",
-        ///                     Filename = "foobar.sh",
-        ///                 },
+        ///                 Content = "baz",
+        ///                 ContentType = "text/x-shellscript",
+        ///                 Filename = "foobar.sh",
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
         /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetConfigResult> InvokeAsync(GetConfigArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetConfigResult>("cloudinit:index/getConfig:getConfig", args ?? new GetConfigArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetConfigResult>("cloudinit:index/getConfig:getConfig", args ?? new GetConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
@@ -80,40 +78,38 @@ namespace Pulumi.CloudInit
         /// {{% example %}}
         /// 
         /// ```csharp
+        /// using System.Collections.Generic;
         /// using Pulumi;
         /// using CloudInit = Pulumi.CloudInit;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = CloudInit.GetConfig.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(CloudInit.GetConfig.InvokeAsync(new CloudInit.GetConfigArgs
+        ///         Base64Encode = false,
+        ///         Gzip = false,
+        ///         Parts = new[]
         ///         {
-        ///             Base64Encode = false,
-        ///             Gzip = false,
-        ///             Parts = 
+        ///             new CloudInit.Inputs.GetConfigPartInputArgs
         ///             {
-        ///                 new CloudInit.Inputs.GetConfigPartArgs
-        ///                 {
-        ///                     Content = "baz",
-        ///                     ContentType = "text/x-shellscript",
-        ///                     Filename = "foobar.sh",
-        ///                 },
+        ///                 Content = "baz",
+        ///                 ContentType = "text/x-shellscript",
+        ///                 Filename = "foobar.sh",
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
         /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetConfigResult> Invoke(GetConfigInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetConfigResult>("cloudinit:index/getConfig:getConfig", args ?? new GetConfigInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetConfigResult>("cloudinit:index/getConfig:getConfig", args ?? new GetConfigInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Base64 encoding of the rendered output. Defaults to `true`,
@@ -152,9 +148,10 @@ namespace Pulumi.CloudInit
         public GetConfigArgs()
         {
         }
+        public static new GetConfigArgs Empty => new GetConfigArgs();
     }
 
-    public sealed class GetConfigInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Base64 encoding of the rendered output. Defaults to `true`,
@@ -193,6 +190,7 @@ namespace Pulumi.CloudInit
         public GetConfigInvokeArgs()
         {
         }
+        public static new GetConfigInvokeArgs Empty => new GetConfigInvokeArgs();
     }
 
 
