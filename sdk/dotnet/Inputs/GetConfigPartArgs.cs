@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.CloudInit.Inputs
 {
 
-    public sealed class GetConfigPartInputArgs : Pulumi.ResourceArgs
+    public sealed class GetConfigPartInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Body content for the part.
@@ -40,5 +40,6 @@ namespace Pulumi.CloudInit.Inputs
         public GetConfigPartInputArgs()
         {
         }
+        public static new GetConfigPartInputArgs Empty => new GetConfigPartInputArgs();
     }
 }
