@@ -9,6 +9,8 @@ using Pulumi.Serialization;
 
 namespace Pulumi.CloudInit
 {
+    [Obsolete(@"This resource is deprecated.
+Please use the getConfig data source instead.")]
     [CloudInitResourceType("cloudinit:index/config:Config")]
     public partial class Config : global::Pulumi.CustomResource
     {

@@ -17,27 +17,35 @@ import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
 
+/**
+ * @deprecated
+ * This resource is deprecated.
+ * Please use the getConfig data source instead.
+ * 
+ */
+@Deprecated /* This resource is deprecated.
+Please use the getConfig data source instead. */
 @ResourceType(type="cloudinit:index/config:Config")
 public class Config extends com.pulumi.resources.CustomResource {
-    @Export(name="base64Encode", type=Boolean.class, parameters={})
+    @Export(name="base64Encode", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> base64Encode;
 
     public Output<Optional<Boolean>> base64Encode() {
         return Codegen.optional(this.base64Encode);
     }
-    @Export(name="boundary", type=String.class, parameters={})
+    @Export(name="boundary", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> boundary;
 
     public Output<Optional<String>> boundary() {
         return Codegen.optional(this.boundary);
     }
-    @Export(name="gzip", type=Boolean.class, parameters={})
+    @Export(name="gzip", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> gzip;
 
     public Output<Optional<Boolean>> gzip() {
         return Codegen.optional(this.gzip);
     }
-    @Export(name="parts", type=List.class, parameters={ConfigPart.class})
+    @Export(name="parts", refs={List.class,ConfigPart.class}, tree="[0,1]")
     private Output<List<ConfigPart>> parts;
 
     public Output<List<ConfigPart>> parts() {
@@ -47,7 +55,7 @@ public class Config extends com.pulumi.resources.CustomResource {
      * rendered cloudinit configuration
      * 
      */
-    @Export(name="rendered", type=String.class, parameters={})
+    @Export(name="rendered", refs={String.class}, tree="[0]")
     private Output<String> rendered;
 
     /**

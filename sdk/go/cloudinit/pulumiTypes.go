@@ -7,8 +7,12 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-cloudinit/sdk/go/cloudinit/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type ConfigPart struct {
 	Content     string  `pulumi:"content"`
@@ -47,6 +51,12 @@ func (i ConfigPartArgs) ToConfigPartOutputWithContext(ctx context.Context) Confi
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigPartOutput)
 }
 
+func (i ConfigPartArgs) ToOutput(ctx context.Context) pulumix.Output[ConfigPart] {
+	return pulumix.Output[ConfigPart]{
+		OutputState: i.ToConfigPartOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ConfigPartArrayInput is an input type that accepts ConfigPartArray and ConfigPartArrayOutput values.
 // You can construct a concrete instance of `ConfigPartArrayInput` via:
 //
@@ -72,6 +82,12 @@ func (i ConfigPartArray) ToConfigPartArrayOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ConfigPartArrayOutput)
 }
 
+func (i ConfigPartArray) ToOutput(ctx context.Context) pulumix.Output[[]ConfigPart] {
+	return pulumix.Output[[]ConfigPart]{
+		OutputState: i.ToConfigPartArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ConfigPartOutput struct{ *pulumi.OutputState }
 
 func (ConfigPartOutput) ElementType() reflect.Type {
@@ -84,6 +100,12 @@ func (o ConfigPartOutput) ToConfigPartOutput() ConfigPartOutput {
 
 func (o ConfigPartOutput) ToConfigPartOutputWithContext(ctx context.Context) ConfigPartOutput {
 	return o
+}
+
+func (o ConfigPartOutput) ToOutput(ctx context.Context) pulumix.Output[ConfigPart] {
+	return pulumix.Output[ConfigPart]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConfigPartOutput) Content() pulumi.StringOutput {
@@ -114,6 +136,12 @@ func (o ConfigPartArrayOutput) ToConfigPartArrayOutput() ConfigPartArrayOutput {
 
 func (o ConfigPartArrayOutput) ToConfigPartArrayOutputWithContext(ctx context.Context) ConfigPartArrayOutput {
 	return o
+}
+
+func (o ConfigPartArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]ConfigPart] {
+	return pulumix.Output[[]ConfigPart]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ConfigPartArrayOutput) Index(i pulumi.IntInput) ConfigPartOutput {
@@ -169,6 +197,12 @@ func (i GetConfigPartArgs) ToGetConfigPartOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigPartOutput)
 }
 
+func (i GetConfigPartArgs) ToOutput(ctx context.Context) pulumix.Output[GetConfigPart] {
+	return pulumix.Output[GetConfigPart]{
+		OutputState: i.ToGetConfigPartOutputWithContext(ctx).OutputState,
+	}
+}
+
 // GetConfigPartArrayInput is an input type that accepts GetConfigPartArray and GetConfigPartArrayOutput values.
 // You can construct a concrete instance of `GetConfigPartArrayInput` via:
 //
@@ -194,6 +228,12 @@ func (i GetConfigPartArray) ToGetConfigPartArrayOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(GetConfigPartArrayOutput)
 }
 
+func (i GetConfigPartArray) ToOutput(ctx context.Context) pulumix.Output[[]GetConfigPart] {
+	return pulumix.Output[[]GetConfigPart]{
+		OutputState: i.ToGetConfigPartArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type GetConfigPartOutput struct{ *pulumi.OutputState }
 
 func (GetConfigPartOutput) ElementType() reflect.Type {
@@ -206,6 +246,12 @@ func (o GetConfigPartOutput) ToGetConfigPartOutput() GetConfigPartOutput {
 
 func (o GetConfigPartOutput) ToGetConfigPartOutputWithContext(ctx context.Context) GetConfigPartOutput {
 	return o
+}
+
+func (o GetConfigPartOutput) ToOutput(ctx context.Context) pulumix.Output[GetConfigPart] {
+	return pulumix.Output[GetConfigPart]{
+		OutputState: o.OutputState,
+	}
 }
 
 // Body content for the part.
@@ -241,6 +287,12 @@ func (o GetConfigPartArrayOutput) ToGetConfigPartArrayOutput() GetConfigPartArra
 
 func (o GetConfigPartArrayOutput) ToGetConfigPartArrayOutputWithContext(ctx context.Context) GetConfigPartArrayOutput {
 	return o
+}
+
+func (o GetConfigPartArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]GetConfigPart] {
+	return pulumix.Output[[]GetConfigPart]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o GetConfigPartArrayOutput) Index(i pulumi.IntInput) GetConfigPartOutput {

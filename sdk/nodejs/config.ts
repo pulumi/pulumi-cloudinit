@@ -6,6 +6,10 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * @deprecated This resource is deprecated.
+Please use the getConfig data source instead.
+ */
 export class Config extends pulumi.CustomResource {
     /**
      * Get an existing Config resource's state with the given name, ID, and optional extra
@@ -17,6 +21,7 @@ export class Config extends pulumi.CustomResource {
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: ConfigState, opts?: pulumi.CustomResourceOptions): Config {
+        pulumi.log.warn("Config is deprecated: This resource is deprecated.\nPlease use the getConfig data source instead.")
         return new Config(name, <any>state, { ...opts, id: id });
     }
 
@@ -50,8 +55,13 @@ export class Config extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
+    /** @deprecated This resource is deprecated.
+Please use the getConfig data source instead. */
     constructor(name: string, args: ConfigArgs, opts?: pulumi.CustomResourceOptions)
+    /** @deprecated This resource is deprecated.
+Please use the getConfig data source instead. */
     constructor(name: string, argsOrState?: ConfigArgs | ConfigState, opts?: pulumi.CustomResourceOptions) {
+        pulumi.log.warn("Config is deprecated: This resource is deprecated.\nPlease use the getConfig data source instead.")
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {

@@ -26,7 +26,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as cloudinit from "@pulumi/cloudinit";
  *
- * const foo = pulumi.output(cloudinit.getConfig({
+ * const foo = cloudinit.getConfig({
  *     base64Encode: false,
  *     gzip: false,
  *     parts: [{
@@ -34,15 +34,12 @@ import * as utilities from "./utilities";
  *         contentType: "text/x-shellscript",
  *         filename: "foobar.sh",
  *     }],
- * }));
+ * });
  * ```
  */
 export function getConfig(args: GetConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("cloudinit:index/getConfig:getConfig", {
         "base64Encode": args.base64Encode,
         "boundary": args.boundary,
@@ -94,9 +91,39 @@ export interface GetConfigResult {
      */
     readonly rendered: string;
 }
-
+/**
+ * Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
+ * for use with [cloud-init](https://cloudinit.readthedocs.io/).
+ *
+ * Cloud-init is a commonly-used startup configuration utility for cloud compute
+ * instances. It accepts configuration via provider-specific user data mechanisms,
+ * such as `userData` for Amazon EC2 instances. Multipart MIME is one of the
+ * data formats it accepts. For more information, see
+ * [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html)
+ * in the cloud-init manual.
+ *
+ * This is not a generalized utility for producing multipart MIME messages. Its
+ * featureset is specialized for the features of cloud-init.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cloudinit from "@pulumi/cloudinit";
+ *
+ * const foo = cloudinit.getConfig({
+ *     base64Encode: false,
+ *     gzip: false,
+ *     parts: [{
+ *         content: "baz",
+ *         contentType: "text/x-shellscript",
+ *         filename: "foobar.sh",
+ *     }],
+ * });
+ * ```
+ */
 export function getConfigOutput(args: GetConfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConfigResult> {
-    return pulumi.output(args).apply(a => getConfig(a, opts))
+    return pulumi.output(args).apply((a: any) => getConfig(a, opts))
 }
 
 /**
