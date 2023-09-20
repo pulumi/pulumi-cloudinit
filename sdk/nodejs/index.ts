@@ -8,18 +8,18 @@ import * as utilities from "./utilities";
 export { ConfigArgs, ConfigState } from "./config";
 export type Config = import("./config").Config;
 export const Config: typeof import("./config").Config = null as any;
+utilities.lazyLoad(exports, ["Config"], () => require("./config"));
 
 export { GetConfigArgs, GetConfigResult, GetConfigOutputArgs } from "./getConfig";
 export const getConfig: typeof import("./getConfig").getConfig = null as any;
 export const getConfigOutput: typeof import("./getConfig").getConfigOutput = null as any;
+utilities.lazyLoad(exports, ["getConfig","getConfigOutput"], () => require("./getConfig"));
 
 export { ProviderArgs } from "./provider";
 export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
-
-utilities.lazyLoad(exports, ["Config"], () => require("./config"));
-utilities.lazyLoad(exports, ["getConfig","getConfigOutput"], () => require("./getConfig"));
 utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+
 
 // Export sub-modules:
 import * as types from "./types";

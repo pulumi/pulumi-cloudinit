@@ -140,7 +140,14 @@ class _ConfigState:
         pulumi.set(self, "rendered", value)
 
 
+warnings.warn("""This resource is deprecated.
+Please use the getConfig data source instead.""", DeprecationWarning)
+
+
 class Config(pulumi.CustomResource):
+    warnings.warn("""This resource is deprecated.
+Please use the getConfig data source instead.""", DeprecationWarning)
+
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -183,6 +190,8 @@ class Config(pulumi.CustomResource):
                  gzip: Optional[pulumi.Input[bool]] = None,
                  parts: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConfigPartArgs']]]]] = None,
                  __props__=None):
+        pulumi.log.warn("""Config is deprecated: This resource is deprecated.
+Please use the getConfig data source instead.""")
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
             raise TypeError('Expected resource options to be a ResourceOptions instance')

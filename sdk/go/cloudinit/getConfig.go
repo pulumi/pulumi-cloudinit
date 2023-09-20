@@ -7,7 +7,9 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-cloudinit/sdk/go/cloudinit/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
@@ -37,11 +39,11 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cloudinit.LookupConfig(ctx, &GetConfigArgs{
+//			_, err := cloudinit.LookupConfig(ctx, &cloudinit.LookupConfigArgs{
 //				Base64Encode: pulumi.BoolRef(false),
 //				Gzip:         pulumi.BoolRef(false),
-//				Parts: []GetConfigPart{
-//					GetConfigPart{
+//				Parts: []cloudinit.GetConfigPart{
+//					{
 //						Content:     "baz",
 //						ContentType: pulumi.StringRef("text/x-shellscript"),
 //						Filename:    pulumi.StringRef("foobar.sh"),
@@ -57,6 +59,7 @@ import (
 //
 // ```
 func LookupConfig(ctx *pulumi.Context, args *LookupConfigArgs, opts ...pulumi.InvokeOption) (*LookupConfigResult, error) {
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupConfigResult
 	err := ctx.Invoke("cloudinit:index/getConfig:getConfig", args, &rv, opts...)
 	if err != nil {
@@ -139,6 +142,12 @@ func (o LookupConfigResultOutput) ToLookupConfigResultOutput() LookupConfigResul
 
 func (o LookupConfigResultOutput) ToLookupConfigResultOutputWithContext(ctx context.Context) LookupConfigResultOutput {
 	return o
+}
+
+func (o LookupConfigResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupConfigResult] {
+	return pulumix.Output[LookupConfigResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o LookupConfigResultOutput) Base64Encode() pulumi.BoolPtrOutput {

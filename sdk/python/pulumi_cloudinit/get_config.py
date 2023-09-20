@@ -147,12 +147,12 @@ def get_config(base64_encode: Optional[bool] = None,
     __ret__ = pulumi.runtime.invoke('cloudinit:index/getConfig:getConfig', __args__, opts=opts, typ=GetConfigResult).value
 
     return AwaitableGetConfigResult(
-        base64_encode=__ret__.base64_encode,
-        boundary=__ret__.boundary,
-        gzip=__ret__.gzip,
-        id=__ret__.id,
-        parts=__ret__.parts,
-        rendered=__ret__.rendered)
+        base64_encode=pulumi.get(__ret__, 'base64_encode'),
+        boundary=pulumi.get(__ret__, 'boundary'),
+        gzip=pulumi.get(__ret__, 'gzip'),
+        id=pulumi.get(__ret__, 'id'),
+        parts=pulumi.get(__ret__, 'parts'),
+        rendered=pulumi.get(__ret__, 'rendered'))
 
 
 @_utilities.lift_output_func(get_config)
