@@ -77,7 +77,13 @@ func Provider() tfbridge.ProviderInfo {
 		GitHubOrg:   "hashicorp",
 		Config:      map[string]*tfbridge.SchemaInfo{},
 		Resources: map[string]*tfbridge.ResourceInfo{
-			"cloudinit_config": {Tok: makeResource(mainMod, "Config")},
+			"cloudinit_config": {
+				Tok: makeResource(mainMod, "Config"),
+				Docs: &tfbridge.DocInfo{
+					Markdown: []byte(" "),
+				},
+				DeprecationMessage: "This resource is deprecated.\nPlease use the getConfig data source instead.",
+			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"cloudinit_config": {Tok: makeDataSource(mainMod, "getConfig")},
