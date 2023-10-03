@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -21,13 +21,28 @@ class ConfigPartArgs:
                  content_type: Optional[pulumi.Input[str]] = None,
                  filename: Optional[pulumi.Input[str]] = None,
                  merge_type: Optional[pulumi.Input[str]] = None):
-        pulumi.set(__self__, "content", content)
+        ConfigPartArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            content=content,
+            content_type=content_type,
+            filename=filename,
+            merge_type=merge_type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             content: pulumi.Input[str],
+             content_type: Optional[pulumi.Input[str]] = None,
+             filename: Optional[pulumi.Input[str]] = None,
+             merge_type: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
+        _setter("content", content)
         if content_type is not None:
-            pulumi.set(__self__, "content_type", content_type)
+            _setter("content_type", content_type)
         if filename is not None:
-            pulumi.set(__self__, "filename", filename)
+            _setter("filename", filename)
         if merge_type is not None:
-            pulumi.set(__self__, "merge_type", merge_type)
+            _setter("merge_type", merge_type)
 
     @property
     @pulumi.getter
@@ -80,13 +95,28 @@ class GetConfigPartArgs:
         :param str merge_type: A value for the `X-Merge-Type` header of the part,
                to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
         """
-        pulumi.set(__self__, "content", content)
+        GetConfigPartArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            content=content,
+            content_type=content_type,
+            filename=filename,
+            merge_type=merge_type,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             content: str,
+             content_type: Optional[str] = None,
+             filename: Optional[str] = None,
+             merge_type: Optional[str] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
+        _setter("content", content)
         if content_type is not None:
-            pulumi.set(__self__, "content_type", content_type)
+            _setter("content_type", content_type)
         if filename is not None:
-            pulumi.set(__self__, "filename", filename)
+            _setter("filename", filename)
         if merge_type is not None:
-            pulumi.set(__self__, "merge_type", merge_type)
+            _setter("merge_type", merge_type)
 
     @property
     @pulumi.getter
