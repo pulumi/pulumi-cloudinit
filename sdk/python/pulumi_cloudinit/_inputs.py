@@ -31,11 +31,19 @@ class ConfigPartArgs:
     @staticmethod
     def _configure(
              _setter: Callable[[Any, Any], None],
-             content: pulumi.Input[str],
+             content: Optional[pulumi.Input[str]] = None,
              content_type: Optional[pulumi.Input[str]] = None,
              filename: Optional[pulumi.Input[str]] = None,
              merge_type: Optional[pulumi.Input[str]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if content is None:
+            raise TypeError("Missing 'content' argument")
+        if content_type is None and 'contentType' in kwargs:
+            content_type = kwargs['contentType']
+        if merge_type is None and 'mergeType' in kwargs:
+            merge_type = kwargs['mergeType']
+
         _setter("content", content)
         if content_type is not None:
             _setter("content_type", content_type)
@@ -105,11 +113,19 @@ class GetConfigPartArgs:
     @staticmethod
     def _configure(
              _setter: Callable[[Any, Any], None],
-             content: str,
+             content: Optional[str] = None,
              content_type: Optional[str] = None,
              filename: Optional[str] = None,
              merge_type: Optional[str] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if content is None:
+            raise TypeError("Missing 'content' argument")
+        if content_type is None and 'contentType' in kwargs:
+            content_type = kwargs['contentType']
+        if merge_type is None and 'mergeType' in kwargs:
+            merge_type = kwargs['mergeType']
+
         _setter("content", content)
         if content_type is not None:
             _setter("content_type", content_type)
