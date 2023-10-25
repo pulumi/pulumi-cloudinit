@@ -33,11 +33,17 @@ class ConfigArgs:
     @staticmethod
     def _configure(
              _setter: Callable[[Any, Any], None],
-             parts: pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]],
+             parts: Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]] = None,
              base64_encode: Optional[pulumi.Input[bool]] = None,
              boundary: Optional[pulumi.Input[str]] = None,
              gzip: Optional[pulumi.Input[bool]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if parts is None:
+            raise TypeError("Missing 'parts' argument")
+        if base64_encode is None and 'base64Encode' in kwargs:
+            base64_encode = kwargs['base64Encode']
+
         _setter("parts", parts)
         if base64_encode is not None:
             _setter("base64_encode", base64_encode)
@@ -111,7 +117,11 @@ class _ConfigState:
              gzip: Optional[pulumi.Input[bool]] = None,
              parts: Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]] = None,
              rendered: Optional[pulumi.Input[str]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if base64_encode is None and 'base64Encode' in kwargs:
+            base64_encode = kwargs['base64Encode']
+
         if base64_encode is not None:
             _setter("base64_encode", base64_encode)
         if boundary is not None:

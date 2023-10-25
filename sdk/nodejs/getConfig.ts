@@ -19,23 +19,6 @@ import * as utilities from "./utilities";
  *
  * This is not a generalized utility for producing multipart MIME messages. Its
  * featureset is specialized for the features of cloud-init.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as cloudinit from "@pulumi/cloudinit";
- *
- * const foo = cloudinit.getConfig({
- *     base64Encode: false,
- *     gzip: false,
- *     parts: [{
- *         content: "baz",
- *         contentType: "text/x-shellscript",
- *         filename: "foobar.sh",
- *     }],
- * });
- * ```
  */
 export function getConfig(args: GetConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigResult> {
 
@@ -104,23 +87,6 @@ export interface GetConfigResult {
  *
  * This is not a generalized utility for producing multipart MIME messages. Its
  * featureset is specialized for the features of cloud-init.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as cloudinit from "@pulumi/cloudinit";
- *
- * const foo = cloudinit.getConfig({
- *     base64Encode: false,
- *     gzip: false,
- *     parts: [{
- *         content: "baz",
- *         contentType: "text/x-shellscript",
- *         filename: "foobar.sh",
- *     }],
- * });
- * ```
  */
 export function getConfigOutput(args: GetConfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConfigResult> {
     return pulumi.output(args).apply((a: any) => getConfig(a, opts))
