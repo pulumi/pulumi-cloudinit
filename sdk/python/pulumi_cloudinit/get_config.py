@@ -113,6 +113,21 @@ def get_config(base64_encode: Optional[bool] = None,
     This is not a generalized utility for producing multipart MIME messages. Its
     featureset is specialized for the features of cloud-init.
 
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cloudinit as cloudinit
+
+    foo = cloudinit.get_config(base64_encode=False,
+        gzip=False,
+        parts=[cloudinit.GetConfigPartArgs(
+            content="baz",
+            content_type="text/x-shellscript",
+            filename="foobar.sh",
+        )])
+    ```
+
 
     :param bool base64_encode: Base64 encoding of the rendered output. Defaults to `true`,
            and cannot be disabled if `gzip` is `true`.
@@ -159,6 +174,21 @@ def get_config_output(base64_encode: Optional[pulumi.Input[Optional[bool]]] = No
 
     This is not a generalized utility for producing multipart MIME messages. Its
     featureset is specialized for the features of cloud-init.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cloudinit as cloudinit
+
+    foo = cloudinit.get_config(base64_encode=False,
+        gzip=False,
+        parts=[cloudinit.GetConfigPartArgs(
+            content="baz",
+            content_type="text/x-shellscript",
+            filename="foobar.sh",
+        )])
+    ```
 
 
     :param bool base64_encode: Base64 encoding of the rendered output. Defaults to `true`,
