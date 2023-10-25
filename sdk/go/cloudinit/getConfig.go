@@ -24,6 +24,40 @@ import (
 //
 // This is not a generalized utility for producing multipart MIME messages. Its
 // featureset is specialized for the features of cloud-init.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-cloudinit/sdk/go/cloudinit"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cloudinit.LookupConfig(ctx, &cloudinit.LookupConfigArgs{
+//				Base64Encode: pulumi.BoolRef(false),
+//				Gzip:         pulumi.BoolRef(false),
+//				Parts: []cloudinit.GetConfigPart{
+//					{
+//						Content:     "baz",
+//						ContentType: pulumi.StringRef("text/x-shellscript"),
+//						Filename:    pulumi.StringRef("foobar.sh"),
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupConfig(ctx *pulumi.Context, args *LookupConfigArgs, opts ...pulumi.InvokeOption) (*LookupConfigResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupConfigResult
