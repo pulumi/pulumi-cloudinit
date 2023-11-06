@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -23,13 +23,34 @@ class ConfigArgs:
         """
         The set of arguments for constructing a Config resource.
         """
-        pulumi.set(__self__, "parts", parts)
+        ConfigArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            parts=parts,
+            base64_encode=base64_encode,
+            boundary=boundary,
+            gzip=gzip,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             parts: Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]] = None,
+             base64_encode: Optional[pulumi.Input[bool]] = None,
+             boundary: Optional[pulumi.Input[str]] = None,
+             gzip: Optional[pulumi.Input[bool]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if parts is None:
+            raise TypeError("Missing 'parts' argument")
+        if base64_encode is None and 'base64Encode' in kwargs:
+            base64_encode = kwargs['base64Encode']
+
+        _setter("parts", parts)
         if base64_encode is not None:
-            pulumi.set(__self__, "base64_encode", base64_encode)
+            _setter("base64_encode", base64_encode)
         if boundary is not None:
-            pulumi.set(__self__, "boundary", boundary)
+            _setter("boundary", boundary)
         if gzip is not None:
-            pulumi.set(__self__, "gzip", gzip)
+            _setter("gzip", gzip)
 
     @property
     @pulumi.getter
@@ -80,16 +101,37 @@ class _ConfigState:
         Input properties used for looking up and filtering Config resources.
         :param pulumi.Input[str] rendered: rendered cloudinit configuration
         """
+        _ConfigState._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            base64_encode=base64_encode,
+            boundary=boundary,
+            gzip=gzip,
+            parts=parts,
+            rendered=rendered,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             base64_encode: Optional[pulumi.Input[bool]] = None,
+             boundary: Optional[pulumi.Input[str]] = None,
+             gzip: Optional[pulumi.Input[bool]] = None,
+             parts: Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]] = None,
+             rendered: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if base64_encode is None and 'base64Encode' in kwargs:
+            base64_encode = kwargs['base64Encode']
+
         if base64_encode is not None:
-            pulumi.set(__self__, "base64_encode", base64_encode)
+            _setter("base64_encode", base64_encode)
         if boundary is not None:
-            pulumi.set(__self__, "boundary", boundary)
+            _setter("boundary", boundary)
         if gzip is not None:
-            pulumi.set(__self__, "gzip", gzip)
+            _setter("gzip", gzip)
         if parts is not None:
-            pulumi.set(__self__, "parts", parts)
+            _setter("parts", parts)
         if rendered is not None:
-            pulumi.set(__self__, "rendered", rendered)
+            _setter("rendered", rendered)
 
     @property
     @pulumi.getter(name="base64Encode")
@@ -180,6 +222,10 @@ Please use the getConfig data source instead.""", DeprecationWarning)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ConfigArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
