@@ -73,12 +73,12 @@ public final class ConfigPart {
             return this;
         }
         public ConfigPart build() {
-            final var o = new ConfigPart();
-            o.content = content;
-            o.contentType = contentType;
-            o.filename = filename;
-            o.mergeType = mergeType;
-            return o;
+            final var _resultValue = new ConfigPart();
+            _resultValue.content = content;
+            _resultValue.contentType = contentType;
+            _resultValue.filename = filename;
+            _resultValue.mergeType = mergeType;
+            return _resultValue;
         }
     }
 }

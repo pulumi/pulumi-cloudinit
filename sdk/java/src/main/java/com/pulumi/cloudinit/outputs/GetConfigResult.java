@@ -117,14 +117,14 @@ public final class GetConfigResult {
             return this;
         }
         public GetConfigResult build() {
-            final var o = new GetConfigResult();
-            o.base64Encode = base64Encode;
-            o.boundary = boundary;
-            o.gzip = gzip;
-            o.id = id;
-            o.parts = parts;
-            o.rendered = rendered;
-            return o;
+            final var _resultValue = new GetConfigResult();
+            _resultValue.base64Encode = base64Encode;
+            _resultValue.boundary = boundary;
+            _resultValue.gzip = gzip;
+            _resultValue.id = id;
+            _resultValue.parts = parts;
+            _resultValue.rendered = rendered;
+            return _resultValue;
         }
     }
 }
