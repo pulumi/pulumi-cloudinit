@@ -107,12 +107,12 @@ public final class GetConfigPart {
             return this;
         }
         public GetConfigPart build() {
-            final var o = new GetConfigPart();
-            o.content = content;
-            o.contentType = contentType;
-            o.filename = filename;
-            o.mergeType = mergeType;
-            return o;
+            final var _resultValue = new GetConfigPart();
+            _resultValue.content = content;
+            _resultValue.contentType = contentType;
+            _resultValue.filename = filename;
+            _resultValue.mergeType = mergeType;
+            return _resultValue;
         }
     }
 }
