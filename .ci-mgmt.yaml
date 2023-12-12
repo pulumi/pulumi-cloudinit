@@ -3,7 +3,6 @@ major-version: 1
 lint: false
 makeTemplate: bridged
 team: ecosystem
-javaGenVersion: "v0.9.5"
 license:
   ignore:
     - github.com/hashicorp/terraform-provider-cloudinit/shim
