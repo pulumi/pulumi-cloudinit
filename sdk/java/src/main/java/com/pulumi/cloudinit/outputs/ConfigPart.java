@@ -4,6 +4,7 @@
 package com.pulumi.cloudinit.outputs;
 
 import com.pulumi.core.annotations.CustomType;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
@@ -54,21 +55,27 @@ public final class ConfigPart {
 
         @CustomType.Setter
         public Builder content(String content) {
-            this.content = Objects.requireNonNull(content);
+            if (content == null) {
+              throw new MissingRequiredPropertyException("ConfigPart", "content");
+            }
+            this.content = content;
             return this;
         }
         @CustomType.Setter
         public Builder contentType(@Nullable String contentType) {
+
             this.contentType = contentType;
             return this;
         }
         @CustomType.Setter
         public Builder filename(@Nullable String filename) {
+
             this.filename = filename;
             return this;
         }
         @CustomType.Setter
         public Builder mergeType(@Nullable String mergeType) {
+
             this.mergeType = mergeType;
             return this;
         }
