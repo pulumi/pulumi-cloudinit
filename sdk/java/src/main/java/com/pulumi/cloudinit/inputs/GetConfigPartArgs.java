@@ -5,6 +5,7 @@ package com.pulumi.cloudinit.inputs;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
@@ -191,7 +192,9 @@ public final class GetConfigPartArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         public GetConfigPartArgs build() {
-            $.content = Objects.requireNonNull($.content, "expected parameter 'content' to be non-null");
+            if ($.content == null) {
+                throw new MissingRequiredPropertyException("GetConfigPartArgs", "content");
+            }
             return $;
         }
     }

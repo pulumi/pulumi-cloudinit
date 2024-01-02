@@ -5,6 +5,7 @@ package com.pulumi.cloudinit.outputs;
 
 import com.pulumi.cloudinit.outputs.GetConfigPart;
 import com.pulumi.core.annotations.CustomType;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
@@ -85,27 +86,36 @@ public final class GetConfigResult {
 
         @CustomType.Setter
         public Builder base64Encode(@Nullable Boolean base64Encode) {
+
             this.base64Encode = base64Encode;
             return this;
         }
         @CustomType.Setter
         public Builder boundary(@Nullable String boundary) {
+
             this.boundary = boundary;
             return this;
         }
         @CustomType.Setter
         public Builder gzip(@Nullable Boolean gzip) {
+
             this.gzip = gzip;
             return this;
         }
         @CustomType.Setter
         public Builder id(String id) {
-            this.id = Objects.requireNonNull(id);
+            if (id == null) {
+              throw new MissingRequiredPropertyException("GetConfigResult", "id");
+            }
+            this.id = id;
             return this;
         }
         @CustomType.Setter
         public Builder parts(List<GetConfigPart> parts) {
-            this.parts = Objects.requireNonNull(parts);
+            if (parts == null) {
+              throw new MissingRequiredPropertyException("GetConfigResult", "parts");
+            }
+            this.parts = parts;
             return this;
         }
         public Builder parts(GetConfigPart... parts) {
@@ -113,7 +123,10 @@ public final class GetConfigResult {
         }
         @CustomType.Setter
         public Builder rendered(String rendered) {
-            this.rendered = Objects.requireNonNull(rendered);
+            if (rendered == null) {
+              throw new MissingRequiredPropertyException("GetConfigResult", "rendered");
+            }
+            this.rendered = rendered;
             return this;
         }
         public GetConfigResult build() {
