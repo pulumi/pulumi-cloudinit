@@ -32,18 +32,18 @@ public final class GetConfigPartArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * A MIME-style content type to report in the header for the part.
+     * A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      * 
      */
-    @Import(name="contentType")
-    private @Nullable Output<String> contentType;
+    @Import(name="contentType", required=true)
+    private Output<String> contentType;
 
     /**
-     * @return A MIME-style content type to report in the header for the part.
+     * @return A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      * 
      */
-    public Optional<Output<String>> contentType() {
-        return Optional.ofNullable(this.contentType);
+    public Output<String> contentType() {
+        return this.contentType;
     }
 
     /**
@@ -62,16 +62,14 @@ public final class GetConfigPartArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * A value for the `X-Merge-Type` header of the part,
-     * to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+     * A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
      * 
      */
     @Import(name="mergeType")
     private @Nullable Output<String> mergeType;
 
     /**
-     * @return A value for the `X-Merge-Type` header of the part,
-     * to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+     * @return A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
      * 
      */
     public Optional<Output<String>> mergeType() {
@@ -127,18 +125,18 @@ public final class GetConfigPartArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param contentType A MIME-style content type to report in the header for the part.
+         * @param contentType A MIME-style content type to report in the header for the part. Defaults to `text/plain`
          * 
          * @return builder
          * 
          */
-        public Builder contentType(@Nullable Output<String> contentType) {
+        public Builder contentType(Output<String> contentType) {
             $.contentType = contentType;
             return this;
         }
 
         /**
-         * @param contentType A MIME-style content type to report in the header for the part.
+         * @param contentType A MIME-style content type to report in the header for the part. Defaults to `text/plain`
          * 
          * @return builder
          * 
@@ -169,8 +167,7 @@ public final class GetConfigPartArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param mergeType A value for the `X-Merge-Type` header of the part,
-         * to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+         * @param mergeType A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
          * 
          * @return builder
          * 
@@ -181,8 +178,7 @@ public final class GetConfigPartArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param mergeType A value for the `X-Merge-Type` header of the part,
-         * to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+         * @param mergeType A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
          * 
          * @return builder
          * 
@@ -194,6 +190,9 @@ public final class GetConfigPartArgs extends com.pulumi.resources.ResourceArgs {
         public GetConfigPartArgs build() {
             if ($.content == null) {
                 throw new MissingRequiredPropertyException("GetConfigPartArgs", "content");
+            }
+            if ($.contentType == null) {
+                throw new MissingRequiredPropertyException("GetConfigPartArgs", "contentType");
             }
             return $;
         }

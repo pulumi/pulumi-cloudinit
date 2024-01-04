@@ -9,25 +9,55 @@ using Pulumi.Serialization;
 
 namespace Pulumi.CloudInit
 {
-    [Obsolete(@"This resource is deprecated.
-Please use the getConfig data source instead.")]
+    /// <summary>
+    /// &gt; **This resource is deprecated** Please use the cloudinit.Config
+    ///   data source instead.
+    /// 
+    /// Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
+    /// 
+    /// Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
+    /// 
+    /// This is not a generalized utility for producing multi-part MIME messages. It's feature set is specialized for cloud-init multi-part MIME messages.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ### Config
+    /// 
+    /// ### hello-script.sh
+    /// 
+    /// ### cloud-config.yaml
+    /// 
+    /// &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --&gt;
+    /// </summary>
     [CloudInitResourceType("cloudinit:index/config:Config")]
     public partial class Config : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+        /// </summary>
         [Output("base64Encode")]
-        public Output<bool?> Base64Encode { get; private set; } = null!;
+        public Output<bool> Base64Encode { get; private set; } = null!;
 
+        /// <summary>
+        /// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+        /// </summary>
         [Output("boundary")]
-        public Output<string?> Boundary { get; private set; } = null!;
+        public Output<string> Boundary { get; private set; } = null!;
 
+        /// <summary>
+        /// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+        /// </summary>
         [Output("gzip")]
-        public Output<bool?> Gzip { get; private set; } = null!;
+        public Output<bool> Gzip { get; private set; } = null!;
 
+        /// <summary>
+        /// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+        /// </summary>
         [Output("parts")]
         public Output<ImmutableArray<Outputs.ConfigPart>> Parts { get; private set; } = null!;
 
         /// <summary>
-        /// rendered cloudinit configuration
+        /// The final rendered multi-part cloud-init config.
         /// </summary>
         [Output("rendered")]
         public Output<string> Rendered { get; private set; } = null!;
@@ -40,7 +70,7 @@ Please use the getConfig data source instead.")]
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Config(string name, ConfigArgs args, CustomResourceOptions? options = null)
+        public Config(string name, ConfigArgs? args = null, CustomResourceOptions? options = null)
             : base("cloudinit:index/config:Config", name, args ?? new ConfigArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -78,17 +108,30 @@ Please use the getConfig data source instead.")]
 
     public sealed class ConfigArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+        /// </summary>
         [Input("base64Encode")]
         public Input<bool>? Base64Encode { get; set; }
 
+        /// <summary>
+        /// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+        /// </summary>
         [Input("boundary")]
         public Input<string>? Boundary { get; set; }
 
+        /// <summary>
+        /// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+        /// </summary>
         [Input("gzip")]
         public Input<bool>? Gzip { get; set; }
 
-        [Input("parts", required: true)]
+        [Input("parts")]
         private InputList<Inputs.ConfigPartArgs>? _parts;
+
+        /// <summary>
+        /// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+        /// </summary>
         public InputList<Inputs.ConfigPartArgs> Parts
         {
             get => _parts ?? (_parts = new InputList<Inputs.ConfigPartArgs>());
@@ -103,17 +146,30 @@ Please use the getConfig data source instead.")]
 
     public sealed class ConfigState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+        /// </summary>
         [Input("base64Encode")]
         public Input<bool>? Base64Encode { get; set; }
 
+        /// <summary>
+        /// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+        /// </summary>
         [Input("boundary")]
         public Input<string>? Boundary { get; set; }
 
+        /// <summary>
+        /// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+        /// </summary>
         [Input("gzip")]
         public Input<bool>? Gzip { get; set; }
 
         [Input("parts")]
         private InputList<Inputs.ConfigPartGetArgs>? _parts;
+
+        /// <summary>
+        /// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+        /// </summary>
         public InputList<Inputs.ConfigPartGetArgs> Parts
         {
             get => _parts ?? (_parts = new InputList<Inputs.ConfigPartGetArgs>());
@@ -121,7 +177,7 @@ Please use the getConfig data source instead.")]
         }
 
         /// <summary>
-        /// rendered cloudinit configuration
+        /// The final rendered multi-part cloud-init config.
         /// </summary>
         [Input("rendered")]
         public Input<string>? Rendered { get; set; }

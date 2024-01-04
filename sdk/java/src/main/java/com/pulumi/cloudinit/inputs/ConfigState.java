@@ -18,43 +18,75 @@ public final class ConfigState extends com.pulumi.resources.ResourceArgs {
 
     public static final ConfigState Empty = new ConfigState();
 
+    /**
+     * Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+     * 
+     */
     @Import(name="base64Encode")
     private @Nullable Output<Boolean> base64Encode;
 
+    /**
+     * @return Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+     * 
+     */
     public Optional<Output<Boolean>> base64Encode() {
         return Optional.ofNullable(this.base64Encode);
     }
 
+    /**
+     * Specify the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
+     * 
+     */
     @Import(name="boundary")
     private @Nullable Output<String> boundary;
 
+    /**
+     * @return Specify the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
+     * 
+     */
     public Optional<Output<String>> boundary() {
         return Optional.ofNullable(this.boundary);
     }
 
+    /**
+     * Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+     * 
+     */
     @Import(name="gzip")
     private @Nullable Output<Boolean> gzip;
 
+    /**
+     * @return Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+     * 
+     */
     public Optional<Output<Boolean>> gzip() {
         return Optional.ofNullable(this.gzip);
     }
 
+    /**
+     * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+     * 
+     */
     @Import(name="parts")
     private @Nullable Output<List<ConfigPartArgs>> parts;
 
+    /**
+     * @return A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+     * 
+     */
     public Optional<Output<List<ConfigPartArgs>>> parts() {
         return Optional.ofNullable(this.parts);
     }
 
     /**
-     * rendered cloudinit configuration
+     * The final rendered multi-part cloud-init config.
      * 
      */
     @Import(name="rendered")
     private @Nullable Output<String> rendered;
 
     /**
-     * @return rendered cloudinit configuration
+     * @return The final rendered multi-part cloud-init config.
      * 
      */
     public Optional<Output<String>> rendered() {
@@ -89,48 +121,102 @@ public final class ConfigState extends com.pulumi.resources.ResourceArgs {
             $ = new ConfigState(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param base64Encode Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder base64Encode(@Nullable Output<Boolean> base64Encode) {
             $.base64Encode = base64Encode;
             return this;
         }
 
+        /**
+         * @param base64Encode Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder base64Encode(Boolean base64Encode) {
             return base64Encode(Output.of(base64Encode));
         }
 
+        /**
+         * @param boundary Specify the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder boundary(@Nullable Output<String> boundary) {
             $.boundary = boundary;
             return this;
         }
 
+        /**
+         * @param boundary Specify the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder boundary(String boundary) {
             return boundary(Output.of(boundary));
         }
 
+        /**
+         * @param gzip Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder gzip(@Nullable Output<Boolean> gzip) {
             $.gzip = gzip;
             return this;
         }
 
+        /**
+         * @param gzip Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder gzip(Boolean gzip) {
             return gzip(Output.of(gzip));
         }
 
+        /**
+         * @param parts A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+         * 
+         * @return builder
+         * 
+         */
         public Builder parts(@Nullable Output<List<ConfigPartArgs>> parts) {
             $.parts = parts;
             return this;
         }
 
+        /**
+         * @param parts A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+         * 
+         * @return builder
+         * 
+         */
         public Builder parts(List<ConfigPartArgs> parts) {
             return parts(Output.of(parts));
         }
 
+        /**
+         * @param parts A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+         * 
+         * @return builder
+         * 
+         */
         public Builder parts(ConfigPartArgs... parts) {
             return parts(List.of(parts));
         }
 
         /**
-         * @param rendered rendered cloudinit configuration
+         * @param rendered The final rendered multi-part cloud-init config.
          * 
          * @return builder
          * 
@@ -141,7 +227,7 @@ public final class ConfigState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param rendered rendered cloudinit configuration
+         * @param rendered The final rendered multi-part cloud-init config.
          * 
          * @return builder
          * 

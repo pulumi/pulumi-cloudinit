@@ -6,9 +6,21 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
 export interface ConfigPart {
+    /**
+     * Body content for the part.
+     */
     content: pulumi.Input<string>;
+    /**
+     * A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+     */
     contentType?: pulumi.Input<string>;
+    /**
+     * A filename to report in the header for the part.
+     */
     filename?: pulumi.Input<string>;
+    /**
+     * A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+     */
     mergeType?: pulumi.Input<string>;
 }
 
@@ -18,7 +30,7 @@ export interface GetConfigPart {
      */
     content: string;
     /**
-     * A MIME-style content type to report in the header for the part.
+     * A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      */
     contentType?: string;
     /**
@@ -26,8 +38,7 @@ export interface GetConfigPart {
      */
     filename?: string;
     /**
-     * A value for the `X-Merge-Type` header of the part,
-     * to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+     * A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
      */
     mergeType?: string;
 }
@@ -38,7 +49,7 @@ export interface GetConfigPartArgs {
      */
     content: pulumi.Input<string>;
     /**
-     * A MIME-style content type to report in the header for the part.
+     * A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      */
     contentType?: pulumi.Input<string>;
     /**
@@ -46,8 +57,7 @@ export interface GetConfigPartArgs {
      */
     filename?: pulumi.Input<string>;
     /**
-     * A value for the `X-Merge-Type` header of the part,
-     * to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+     * A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
      */
     mergeType?: pulumi.Input<string>;
 }

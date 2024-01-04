@@ -5,7 +5,6 @@ package com.pulumi.cloudinit.inputs;
 
 import com.pulumi.cloudinit.inputs.GetConfigPart;
 import com.pulumi.core.annotations.Import;
-import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
@@ -19,16 +18,14 @@ public final class GetConfigPlainArgs extends com.pulumi.resources.InvokeArgs {
     public static final GetConfigPlainArgs Empty = new GetConfigPlainArgs();
 
     /**
-     * Base64 encoding of the rendered output. Defaults to `true`,
-     * and cannot be disabled if `gzip` is `true`.
+     * Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
      * 
      */
     @Import(name="base64Encode")
     private @Nullable Boolean base64Encode;
 
     /**
-     * @return Base64 encoding of the rendered output. Defaults to `true`,
-     * and cannot be disabled if `gzip` is `true`.
+     * @return Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
      * 
      */
     public Optional<Boolean> base64Encode() {
@@ -36,14 +33,14 @@ public final class GetConfigPlainArgs extends com.pulumi.resources.InvokeArgs {
     }
 
     /**
-     * Define the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
+     * Specify the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
      * 
      */
     @Import(name="boundary")
     private @Nullable String boundary;
 
     /**
-     * @return Define the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
+     * @return Specify the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
      * 
      */
     public Optional<String> boundary() {
@@ -51,14 +48,14 @@ public final class GetConfigPlainArgs extends com.pulumi.resources.InvokeArgs {
     }
 
     /**
-     * Specify whether or not to gzip the rendered output. Defaults to `true`.
+     * Specify whether or not to gzip the `rendered` output. Defaults to `true`.
      * 
      */
     @Import(name="gzip")
     private @Nullable Boolean gzip;
 
     /**
-     * @return Specify whether or not to gzip the rendered output. Defaults to `true`.
+     * @return Specify whether or not to gzip the `rendered` output. Defaults to `true`.
      * 
      */
     public Optional<Boolean> gzip() {
@@ -66,24 +63,18 @@ public final class GetConfigPlainArgs extends com.pulumi.resources.InvokeArgs {
     }
 
     /**
-     * A nested block type which adds a file to the generated
-     * cloud-init configuration. Use multiple `part` blocks to specify multiple
-     * files, which will be included in order of declaration in the final MIME
-     * document.
+     * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      * 
      */
-    @Import(name="parts", required=true)
-    private List<GetConfigPart> parts;
+    @Import(name="parts")
+    private @Nullable List<GetConfigPart> parts;
 
     /**
-     * @return A nested block type which adds a file to the generated
-     * cloud-init configuration. Use multiple `part` blocks to specify multiple
-     * files, which will be included in order of declaration in the final MIME
-     * document.
+     * @return A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      * 
      */
-    public List<GetConfigPart> parts() {
-        return this.parts;
+    public Optional<List<GetConfigPart>> parts() {
+        return Optional.ofNullable(this.parts);
     }
 
     private GetConfigPlainArgs() {}
@@ -114,8 +105,7 @@ public final class GetConfigPlainArgs extends com.pulumi.resources.InvokeArgs {
         }
 
         /**
-         * @param base64Encode Base64 encoding of the rendered output. Defaults to `true`,
-         * and cannot be disabled if `gzip` is `true`.
+         * @param base64Encode Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
          * 
          * @return builder
          * 
@@ -126,7 +116,7 @@ public final class GetConfigPlainArgs extends com.pulumi.resources.InvokeArgs {
         }
 
         /**
-         * @param boundary Define the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
+         * @param boundary Specify the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
          * 
          * @return builder
          * 
@@ -137,7 +127,7 @@ public final class GetConfigPlainArgs extends com.pulumi.resources.InvokeArgs {
         }
 
         /**
-         * @param gzip Specify whether or not to gzip the rendered output. Defaults to `true`.
+         * @param gzip Specify whether or not to gzip the `rendered` output. Defaults to `true`.
          * 
          * @return builder
          * 
@@ -148,24 +138,18 @@ public final class GetConfigPlainArgs extends com.pulumi.resources.InvokeArgs {
         }
 
         /**
-         * @param parts A nested block type which adds a file to the generated
-         * cloud-init configuration. Use multiple `part` blocks to specify multiple
-         * files, which will be included in order of declaration in the final MIME
-         * document.
+         * @param parts A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
          * 
          * @return builder
          * 
          */
-        public Builder parts(List<GetConfigPart> parts) {
+        public Builder parts(@Nullable List<GetConfigPart> parts) {
             $.parts = parts;
             return this;
         }
 
         /**
-         * @param parts A nested block type which adds a file to the generated
-         * cloud-init configuration. Use multiple `part` blocks to specify multiple
-         * files, which will be included in order of declaration in the final MIME
-         * document.
+         * @param parts A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
          * 
          * @return builder
          * 
@@ -175,9 +159,6 @@ public final class GetConfigPlainArgs extends com.pulumi.resources.InvokeArgs {
         }
 
         public GetConfigPlainArgs build() {
-            if ($.parts == null) {
-                throw new MissingRequiredPropertyException("GetConfigPlainArgs", "parts");
-            }
             return $;
         }
     }

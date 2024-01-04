@@ -7,8 +7,24 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * @deprecated This resource is deprecated.
-Please use the getConfig data source instead.
+ * > **This resource is deprecated** Please use the cloudinit.Config
+ *   data source instead.
+ *
+ * Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
+ *
+ * Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `userData` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
+ *
+ * This is not a generalized utility for producing multi-part MIME messages. It's feature set is specialized for cloud-init multi-part MIME messages.
+ *
+ * ## Example Usage
+ *
+ * ### Config
+ *
+ * ### hello-script.sh
+ *
+ * ### cloud-config.yaml
+ *
+ * <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
  */
 export class Config extends pulumi.CustomResource {
     /**
@@ -21,7 +37,6 @@ export class Config extends pulumi.CustomResource {
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: ConfigState, opts?: pulumi.CustomResourceOptions): Config {
-        pulumi.log.warn("Config is deprecated: This resource is deprecated.\nPlease use the getConfig data source instead.")
         return new Config(name, <any>state, { ...opts, id: id });
     }
 
@@ -39,12 +54,24 @@ export class Config extends pulumi.CustomResource {
         return obj['__pulumiType'] === Config.__pulumiType;
     }
 
-    public readonly base64Encode!: pulumi.Output<boolean | undefined>;
-    public readonly boundary!: pulumi.Output<string | undefined>;
-    public readonly gzip!: pulumi.Output<boolean | undefined>;
-    public readonly parts!: pulumi.Output<outputs.ConfigPart[]>;
     /**
-     * rendered cloudinit configuration
+     * Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+     */
+    public readonly base64Encode!: pulumi.Output<boolean>;
+    /**
+     * Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+     */
+    public readonly boundary!: pulumi.Output<string>;
+    /**
+     * Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+     */
+    public readonly gzip!: pulumi.Output<boolean>;
+    /**
+     * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+     */
+    public readonly parts!: pulumi.Output<outputs.ConfigPart[] | undefined>;
+    /**
+     * The final rendered multi-part cloud-init config.
      */
     public /*out*/ readonly rendered!: pulumi.Output<string>;
 
@@ -55,13 +82,8 @@ export class Config extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    /** @deprecated This resource is deprecated.
-Please use the getConfig data source instead. */
-    constructor(name: string, args: ConfigArgs, opts?: pulumi.CustomResourceOptions)
-    /** @deprecated This resource is deprecated.
-Please use the getConfig data source instead. */
+    constructor(name: string, args?: ConfigArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConfigArgs | ConfigState, opts?: pulumi.CustomResourceOptions) {
-        pulumi.log.warn("Config is deprecated: This resource is deprecated.\nPlease use the getConfig data source instead.")
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
@@ -73,9 +95,6 @@ Please use the getConfig data source instead. */
             resourceInputs["rendered"] = state ? state.rendered : undefined;
         } else {
             const args = argsOrState as ConfigArgs | undefined;
-            if ((!args || args.parts === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'parts'");
-            }
             resourceInputs["base64Encode"] = args ? args.base64Encode : undefined;
             resourceInputs["boundary"] = args ? args.boundary : undefined;
             resourceInputs["gzip"] = args ? args.gzip : undefined;
@@ -91,12 +110,24 @@ Please use the getConfig data source instead. */
  * Input properties used for looking up and filtering Config resources.
  */
 export interface ConfigState {
+    /**
+     * Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+     */
     base64Encode?: pulumi.Input<boolean>;
+    /**
+     * Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+     */
     boundary?: pulumi.Input<string>;
+    /**
+     * Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+     */
     gzip?: pulumi.Input<boolean>;
+    /**
+     * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+     */
     parts?: pulumi.Input<pulumi.Input<inputs.ConfigPart>[]>;
     /**
-     * rendered cloudinit configuration
+     * The final rendered multi-part cloud-init config.
      */
     rendered?: pulumi.Input<string>;
 }
@@ -105,8 +136,20 @@ export interface ConfigState {
  * The set of arguments for constructing a Config resource.
  */
 export interface ConfigArgs {
+    /**
+     * Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+     */
     base64Encode?: pulumi.Input<boolean>;
+    /**
+     * Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+     */
     boundary?: pulumi.Input<string>;
+    /**
+     * Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+     */
     gzip?: pulumi.Input<boolean>;
-    parts: pulumi.Input<pulumi.Input<inputs.ConfigPart>[]>;
+    /**
+     * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+     */
+    parts?: pulumi.Input<pulumi.Input<inputs.ConfigPart>[]>;
 }

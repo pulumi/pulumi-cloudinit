@@ -7,21 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"errors"
 	"github.com/pulumi/pulumi-cloudinit/sdk/go/cloudinit/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Deprecated: This resource is deprecated.
-// Please use the getConfig data source instead.
+// > **This resource is deprecated** Please use the Config
+//
+//	data source instead.
+//
+// Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
+//
+// Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `userData` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
+//
+// This is not a generalized utility for producing multi-part MIME messages. It's feature set is specialized for cloud-init multi-part MIME messages.
+//
+// ## Example Usage
+//
+// ### Config
+//
+// ### hello-script.sh
+//
+// ### cloud-config.yaml
+//
+// <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
 type Config struct {
 	pulumi.CustomResourceState
 
-	Base64Encode pulumi.BoolPtrOutput   `pulumi:"base64Encode"`
-	Boundary     pulumi.StringPtrOutput `pulumi:"boundary"`
-	Gzip         pulumi.BoolPtrOutput   `pulumi:"gzip"`
-	Parts        ConfigPartArrayOutput  `pulumi:"parts"`
-	// rendered cloudinit configuration
+	// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+	Base64Encode pulumi.BoolOutput `pulumi:"base64Encode"`
+	// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+	Boundary pulumi.StringOutput `pulumi:"boundary"`
+	// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+	Gzip pulumi.BoolOutput `pulumi:"gzip"`
+	// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+	Parts ConfigPartArrayOutput `pulumi:"parts"`
+	// The final rendered multi-part cloud-init config.
 	Rendered pulumi.StringOutput `pulumi:"rendered"`
 }
 
@@ -29,12 +49,9 @@ type Config struct {
 func NewConfig(ctx *pulumi.Context,
 	name string, args *ConfigArgs, opts ...pulumi.ResourceOption) (*Config, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &ConfigArgs{}
 	}
 
-	if args.Parts == nil {
-		return nil, errors.New("invalid value for required argument 'Parts'")
-	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Config
 	err := ctx.RegisterResource("cloudinit:index/config:Config", name, args, &resource, opts...)
@@ -58,20 +75,28 @@ func GetConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Config resources.
 type configState struct {
-	Base64Encode *bool        `pulumi:"base64Encode"`
-	Boundary     *string      `pulumi:"boundary"`
-	Gzip         *bool        `pulumi:"gzip"`
-	Parts        []ConfigPart `pulumi:"parts"`
-	// rendered cloudinit configuration
+	// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+	Base64Encode *bool `pulumi:"base64Encode"`
+	// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+	Boundary *string `pulumi:"boundary"`
+	// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+	Gzip *bool `pulumi:"gzip"`
+	// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+	Parts []ConfigPart `pulumi:"parts"`
+	// The final rendered multi-part cloud-init config.
 	Rendered *string `pulumi:"rendered"`
 }
 
 type ConfigState struct {
+	// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
 	Base64Encode pulumi.BoolPtrInput
-	Boundary     pulumi.StringPtrInput
-	Gzip         pulumi.BoolPtrInput
-	Parts        ConfigPartArrayInput
-	// rendered cloudinit configuration
+	// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+	Boundary pulumi.StringPtrInput
+	// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+	Gzip pulumi.BoolPtrInput
+	// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+	Parts ConfigPartArrayInput
+	// The final rendered multi-part cloud-init config.
 	Rendered pulumi.StringPtrInput
 }
 
@@ -80,18 +105,26 @@ func (ConfigState) ElementType() reflect.Type {
 }
 
 type configArgs struct {
-	Base64Encode *bool        `pulumi:"base64Encode"`
-	Boundary     *string      `pulumi:"boundary"`
-	Gzip         *bool        `pulumi:"gzip"`
-	Parts        []ConfigPart `pulumi:"parts"`
+	// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+	Base64Encode *bool `pulumi:"base64Encode"`
+	// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+	Boundary *string `pulumi:"boundary"`
+	// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+	Gzip *bool `pulumi:"gzip"`
+	// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+	Parts []ConfigPart `pulumi:"parts"`
 }
 
 // The set of arguments for constructing a Config resource.
 type ConfigArgs struct {
+	// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
 	Base64Encode pulumi.BoolPtrInput
-	Boundary     pulumi.StringPtrInput
-	Gzip         pulumi.BoolPtrInput
-	Parts        ConfigPartArrayInput
+	// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+	Boundary pulumi.StringPtrInput
+	// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+	Gzip pulumi.BoolPtrInput
+	// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+	Parts ConfigPartArrayInput
 }
 
 func (ConfigArgs) ElementType() reflect.Type {
@@ -181,23 +214,27 @@ func (o ConfigOutput) ToConfigOutputWithContext(ctx context.Context) ConfigOutpu
 	return o
 }
 
-func (o ConfigOutput) Base64Encode() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Config) pulumi.BoolPtrOutput { return v.Base64Encode }).(pulumi.BoolPtrOutput)
+// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+func (o ConfigOutput) Base64Encode() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Config) pulumi.BoolOutput { return v.Base64Encode }).(pulumi.BoolOutput)
 }
 
-func (o ConfigOutput) Boundary() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Config) pulumi.StringPtrOutput { return v.Boundary }).(pulumi.StringPtrOutput)
+// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+func (o ConfigOutput) Boundary() pulumi.StringOutput {
+	return o.ApplyT(func(v *Config) pulumi.StringOutput { return v.Boundary }).(pulumi.StringOutput)
 }
 
-func (o ConfigOutput) Gzip() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Config) pulumi.BoolPtrOutput { return v.Gzip }).(pulumi.BoolPtrOutput)
+// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+func (o ConfigOutput) Gzip() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Config) pulumi.BoolOutput { return v.Gzip }).(pulumi.BoolOutput)
 }
 
+// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
 func (o ConfigOutput) Parts() ConfigPartArrayOutput {
 	return o.ApplyT(func(v *Config) ConfigPartArrayOutput { return v.Parts }).(ConfigPartArrayOutput)
 }
 
-// rendered cloudinit configuration
+// The final rendered multi-part cloud-init config.
 func (o ConfigOutput) Rendered() pulumi.StringOutput {
 	return o.ApplyT(func(v *Config) pulumi.StringOutput { return v.Rendered }).(pulumi.StringOutput)
 }

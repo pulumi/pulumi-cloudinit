@@ -18,18 +18,17 @@ public final class GetConfigPart {
      */
     private String content;
     /**
-     * @return A MIME-style content type to report in the header for the part.
+     * @return A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      * 
      */
-    private @Nullable String contentType;
+    private String contentType;
     /**
      * @return A filename to report in the header for the part.
      * 
      */
     private @Nullable String filename;
     /**
-     * @return A value for the `X-Merge-Type` header of the part,
-     * to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+     * @return A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
      * 
      */
     private @Nullable String mergeType;
@@ -43,11 +42,11 @@ public final class GetConfigPart {
         return this.content;
     }
     /**
-     * @return A MIME-style content type to report in the header for the part.
+     * @return A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      * 
      */
-    public Optional<String> contentType() {
-        return Optional.ofNullable(this.contentType);
+    public String contentType() {
+        return this.contentType;
     }
     /**
      * @return A filename to report in the header for the part.
@@ -57,8 +56,7 @@ public final class GetConfigPart {
         return Optional.ofNullable(this.filename);
     }
     /**
-     * @return A value for the `X-Merge-Type` header of the part,
-     * to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+     * @return A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
      * 
      */
     public Optional<String> mergeType() {
@@ -75,7 +73,7 @@ public final class GetConfigPart {
     @CustomType.Builder
     public static final class Builder {
         private String content;
-        private @Nullable String contentType;
+        private String contentType;
         private @Nullable String filename;
         private @Nullable String mergeType;
         public Builder() {}
@@ -96,8 +94,10 @@ public final class GetConfigPart {
             return this;
         }
         @CustomType.Setter
-        public Builder contentType(@Nullable String contentType) {
-
+        public Builder contentType(String contentType) {
+            if (contentType == null) {
+              throw new MissingRequiredPropertyException("GetConfigPart", "contentType");
+            }
             this.contentType = contentType;
             return this;
         }

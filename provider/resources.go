@@ -15,15 +15,17 @@
 package cloudinit
 
 import (
+	// embed is used to store bridge-metadata.json in the compiled binary
+	_ "embed"
 	"fmt"
-	"path/filepath"
-	"unicode"
-
 	"github.com/hashicorp/terraform-provider-cloudinit/shim"
 	"github.com/pulumi/pulumi-cloudinit/provider/pkg/version"
+	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
+	tfbridgetokens "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
+	"path/filepath"
+	"unicode"
 )
 
 // all of the token components used below.
@@ -63,12 +65,13 @@ func makeDataSource(mod string, res string) tokens.ModuleMember {
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	p := shimv2.NewProvider(shim.NewProvider())
+	//p := shimv2.NewProvider(shim.NewProvider())
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
-		P:           p,
+		P:           pf.ShimProvider(shim.NewProvider()),
 		Name:        "cloudinit",
+		Version:     version.Version,
 		Description: "A Pulumi package for creating and managing cloudinit cloud resources.",
 		Keywords:    []string{"pulumi", "cloudinit"},
 		License:     "Apache-2.0",
@@ -76,18 +79,6 @@ func Provider() tfbridge.ProviderInfo {
 		Repository:  "https://github.com/pulumi/pulumi-cloudinit",
 		GitHubOrg:   "hashicorp",
 		Config:      map[string]*tfbridge.SchemaInfo{},
-		Resources: map[string]*tfbridge.ResourceInfo{
-			"cloudinit_config": {
-				Tok: makeResource(mainMod, "Config"),
-				Docs: &tfbridge.DocInfo{
-					Markdown: []byte(" "),
-				},
-				DeprecationMessage: "This resource is deprecated.\nPlease use the getConfig data source instead.",
-			},
-		},
-		DataSources: map[string]*tfbridge.DataSourceInfo{
-			"cloudinit_config": {Tok: makeDataSource(mainMod, "getConfig")},
-		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
@@ -123,9 +114,17 @@ func Provider() tfbridge.ProviderInfo {
 				"cloudinit": "CloudInit",
 			},
 		},
+		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 	}
+
+	prov.MustComputeTokens(tfbridgetokens.SingleModule("cloudinit_", mainMod,
+		tfbridgetokens.MakeStandard(mainPkg)))
+	prov.MustApplyAutoAliases()
 
 	prov.SetAutonaming(255, "-")
 
 	return prov
 }
+
+//go:embed cmd/pulumi-resource-cloudinit/bridge-metadata.json
+var metadata []byte

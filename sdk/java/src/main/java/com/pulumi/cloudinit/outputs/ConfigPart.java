@@ -12,21 +12,53 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ConfigPart {
+    /**
+     * @return Body content for the part.
+     * 
+     */
     private String content;
+    /**
+     * @return A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+     * 
+     */
     private @Nullable String contentType;
+    /**
+     * @return A filename to report in the header for the part.
+     * 
+     */
     private @Nullable String filename;
+    /**
+     * @return A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+     * 
+     */
     private @Nullable String mergeType;
 
     private ConfigPart() {}
+    /**
+     * @return Body content for the part.
+     * 
+     */
     public String content() {
         return this.content;
     }
+    /**
+     * @return A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+     * 
+     */
     public Optional<String> contentType() {
         return Optional.ofNullable(this.contentType);
     }
+    /**
+     * @return A filename to report in the header for the part.
+     * 
+     */
     public Optional<String> filename() {
         return Optional.ofNullable(this.filename);
     }
+    /**
+     * @return A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+     * 
+     */
     public Optional<String> mergeType() {
         return Optional.ofNullable(this.mergeType);
     }

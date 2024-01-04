@@ -1,0 +1,53 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "cloudinit_config": {
+                "current": "cloudinit:index/config:Config",
+                "majorVersion": 1,
+                "fields": {
+                    "part": {
+                        "maxItemsOne": false
+                    }
+                }
+            }
+        },
+        "datasources": {
+            "cloudinit_config": {
+                "current": "cloudinit:index/getConfig:getConfig",
+                "majorVersion": 1,
+                "fields": {
+                    "part": {
+                        "maxItemsOne": false
+                    }
+                }
+            }
+        }
+    },
+    "auto-settings": {},
+    "renames": {
+        "resources": {
+            "cloudinit:index/config:Config": "cloudinit_config"
+        },
+        "functions": {
+            "cloudinit:index/getConfig:getConfig": "cloudinit_config"
+        },
+        "renamedProperties": {
+            "cloudinit:index/ConfigPart:ConfigPart": {
+                "contentType": "content_type",
+                "mergeType": "merge_type"
+            },
+            "cloudinit:index/config:Config": {
+                "base64Encode": "base64_encode",
+                "parts": "part"
+            },
+            "cloudinit:index/getConfig:getConfig": {
+                "base64Encode": "base64_encode",
+                "parts": "part"
+            },
+            "cloudinit:index/getConfigPart:getConfigPart": {
+                "contentType": "content_type",
+                "mergeType": "merge_type"
+            }
+        }
+    }
+}

@@ -18,48 +18,93 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
- * @deprecated
- * This resource is deprecated.
- * Please use the getConfig data source instead.
+ * &gt; **This resource is deprecated** Please use the cloudinit.Config
+ *   data source instead.
+ * 
+ * Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
+ * 
+ * Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
+ * 
+ * This is not a generalized utility for producing multi-part MIME messages. It&#39;s feature set is specialized for cloud-init multi-part MIME messages.
+ * 
+ * ## Example Usage
+ * 
+ * ### Config
+ * 
+ * ### hello-script.sh
+ * 
+ * ### cloud-config.yaml
+ * 
+ * &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --&gt;
  * 
  */
-@Deprecated /* This resource is deprecated.
-Please use the getConfig data source instead. */
 @ResourceType(type="cloudinit:index/config:Config")
 public class Config extends com.pulumi.resources.CustomResource {
+    /**
+     * Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+     * 
+     */
     @Export(name="base64Encode", refs={Boolean.class}, tree="[0]")
-    private Output</* @Nullable */ Boolean> base64Encode;
+    private Output<Boolean> base64Encode;
 
-    public Output<Optional<Boolean>> base64Encode() {
-        return Codegen.optional(this.base64Encode);
-    }
-    @Export(name="boundary", refs={String.class}, tree="[0]")
-    private Output</* @Nullable */ String> boundary;
-
-    public Output<Optional<String>> boundary() {
-        return Codegen.optional(this.boundary);
-    }
-    @Export(name="gzip", refs={Boolean.class}, tree="[0]")
-    private Output</* @Nullable */ Boolean> gzip;
-
-    public Output<Optional<Boolean>> gzip() {
-        return Codegen.optional(this.gzip);
-    }
-    @Export(name="parts", refs={List.class,ConfigPart.class}, tree="[0,1]")
-    private Output<List<ConfigPart>> parts;
-
-    public Output<List<ConfigPart>> parts() {
-        return this.parts;
+    /**
+     * @return Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+     * 
+     */
+    public Output<Boolean> base64Encode() {
+        return this.base64Encode;
     }
     /**
-     * rendered cloudinit configuration
+     * Specify the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
+     * 
+     */
+    @Export(name="boundary", refs={String.class}, tree="[0]")
+    private Output<String> boundary;
+
+    /**
+     * @return Specify the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
+     * 
+     */
+    public Output<String> boundary() {
+        return this.boundary;
+    }
+    /**
+     * Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+     * 
+     */
+    @Export(name="gzip", refs={Boolean.class}, tree="[0]")
+    private Output<Boolean> gzip;
+
+    /**
+     * @return Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+     * 
+     */
+    public Output<Boolean> gzip() {
+        return this.gzip;
+    }
+    /**
+     * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+     * 
+     */
+    @Export(name="parts", refs={List.class,ConfigPart.class}, tree="[0,1]")
+    private Output</* @Nullable */ List<ConfigPart>> parts;
+
+    /**
+     * @return A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+     * 
+     */
+    public Output<Optional<List<ConfigPart>>> parts() {
+        return Codegen.optional(this.parts);
+    }
+    /**
+     * The final rendered multi-part cloud-init config.
      * 
      */
     @Export(name="rendered", refs={String.class}, tree="[0]")
     private Output<String> rendered;
 
     /**
-     * @return rendered cloudinit configuration
+     * @return The final rendered multi-part cloud-init config.
      * 
      */
     public Output<String> rendered() {
@@ -78,7 +123,7 @@ public class Config extends com.pulumi.resources.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param args The arguments to use to populate this resource's properties.
      */
-    public Config(String name, ConfigArgs args) {
+    public Config(String name, @Nullable ConfigArgs args) {
         this(name, args, null);
     }
     /**
@@ -87,7 +132,7 @@ public class Config extends com.pulumi.resources.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param options A bag of options that control this resource's behavior.
      */
-    public Config(String name, ConfigArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    public Config(String name, @Nullable ConfigArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         super("cloudinit:index/config:Config", name, args == null ? ConfigArgs.Empty : args, makeResourceOptions(options, Codegen.empty()));
     }
 
