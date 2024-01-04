@@ -15,13 +15,11 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
-
 	cloudinit "github.com/pulumi/pulumi-cloudinit/provider"
-	"github.com/pulumi/pulumi-cloudinit/provider/pkg/version"
+	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
 )
 
 func main() {
 	// Modify the path to point to the new provider
-	tfgen.Main("cloudinit", version.Version, cloudinit.Provider())
+	tfgen.Main("cloudinit", cloudinit.Provider())
 }
