@@ -45,30 +45,42 @@ class GetConfigResult:
 
     @property
     @pulumi.getter(name="base64Encode")
-    def base64_encode(self) -> Optional[bool]:
+    def base64_encode(self) -> bool:
+        """
+        Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+        """
         return pulumi.get(self, "base64_encode")
 
     @property
     @pulumi.getter
-    def boundary(self) -> Optional[str]:
+    def boundary(self) -> str:
+        """
+        Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+        """
         return pulumi.get(self, "boundary")
 
     @property
     @pulumi.getter
-    def gzip(self) -> Optional[bool]:
+    def gzip(self) -> bool:
+        """
+        Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+        """
         return pulumi.get(self, "gzip")
 
     @property
     @pulumi.getter
     def id(self) -> str:
         """
-        The provider-assigned unique ID for this managed resource.
+        [CRC-32](https://pkg.go.dev/hash/crc32) checksum of `rendered` cloud-init config.
         """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
-    def parts(self) -> Sequence['outputs.GetConfigPartResult']:
+    def parts(self) -> Optional[Sequence['outputs.GetConfigPartResult']]:
+        """
+        A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+        """
         return pulumi.get(self, "parts")
 
     @property
@@ -100,43 +112,27 @@ def get_config(base64_encode: Optional[bool] = None,
                parts: Optional[Sequence[pulumi.InputType['GetConfigPartArgs']]] = None,
                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetConfigResult:
     """
-    Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
-    for use with [cloud-init](https://cloudinit.readthedocs.io/).
+    Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
 
-    Cloud-init is a commonly-used startup configuration utility for cloud compute
-    instances. It accepts configuration via provider-specific user data mechanisms,
-    such as `user_data` for Amazon EC2 instances. Multipart MIME is one of the
-    data formats it accepts. For more information, see
-    [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html)
-    in the cloud-init manual.
+    Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
 
-    This is not a generalized utility for producing multipart MIME messages. Its
-    featureset is specialized for the features of cloud-init.
+    This is not a generalized utility for producing multi-part MIME messages. It's feature set is specialized for cloud-init multi-part MIME messages.
 
     ## Example Usage
 
-    ```python
-    import pulumi
-    import pulumi_cloudinit as cloudinit
+    ### Config
 
-    foo = cloudinit.get_config(base64_encode=False,
-        gzip=False,
-        parts=[cloudinit.GetConfigPartArgs(
-            content="baz",
-            content_type="text/x-shellscript",
-            filename="foobar.sh",
-        )])
-    ```
+    ### hello-script.sh
+
+    ### cloud-config.yaml
+
+    <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
 
 
-    :param bool base64_encode: Base64 encoding of the rendered output. Defaults to `true`,
-           and cannot be disabled if `gzip` is `true`.
-    :param str boundary: Define the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
-    :param bool gzip: Specify whether or not to gzip the rendered output. Defaults to `true`.
-    :param Sequence[pulumi.InputType['GetConfigPartArgs']] parts: A nested block type which adds a file to the generated
-           cloud-init configuration. Use multiple `part` blocks to specify multiple
-           files, which will be included in order of declaration in the final MIME
-           document.
+    :param bool base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+    :param str boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+    :param bool gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+    :param Sequence[pulumi.InputType['GetConfigPartArgs']] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
     """
     __args__ = dict()
     __args__['base64Encode'] = base64_encode
@@ -159,45 +155,29 @@ def get_config(base64_encode: Optional[bool] = None,
 def get_config_output(base64_encode: Optional[pulumi.Input[Optional[bool]]] = None,
                       boundary: Optional[pulumi.Input[Optional[str]]] = None,
                       gzip: Optional[pulumi.Input[Optional[bool]]] = None,
-                      parts: Optional[pulumi.Input[Sequence[pulumi.InputType['GetConfigPartArgs']]]] = None,
+                      parts: Optional[pulumi.Input[Optional[Sequence[pulumi.InputType['GetConfigPartArgs']]]]] = None,
                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetConfigResult]:
     """
-    Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
-    for use with [cloud-init](https://cloudinit.readthedocs.io/).
+    Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
 
-    Cloud-init is a commonly-used startup configuration utility for cloud compute
-    instances. It accepts configuration via provider-specific user data mechanisms,
-    such as `user_data` for Amazon EC2 instances. Multipart MIME is one of the
-    data formats it accepts. For more information, see
-    [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html)
-    in the cloud-init manual.
+    Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
 
-    This is not a generalized utility for producing multipart MIME messages. Its
-    featureset is specialized for the features of cloud-init.
+    This is not a generalized utility for producing multi-part MIME messages. It's feature set is specialized for cloud-init multi-part MIME messages.
 
     ## Example Usage
 
-    ```python
-    import pulumi
-    import pulumi_cloudinit as cloudinit
+    ### Config
 
-    foo = cloudinit.get_config(base64_encode=False,
-        gzip=False,
-        parts=[cloudinit.GetConfigPartArgs(
-            content="baz",
-            content_type="text/x-shellscript",
-            filename="foobar.sh",
-        )])
-    ```
+    ### hello-script.sh
+
+    ### cloud-config.yaml
+
+    <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
 
 
-    :param bool base64_encode: Base64 encoding of the rendered output. Defaults to `true`,
-           and cannot be disabled if `gzip` is `true`.
-    :param str boundary: Define the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
-    :param bool gzip: Specify whether or not to gzip the rendered output. Defaults to `true`.
-    :param Sequence[pulumi.InputType['GetConfigPartArgs']] parts: A nested block type which adds a file to the generated
-           cloud-init configuration. Use multiple `part` blocks to specify multiple
-           files, which will be included in order of declaration in the final MIME
-           document.
+    :param bool base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+    :param str boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+    :param bool gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+    :param Sequence[pulumi.InputType['GetConfigPartArgs']] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
     """
     ...

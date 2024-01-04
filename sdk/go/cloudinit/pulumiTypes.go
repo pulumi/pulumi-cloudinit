@@ -14,10 +14,14 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type ConfigPart struct {
-	Content     string  `pulumi:"content"`
+	// Body content for the part.
+	Content string `pulumi:"content"`
+	// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
 	ContentType *string `pulumi:"contentType"`
-	Filename    *string `pulumi:"filename"`
-	MergeType   *string `pulumi:"mergeType"`
+	// A filename to report in the header for the part.
+	Filename *string `pulumi:"filename"`
+	// A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+	MergeType *string `pulumi:"mergeType"`
 }
 
 // ConfigPartInput is an input type that accepts ConfigPartArgs and ConfigPartOutput values.
@@ -32,10 +36,14 @@ type ConfigPartInput interface {
 }
 
 type ConfigPartArgs struct {
-	Content     pulumi.StringInput    `pulumi:"content"`
+	// Body content for the part.
+	Content pulumi.StringInput `pulumi:"content"`
+	// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
 	ContentType pulumi.StringPtrInput `pulumi:"contentType"`
-	Filename    pulumi.StringPtrInput `pulumi:"filename"`
-	MergeType   pulumi.StringPtrInput `pulumi:"mergeType"`
+	// A filename to report in the header for the part.
+	Filename pulumi.StringPtrInput `pulumi:"filename"`
+	// A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+	MergeType pulumi.StringPtrInput `pulumi:"mergeType"`
 }
 
 func (ConfigPartArgs) ElementType() reflect.Type {
@@ -89,18 +97,22 @@ func (o ConfigPartOutput) ToConfigPartOutputWithContext(ctx context.Context) Con
 	return o
 }
 
+// Body content for the part.
 func (o ConfigPartOutput) Content() pulumi.StringOutput {
 	return o.ApplyT(func(v ConfigPart) string { return v.Content }).(pulumi.StringOutput)
 }
 
+// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
 func (o ConfigPartOutput) ContentType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigPart) *string { return v.ContentType }).(pulumi.StringPtrOutput)
 }
 
+// A filename to report in the header for the part.
 func (o ConfigPartOutput) Filename() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigPart) *string { return v.Filename }).(pulumi.StringPtrOutput)
 }
 
+// A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
 func (o ConfigPartOutput) MergeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ConfigPart) *string { return v.MergeType }).(pulumi.StringPtrOutput)
 }
@@ -128,12 +140,11 @@ func (o ConfigPartArrayOutput) Index(i pulumi.IntInput) ConfigPartOutput {
 type GetConfigPart struct {
 	// Body content for the part.
 	Content string `pulumi:"content"`
-	// A MIME-style content type to report in the header for the part.
-	ContentType *string `pulumi:"contentType"`
+	// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+	ContentType string `pulumi:"contentType"`
 	// A filename to report in the header for the part.
 	Filename *string `pulumi:"filename"`
-	// A value for the `X-Merge-Type` header of the part,
-	// to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+	// A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
 	MergeType *string `pulumi:"mergeType"`
 }
 
@@ -151,12 +162,11 @@ type GetConfigPartInput interface {
 type GetConfigPartArgs struct {
 	// Body content for the part.
 	Content pulumi.StringInput `pulumi:"content"`
-	// A MIME-style content type to report in the header for the part.
-	ContentType pulumi.StringPtrInput `pulumi:"contentType"`
+	// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+	ContentType pulumi.StringInput `pulumi:"contentType"`
 	// A filename to report in the header for the part.
 	Filename pulumi.StringPtrInput `pulumi:"filename"`
-	// A value for the `X-Merge-Type` header of the part,
-	// to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+	// A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
 	MergeType pulumi.StringPtrInput `pulumi:"mergeType"`
 }
 
@@ -216,9 +226,9 @@ func (o GetConfigPartOutput) Content() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConfigPart) string { return v.Content }).(pulumi.StringOutput)
 }
 
-// A MIME-style content type to report in the header for the part.
-func (o GetConfigPartOutput) ContentType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetConfigPart) *string { return v.ContentType }).(pulumi.StringPtrOutput)
+// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+func (o GetConfigPartOutput) ContentType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigPart) string { return v.ContentType }).(pulumi.StringOutput)
 }
 
 // A filename to report in the header for the part.
@@ -226,8 +236,7 @@ func (o GetConfigPartOutput) Filename() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetConfigPart) *string { return v.Filename }).(pulumi.StringPtrOutput)
 }
 
-// A value for the `X-Merge-Type` header of the part,
-// to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+// A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
 func (o GetConfigPartOutput) MergeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetConfigPart) *string { return v.MergeType }).(pulumi.StringPtrOutput)
 }

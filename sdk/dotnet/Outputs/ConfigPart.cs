@@ -13,9 +13,21 @@ namespace Pulumi.CloudInit.Outputs
     [OutputType]
     public sealed class ConfigPart
     {
+        /// <summary>
+        /// Body content for the part.
+        /// </summary>
         public readonly string Content;
+        /// <summary>
+        /// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+        /// </summary>
         public readonly string? ContentType;
+        /// <summary>
+        /// A filename to report in the header for the part.
+        /// </summary>
         public readonly string? Filename;
+        /// <summary>
+        /// A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+        /// </summary>
         public readonly string? MergeType;
 
         [OutputConstructor]

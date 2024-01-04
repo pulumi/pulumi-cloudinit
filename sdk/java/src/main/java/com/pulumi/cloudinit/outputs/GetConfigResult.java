@@ -10,20 +10,35 @@ import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import javax.annotation.Nullable;
 
 @CustomType
 public final class GetConfigResult {
-    private @Nullable Boolean base64Encode;
-    private @Nullable String boundary;
-    private @Nullable Boolean gzip;
     /**
-     * @return The provider-assigned unique ID for this managed resource.
+     * @return Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+     * 
+     */
+    private Boolean base64Encode;
+    /**
+     * @return Specify the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
+     * 
+     */
+    private String boundary;
+    /**
+     * @return Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+     * 
+     */
+    private Boolean gzip;
+    /**
+     * @return [CRC-32](https://pkg.go.dev/hash/crc32) checksum of `rendered` cloud-init config.
      * 
      */
     private String id;
-    private List<GetConfigPart> parts;
+    /**
+     * @return A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+     * 
+     */
+    private @Nullable List<GetConfigPart> parts;
     /**
      * @return The final rendered multi-part cloud-init config.
      * 
@@ -31,24 +46,40 @@ public final class GetConfigResult {
     private String rendered;
 
     private GetConfigResult() {}
-    public Optional<Boolean> base64Encode() {
-        return Optional.ofNullable(this.base64Encode);
-    }
-    public Optional<String> boundary() {
-        return Optional.ofNullable(this.boundary);
-    }
-    public Optional<Boolean> gzip() {
-        return Optional.ofNullable(this.gzip);
+    /**
+     * @return Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+     * 
+     */
+    public Boolean base64Encode() {
+        return this.base64Encode;
     }
     /**
-     * @return The provider-assigned unique ID for this managed resource.
+     * @return Specify the Writer&#39;s default boundary separator. Defaults to `MIMEBOUNDARY`.
+     * 
+     */
+    public String boundary() {
+        return this.boundary;
+    }
+    /**
+     * @return Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+     * 
+     */
+    public Boolean gzip() {
+        return this.gzip;
+    }
+    /**
+     * @return [CRC-32](https://pkg.go.dev/hash/crc32) checksum of `rendered` cloud-init config.
      * 
      */
     public String id() {
         return this.id;
     }
+    /**
+     * @return A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+     * 
+     */
     public List<GetConfigPart> parts() {
-        return this.parts;
+        return this.parts == null ? List.of() : this.parts;
     }
     /**
      * @return The final rendered multi-part cloud-init config.
@@ -67,11 +98,11 @@ public final class GetConfigResult {
     }
     @CustomType.Builder
     public static final class Builder {
-        private @Nullable Boolean base64Encode;
-        private @Nullable String boundary;
-        private @Nullable Boolean gzip;
+        private Boolean base64Encode;
+        private String boundary;
+        private Boolean gzip;
         private String id;
-        private List<GetConfigPart> parts;
+        private @Nullable List<GetConfigPart> parts;
         private String rendered;
         public Builder() {}
         public Builder(GetConfigResult defaults) {
@@ -85,20 +116,26 @@ public final class GetConfigResult {
         }
 
         @CustomType.Setter
-        public Builder base64Encode(@Nullable Boolean base64Encode) {
-
+        public Builder base64Encode(Boolean base64Encode) {
+            if (base64Encode == null) {
+              throw new MissingRequiredPropertyException("GetConfigResult", "base64Encode");
+            }
             this.base64Encode = base64Encode;
             return this;
         }
         @CustomType.Setter
-        public Builder boundary(@Nullable String boundary) {
-
+        public Builder boundary(String boundary) {
+            if (boundary == null) {
+              throw new MissingRequiredPropertyException("GetConfigResult", "boundary");
+            }
             this.boundary = boundary;
             return this;
         }
         @CustomType.Setter
-        public Builder gzip(@Nullable Boolean gzip) {
-
+        public Builder gzip(Boolean gzip) {
+            if (gzip == null) {
+              throw new MissingRequiredPropertyException("GetConfigResult", "gzip");
+            }
             this.gzip = gzip;
             return this;
         }
@@ -111,10 +148,8 @@ public final class GetConfigResult {
             return this;
         }
         @CustomType.Setter
-        public Builder parts(List<GetConfigPart> parts) {
-            if (parts == null) {
-              throw new MissingRequiredPropertyException("GetConfigResult", "parts");
-            }
+        public Builder parts(@Nullable List<GetConfigPart> parts) {
+
             this.parts = parts;
             return this;
         }

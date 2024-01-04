@@ -15,216 +15,126 @@ import java.util.concurrent.CompletableFuture;
 
 public final class CloudinitFunctions {
     /**
-     * Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
-     * for use with [cloud-init](https://cloudinit.readthedocs.io/).
+     * Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
      * 
-     * Cloud-init is a commonly-used startup configuration utility for cloud compute
-     * instances. It accepts configuration via provider-specific user data mechanisms,
-     * such as `user_data` for Amazon EC2 instances. Multipart MIME is one of the
-     * data formats it accepts. For more information, see
-     * [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html)
-     * in the cloud-init manual.
+     * Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
      * 
-     * This is not a generalized utility for producing multipart MIME messages. Its
-     * featureset is specialized for the features of cloud-init.
+     * This is not a generalized utility for producing multi-part MIME messages. It&#39;s feature set is specialized for cloud-init multi-part MIME messages.
      * 
      * ## Example Usage
-     * ```java
-     * package generated_program;
      * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import com.pulumi.cloudinit.CloudinitFunctions;
-     * import com.pulumi.cloudinit.inputs.GetConfigArgs;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
+     * ### Config
      * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
+     * ### hello-script.sh
      * 
-     *     public static void stack(Context ctx) {
-     *         final var foo = CloudinitFunctions.getConfig(GetConfigArgs.builder()
-     *             .base64Encode(false)
-     *             .gzip(false)
-     *             .parts(GetConfigPartArgs.builder()
-     *                 .content(&#34;baz&#34;)
-     *                 .contentType(&#34;text/x-shellscript&#34;)
-     *                 .filename(&#34;foobar.sh&#34;)
-     *                 .build())
-     *             .build());
+     * ### cloud-config.yaml
      * 
-     *     }
-     * }
-     * ```
+     * &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --&gt;
+     * 
+     */
+    public static Output<GetConfigResult> getConfig() {
+        return getConfig(GetConfigArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
+     * 
+     * Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
+     * 
+     * This is not a generalized utility for producing multi-part MIME messages. It&#39;s feature set is specialized for cloud-init multi-part MIME messages.
+     * 
+     * ## Example Usage
+     * 
+     * ### Config
+     * 
+     * ### hello-script.sh
+     * 
+     * ### cloud-config.yaml
+     * 
+     * &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --&gt;
+     * 
+     */
+    public static CompletableFuture<GetConfigResult> getConfigPlain() {
+        return getConfigPlain(GetConfigPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
+     * 
+     * Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
+     * 
+     * This is not a generalized utility for producing multi-part MIME messages. It&#39;s feature set is specialized for cloud-init multi-part MIME messages.
+     * 
+     * ## Example Usage
+     * 
+     * ### Config
+     * 
+     * ### hello-script.sh
+     * 
+     * ### cloud-config.yaml
+     * 
+     * &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --&gt;
      * 
      */
     public static Output<GetConfigResult> getConfig(GetConfigArgs args) {
         return getConfig(args, InvokeOptions.Empty);
     }
     /**
-     * Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
-     * for use with [cloud-init](https://cloudinit.readthedocs.io/).
+     * Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
      * 
-     * Cloud-init is a commonly-used startup configuration utility for cloud compute
-     * instances. It accepts configuration via provider-specific user data mechanisms,
-     * such as `user_data` for Amazon EC2 instances. Multipart MIME is one of the
-     * data formats it accepts. For more information, see
-     * [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html)
-     * in the cloud-init manual.
+     * Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
      * 
-     * This is not a generalized utility for producing multipart MIME messages. Its
-     * featureset is specialized for the features of cloud-init.
+     * This is not a generalized utility for producing multi-part MIME messages. It&#39;s feature set is specialized for cloud-init multi-part MIME messages.
      * 
      * ## Example Usage
-     * ```java
-     * package generated_program;
      * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import com.pulumi.cloudinit.CloudinitFunctions;
-     * import com.pulumi.cloudinit.inputs.GetConfigArgs;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
+     * ### Config
      * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
+     * ### hello-script.sh
      * 
-     *     public static void stack(Context ctx) {
-     *         final var foo = CloudinitFunctions.getConfig(GetConfigArgs.builder()
-     *             .base64Encode(false)
-     *             .gzip(false)
-     *             .parts(GetConfigPartArgs.builder()
-     *                 .content(&#34;baz&#34;)
-     *                 .contentType(&#34;text/x-shellscript&#34;)
-     *                 .filename(&#34;foobar.sh&#34;)
-     *                 .build())
-     *             .build());
+     * ### cloud-config.yaml
      * 
-     *     }
-     * }
-     * ```
+     * &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --&gt;
      * 
      */
     public static CompletableFuture<GetConfigResult> getConfigPlain(GetConfigPlainArgs args) {
         return getConfigPlain(args, InvokeOptions.Empty);
     }
     /**
-     * Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
-     * for use with [cloud-init](https://cloudinit.readthedocs.io/).
+     * Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
      * 
-     * Cloud-init is a commonly-used startup configuration utility for cloud compute
-     * instances. It accepts configuration via provider-specific user data mechanisms,
-     * such as `user_data` for Amazon EC2 instances. Multipart MIME is one of the
-     * data formats it accepts. For more information, see
-     * [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html)
-     * in the cloud-init manual.
+     * Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
      * 
-     * This is not a generalized utility for producing multipart MIME messages. Its
-     * featureset is specialized for the features of cloud-init.
+     * This is not a generalized utility for producing multi-part MIME messages. It&#39;s feature set is specialized for cloud-init multi-part MIME messages.
      * 
      * ## Example Usage
-     * ```java
-     * package generated_program;
      * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import com.pulumi.cloudinit.CloudinitFunctions;
-     * import com.pulumi.cloudinit.inputs.GetConfigArgs;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
+     * ### Config
      * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
+     * ### hello-script.sh
      * 
-     *     public static void stack(Context ctx) {
-     *         final var foo = CloudinitFunctions.getConfig(GetConfigArgs.builder()
-     *             .base64Encode(false)
-     *             .gzip(false)
-     *             .parts(GetConfigPartArgs.builder()
-     *                 .content(&#34;baz&#34;)
-     *                 .contentType(&#34;text/x-shellscript&#34;)
-     *                 .filename(&#34;foobar.sh&#34;)
-     *                 .build())
-     *             .build());
+     * ### cloud-config.yaml
      * 
-     *     }
-     * }
-     * ```
+     * &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --&gt;
      * 
      */
     public static Output<GetConfigResult> getConfig(GetConfigArgs args, InvokeOptions options) {
         return Deployment.getInstance().invoke("cloudinit:index/getConfig:getConfig", TypeShape.of(GetConfigResult.class), args, Utilities.withVersion(options));
     }
     /**
-     * Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
-     * for use with [cloud-init](https://cloudinit.readthedocs.io/).
+     * Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
      * 
-     * Cloud-init is a commonly-used startup configuration utility for cloud compute
-     * instances. It accepts configuration via provider-specific user data mechanisms,
-     * such as `user_data` for Amazon EC2 instances. Multipart MIME is one of the
-     * data formats it accepts. For more information, see
-     * [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html)
-     * in the cloud-init manual.
+     * Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
      * 
-     * This is not a generalized utility for producing multipart MIME messages. Its
-     * featureset is specialized for the features of cloud-init.
+     * This is not a generalized utility for producing multi-part MIME messages. It&#39;s feature set is specialized for cloud-init multi-part MIME messages.
      * 
      * ## Example Usage
-     * ```java
-     * package generated_program;
      * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import com.pulumi.cloudinit.CloudinitFunctions;
-     * import com.pulumi.cloudinit.inputs.GetConfigArgs;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
+     * ### Config
      * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
+     * ### hello-script.sh
      * 
-     *     public static void stack(Context ctx) {
-     *         final var foo = CloudinitFunctions.getConfig(GetConfigArgs.builder()
-     *             .base64Encode(false)
-     *             .gzip(false)
-     *             .parts(GetConfigPartArgs.builder()
-     *                 .content(&#34;baz&#34;)
-     *                 .contentType(&#34;text/x-shellscript&#34;)
-     *                 .filename(&#34;foobar.sh&#34;)
-     *                 .build())
-     *             .build());
+     * ### cloud-config.yaml
      * 
-     *     }
-     * }
-     * ```
+     * &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --&gt;
      * 
      */
     public static CompletableFuture<GetConfigResult> getConfigPlain(GetConfigPlainArgs args, InvokeOptions options) {

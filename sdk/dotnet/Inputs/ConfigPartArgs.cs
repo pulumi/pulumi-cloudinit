@@ -12,15 +12,27 @@ namespace Pulumi.CloudInit.Inputs
 
     public sealed class ConfigPartArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Body content for the part.
+        /// </summary>
         [Input("content", required: true)]
         public Input<string> Content { get; set; } = null!;
 
+        /// <summary>
+        /// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+        /// </summary>
         [Input("contentType")]
         public Input<string>? ContentType { get; set; }
 
+        /// <summary>
+        /// A filename to report in the header for the part.
+        /// </summary>
         [Input("filename")]
         public Input<string>? Filename { get; set; }
 
+        /// <summary>
+        /// A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+        /// </summary>
         [Input("mergeType")]
         public Input<string>? MergeType { get; set; }
 

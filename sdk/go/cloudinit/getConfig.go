@@ -11,52 +11,21 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
-// for use with [cloud-init](https://cloudinit.readthedocs.io/).
+// Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
 //
-// Cloud-init is a commonly-used startup configuration utility for cloud compute
-// instances. It accepts configuration via provider-specific user data mechanisms,
-// such as `userData` for Amazon EC2 instances. Multipart MIME is one of the
-// data formats it accepts. For more information, see
-// [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html)
-// in the cloud-init manual.
+// Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `userData` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
 //
-// This is not a generalized utility for producing multipart MIME messages. Its
-// featureset is specialized for the features of cloud-init.
+// This is not a generalized utility for producing multi-part MIME messages. It's feature set is specialized for cloud-init multi-part MIME messages.
 //
 // ## Example Usage
 //
-// ```go
-// package main
+// ### Config
 //
-// import (
+// ### hello-script.sh
 //
-//	"github.com/pulumi/pulumi-cloudinit/sdk/go/cloudinit"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// ### cloud-config.yaml
 //
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cloudinit.LookupConfig(ctx, &cloudinit.LookupConfigArgs{
-//				Base64Encode: pulumi.BoolRef(false),
-//				Gzip:         pulumi.BoolRef(false),
-//				Parts: []cloudinit.GetConfigPart{
-//					{
-//						Content:     "baz",
-//						ContentType: pulumi.StringRef("text/x-shellscript"),
-//						Filename:    pulumi.StringRef("foobar.sh"),
-//					},
-//				},
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
+// <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
 func LookupConfig(ctx *pulumi.Context, args *LookupConfigArgs, opts ...pulumi.InvokeOption) (*LookupConfigResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupConfigResult
@@ -69,27 +38,27 @@ func LookupConfig(ctx *pulumi.Context, args *LookupConfigArgs, opts ...pulumi.In
 
 // A collection of arguments for invoking getConfig.
 type LookupConfigArgs struct {
-	// Base64 encoding of the rendered output. Defaults to `true`,
-	// and cannot be disabled if `gzip` is `true`.
+	// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
 	Base64Encode *bool `pulumi:"base64Encode"`
-	// Define the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+	// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
 	Boundary *string `pulumi:"boundary"`
-	// Specify whether or not to gzip the rendered output. Defaults to `true`.
+	// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
 	Gzip *bool `pulumi:"gzip"`
-	// A nested block type which adds a file to the generated
-	// cloud-init configuration. Use multiple `part` blocks to specify multiple
-	// files, which will be included in order of declaration in the final MIME
-	// document.
+	// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
 	Parts []GetConfigPart `pulumi:"parts"`
 }
 
 // A collection of values returned by getConfig.
 type LookupConfigResult struct {
-	Base64Encode *bool   `pulumi:"base64Encode"`
-	Boundary     *string `pulumi:"boundary"`
-	Gzip         *bool   `pulumi:"gzip"`
-	// The provider-assigned unique ID for this managed resource.
-	Id    string          `pulumi:"id"`
+	// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+	Base64Encode bool `pulumi:"base64Encode"`
+	// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+	Boundary string `pulumi:"boundary"`
+	// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+	Gzip bool `pulumi:"gzip"`
+	// [CRC-32](https://pkg.go.dev/hash/crc32) checksum of `rendered` cloud-init config.
+	Id string `pulumi:"id"`
+	// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
 	Parts []GetConfigPart `pulumi:"parts"`
 	// The final rendered multi-part cloud-init config.
 	Rendered string `pulumi:"rendered"`
@@ -110,17 +79,13 @@ func LookupConfigOutput(ctx *pulumi.Context, args LookupConfigOutputArgs, opts .
 
 // A collection of arguments for invoking getConfig.
 type LookupConfigOutputArgs struct {
-	// Base64 encoding of the rendered output. Defaults to `true`,
-	// and cannot be disabled if `gzip` is `true`.
+	// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
 	Base64Encode pulumi.BoolPtrInput `pulumi:"base64Encode"`
-	// Define the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+	// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
 	Boundary pulumi.StringPtrInput `pulumi:"boundary"`
-	// Specify whether or not to gzip the rendered output. Defaults to `true`.
+	// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
 	Gzip pulumi.BoolPtrInput `pulumi:"gzip"`
-	// A nested block type which adds a file to the generated
-	// cloud-init configuration. Use multiple `part` blocks to specify multiple
-	// files, which will be included in order of declaration in the final MIME
-	// document.
+	// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
 	Parts GetConfigPartArrayInput `pulumi:"parts"`
 }
 
@@ -143,23 +108,27 @@ func (o LookupConfigResultOutput) ToLookupConfigResultOutputWithContext(ctx cont
 	return o
 }
 
-func (o LookupConfigResultOutput) Base64Encode() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v LookupConfigResult) *bool { return v.Base64Encode }).(pulumi.BoolPtrOutput)
+// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+func (o LookupConfigResultOutput) Base64Encode() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupConfigResult) bool { return v.Base64Encode }).(pulumi.BoolOutput)
 }
 
-func (o LookupConfigResultOutput) Boundary() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v LookupConfigResult) *string { return v.Boundary }).(pulumi.StringPtrOutput)
+// Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
+func (o LookupConfigResultOutput) Boundary() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupConfigResult) string { return v.Boundary }).(pulumi.StringOutput)
 }
 
-func (o LookupConfigResultOutput) Gzip() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v LookupConfigResult) *bool { return v.Gzip }).(pulumi.BoolPtrOutput)
+// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+func (o LookupConfigResultOutput) Gzip() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupConfigResult) bool { return v.Gzip }).(pulumi.BoolOutput)
 }
 
-// The provider-assigned unique ID for this managed resource.
+// [CRC-32](https://pkg.go.dev/hash/crc32) checksum of `rendered` cloud-init config.
 func (o LookupConfigResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupConfigResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
 func (o LookupConfigResultOutput) Parts() GetConfigPartArrayOutput {
 	return o.ApplyT(func(v LookupConfigResult) []GetConfigPart { return v.Parts }).(GetConfigPartArrayOutput)
 }

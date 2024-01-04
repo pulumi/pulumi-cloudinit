@@ -16,30 +16,62 @@ public final class ConfigPartArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ConfigPartArgs Empty = new ConfigPartArgs();
 
+    /**
+     * Body content for the part.
+     * 
+     */
     @Import(name="content", required=true)
     private Output<String> content;
 
+    /**
+     * @return Body content for the part.
+     * 
+     */
     public Output<String> content() {
         return this.content;
     }
 
+    /**
+     * A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+     * 
+     */
     @Import(name="contentType")
     private @Nullable Output<String> contentType;
 
+    /**
+     * @return A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+     * 
+     */
     public Optional<Output<String>> contentType() {
         return Optional.ofNullable(this.contentType);
     }
 
+    /**
+     * A filename to report in the header for the part.
+     * 
+     */
     @Import(name="filename")
     private @Nullable Output<String> filename;
 
+    /**
+     * @return A filename to report in the header for the part.
+     * 
+     */
     public Optional<Output<String>> filename() {
         return Optional.ofNullable(this.filename);
     }
 
+    /**
+     * A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+     * 
+     */
     @Import(name="mergeType")
     private @Nullable Output<String> mergeType;
 
+    /**
+     * @return A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+     * 
+     */
     public Optional<Output<String>> mergeType() {
         return Optional.ofNullable(this.mergeType);
     }
@@ -71,38 +103,86 @@ public final class ConfigPartArgs extends com.pulumi.resources.ResourceArgs {
             $ = new ConfigPartArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param content Body content for the part.
+         * 
+         * @return builder
+         * 
+         */
         public Builder content(Output<String> content) {
             $.content = content;
             return this;
         }
 
+        /**
+         * @param content Body content for the part.
+         * 
+         * @return builder
+         * 
+         */
         public Builder content(String content) {
             return content(Output.of(content));
         }
 
+        /**
+         * @param contentType A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+         * 
+         * @return builder
+         * 
+         */
         public Builder contentType(@Nullable Output<String> contentType) {
             $.contentType = contentType;
             return this;
         }
 
+        /**
+         * @param contentType A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+         * 
+         * @return builder
+         * 
+         */
         public Builder contentType(String contentType) {
             return contentType(Output.of(contentType));
         }
 
+        /**
+         * @param filename A filename to report in the header for the part.
+         * 
+         * @return builder
+         * 
+         */
         public Builder filename(@Nullable Output<String> filename) {
             $.filename = filename;
             return this;
         }
 
+        /**
+         * @param filename A filename to report in the header for the part.
+         * 
+         * @return builder
+         * 
+         */
         public Builder filename(String filename) {
             return filename(Output.of(filename));
         }
 
+        /**
+         * @param mergeType A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+         * 
+         * @return builder
+         * 
+         */
         public Builder mergeType(@Nullable Output<String> mergeType) {
             $.mergeType = mergeType;
             return this;
         }
 
+        /**
+         * @param mergeType A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+         * 
+         * @return builder
+         * 
+         */
         public Builder mergeType(String mergeType) {
             return mergeType(Output.of(mergeType));
         }

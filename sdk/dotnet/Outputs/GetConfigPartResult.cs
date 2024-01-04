@@ -18,16 +18,15 @@ namespace Pulumi.CloudInit.Outputs
         /// </summary>
         public readonly string Content;
         /// <summary>
-        /// A MIME-style content type to report in the header for the part.
+        /// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
         /// </summary>
-        public readonly string? ContentType;
+        public readonly string ContentType;
         /// <summary>
         /// A filename to report in the header for the part.
         /// </summary>
         public readonly string? Filename;
         /// <summary>
-        /// A value for the `X-Merge-Type` header of the part,
-        /// to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).
+        /// A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
         /// </summary>
         public readonly string? MergeType;
 
@@ -35,7 +34,7 @@ namespace Pulumi.CloudInit.Outputs
         private GetConfigPartResult(
             string content,
 
-            string? contentType,
+            string contentType,
 
             string? filename,
 
