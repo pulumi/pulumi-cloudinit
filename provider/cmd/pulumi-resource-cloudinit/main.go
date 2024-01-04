@@ -17,11 +17,11 @@
 package main
 
 import (
+	"context"
 	_ "embed"
-
 	cloudinit "github.com/pulumi/pulumi-cloudinit/provider"
-	"github.com/pulumi/pulumi-cloudinit/provider/pkg/version"
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	//"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 )
 
 //go:embed schema-embed.json
@@ -29,5 +29,8 @@ var pulumiSchema []byte
 
 func main() {
 	// Modify the path to point to the new provider
-	tfbridge.Main("cloudinit", version.Version, cloudinit.Provider(), pulumiSchema)
+	ctx := context.Background()
+	metadata := tfbridge.ProviderMetadata{PackageSchema: pulumiSchema}
+
+	tfbridge.Main(ctx, "cloudinit", cloudinit.Provider(), metadata)
 }

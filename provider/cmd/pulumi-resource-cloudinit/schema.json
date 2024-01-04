@@ -57,25 +57,33 @@
             "properties": {
                 "content": {
                     "type": "string",
-                    "willReplaceOnChanges": true
+                    "description": "Body content for the part.\n"
                 },
                 "contentType": {
                     "type": "string",
-                    "willReplaceOnChanges": true
+                    "description": "A MIME-style content type to report in the header for the part. Defaults to `text/plain`\n"
                 },
                 "filename": {
                     "type": "string",
-                    "willReplaceOnChanges": true
+                    "description": "A filename to report in the header for the part.\n"
                 },
                 "mergeType": {
                     "type": "string",
-                    "willReplaceOnChanges": true
+                    "description": "A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).\n"
                 }
             },
             "type": "object",
             "required": [
                 "content"
-            ]
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "content",
+                        "contentType"
+                    ]
+                }
+            }
         },
         "cloudinit:index/getConfigPart:getConfigPart": {
             "properties": {
@@ -85,7 +93,7 @@
                 },
                 "contentType": {
                     "type": "string",
-                    "description": "A MIME-style content type to report in the header for the part.\n"
+                    "description": "A MIME-style content type to report in the header for the part. Defaults to `text/plain`\n"
                 },
                 "filename": {
                     "type": "string",
@@ -93,13 +101,21 @@
                 },
                 "mergeType": {
                     "type": "string",
-                    "description": "A value for the `X-Merge-Type` header of the part,\nto control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/topics/merging.html).\n"
+                    "description": "A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).\n"
                 }
             },
             "type": "object",
             "required": [
-                "content"
-            ]
+                "content",
+                "contentType"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": [
+                        "content"
+                    ]
+                }
+            }
         }
     },
     "provider": {
@@ -107,139 +123,143 @@
     },
     "resources": {
         "cloudinit:index/config:Config": {
+            "description": "\u003e **This resource is deprecated** Please use the cloudinit.Config\n  data source instead.\n\nRenders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).\n\nCloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.\n\nThis is not a generalized utility for producing multi-part MIME messages. It's feature set is specialized for cloud-init multi-part MIME messages.\n\n{{% examples %}}\n## Example Usage\n\n### Config\n```terraform\nresource \"cloudinit_config\" \"foobar\" {\n  gzip          = false\n  base64_encode = false\n\n  part {\n    filename     = \"hello-script.sh\"\n    content_type = \"text/x-shellscript\"\n\n    content = file(\"${path.module}/hello-script.sh\")\n  }\n\n  part {\n    filename     = \"cloud-config.yaml\"\n    content_type = \"text/cloud-config\"\n\n    content = file(\"${path.module}/cloud-config.yaml\")\n  }\n}\n```\n\n### hello-script.sh\n```shell\n#!/bin/sh\necho \"Hello World! I'm starting up now at $(date -R)!\"\n```\n\n### cloud-config.yaml\n```yaml\n#cloud-config\n# See documentation for more configuration examples\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html \n\n# Install arbitrary packages\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#install-arbitrary-packages\npackages:\n  - python\n# Run commands on first boot\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#run-commands-on-first-boot\nruncmd:\n - [ ls, -l, / ]\n - [ sh, -xc, \"echo $(date) ': hello world!'\" ]\n - [ sh, -c, echo \"=========hello world=========\" ]\n - ls -l /root\n```\n\n\u003c!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --\u003e\n\n{{% /examples %}}",
             "properties": {
                 "base64Encode": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n"
                 },
                 "boundary": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.\n"
                 },
                 "gzip": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n"
                 },
                 "parts": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/cloudinit:index/ConfigPart:ConfigPart"
-                    }
+                    },
+                    "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
                 },
                 "rendered": {
                     "type": "string",
-                    "description": "rendered cloudinit configuration\n"
+                    "description": "The final rendered multi-part cloud-init config.\n"
                 }
             },
             "required": [
-                "parts",
+                "base64Encode",
+                "boundary",
+                "gzip",
                 "rendered"
             ],
             "inputProperties": {
                 "base64Encode": {
                     "type": "boolean",
-                    "willReplaceOnChanges": true
+                    "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n"
                 },
                 "boundary": {
                     "type": "string",
-                    "willReplaceOnChanges": true
+                    "description": "Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.\n"
                 },
                 "gzip": {
                     "type": "boolean",
-                    "willReplaceOnChanges": true
+                    "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n"
                 },
                 "parts": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/cloudinit:index/ConfigPart:ConfigPart"
                     },
-                    "willReplaceOnChanges": true
+                    "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
                 }
             },
-            "requiredInputs": [
-                "parts"
-            ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Config resources.\n",
                 "properties": {
                     "base64Encode": {
                         "type": "boolean",
-                        "willReplaceOnChanges": true
+                        "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n"
                     },
                     "boundary": {
                         "type": "string",
-                        "willReplaceOnChanges": true
+                        "description": "Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.\n"
                     },
                     "gzip": {
                         "type": "boolean",
-                        "willReplaceOnChanges": true
+                        "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n"
                     },
                     "parts": {
                         "type": "array",
                         "items": {
                             "$ref": "#/types/cloudinit:index/ConfigPart:ConfigPart"
                         },
-                        "willReplaceOnChanges": true
+                        "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
                     },
                     "rendered": {
                         "type": "string",
-                        "description": "rendered cloudinit configuration\n"
+                        "description": "The final rendered multi-part cloud-init config.\n"
                     }
                 },
                 "type": "object"
-            },
-            "deprecationMessage": "This resource is deprecated.\nPlease use the getConfig data source instead."
+            }
         }
     },
     "functions": {
         "cloudinit:index/getConfig:getConfig": {
-            "description": "Renders a [multipart MIME configuration](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)\nfor use with [cloud-init](https://cloudinit.readthedocs.io/).\n\nCloud-init is a commonly-used startup configuration utility for cloud compute\ninstances. It accepts configuration via provider-specific user data mechanisms,\nsuch as `user_data` for Amazon EC2 instances. Multipart MIME is one of the\ndata formats it accepts. For more information, see\n[User-Data Formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html)\nin the cloud-init manual.\n\nThis is not a generalized utility for producing multipart MIME messages. Its\nfeatureset is specialized for the features of cloud-init.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cloudinit from \"@pulumi/cloudinit\";\n\nconst foo = cloudinit.getConfig({\n    base64Encode: false,\n    gzip: false,\n    parts: [{\n        content: \"baz\",\n        contentType: \"text/x-shellscript\",\n        filename: \"foobar.sh\",\n    }],\n});\n```\n```python\nimport pulumi\nimport pulumi_cloudinit as cloudinit\n\nfoo = cloudinit.get_config(base64_encode=False,\n    gzip=False,\n    parts=[cloudinit.GetConfigPartArgs(\n        content=\"baz\",\n        content_type=\"text/x-shellscript\",\n        filename=\"foobar.sh\",\n    )])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing CloudInit = Pulumi.CloudInit;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var foo = CloudInit.GetConfig.Invoke(new()\n    {\n        Base64Encode = false,\n        Gzip = false,\n        Parts = new[]\n        {\n            new CloudInit.Inputs.GetConfigPartInputArgs\n            {\n                Content = \"baz\",\n                ContentType = \"text/x-shellscript\",\n                Filename = \"foobar.sh\",\n            },\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-cloudinit/sdk/go/cloudinit\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cloudinit.LookupConfig(ctx, \u0026cloudinit.LookupConfigArgs{\n\t\t\tBase64Encode: pulumi.BoolRef(false),\n\t\t\tGzip:         pulumi.BoolRef(false),\n\t\t\tParts: []cloudinit.GetConfigPart{\n\t\t\t\t{\n\t\t\t\t\tContent:     \"baz\",\n\t\t\t\t\tContentType: pulumi.StringRef(\"text/x-shellscript\"),\n\t\t\t\t\tFilename:    pulumi.StringRef(\"foobar.sh\"),\n\t\t\t\t},\n\t\t\t},\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cloudinit.CloudinitFunctions;\nimport com.pulumi.cloudinit.inputs.GetConfigArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var foo = CloudinitFunctions.getConfig(GetConfigArgs.builder()\n            .base64Encode(false)\n            .gzip(false)\n            .parts(GetConfigPartArgs.builder()\n                .content(\"baz\")\n                .contentType(\"text/x-shellscript\")\n                .filename(\"foobar.sh\")\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  foo:\n    fn::invoke:\n      Function: cloudinit:getConfig\n      Arguments:\n        base64Encode: false\n        gzip: false\n        parts:\n          - content: baz\n            contentType: text/x-shellscript\n            filename: foobar.sh\n```\n{{% /example %}}\n{{% /examples %}}",
+            "description": "Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).\n\nCloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.\n\nThis is not a generalized utility for producing multi-part MIME messages. It's feature set is specialized for cloud-init multi-part MIME messages.\n\n{{% examples %}}\n## Example Usage\n\n### Config\n```terraform\ndata \"cloudinit_config\" \"foobar\" {\n  gzip          = false\n  base64_encode = false\n\n  part {\n    filename     = \"hello-script.sh\"\n    content_type = \"text/x-shellscript\"\n\n    content = file(\"${path.module}/hello-script.sh\")\n  }\n\n  part {\n    filename     = \"cloud-config.yaml\"\n    content_type = \"text/cloud-config\"\n\n    content = file(\"${path.module}/cloud-config.yaml\")\n  }\n}\n```\n\n### hello-script.sh\n```shell\n#!/bin/sh\necho \"Hello World! I'm starting up now at $(date -R)!\"\n```\n\n### cloud-config.yaml\n```yaml\n#cloud-config\n# See documentation for more configuration examples\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html \n\n# Install arbitrary packages\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#install-arbitrary-packages\npackages:\n  - python\n# Run commands on first boot\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#run-commands-on-first-boot\nruncmd:\n - [ ls, -l, / ]\n - [ sh, -xc, \"echo $(date) ': hello world!'\" ]\n - [ sh, -c, echo \"=========hello world=========\" ]\n - ls -l /root\n```\n\n\u003c!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --\u003e\n\n{{% /examples %}}",
             "inputs": {
                 "description": "A collection of arguments for invoking getConfig.\n",
                 "properties": {
                     "base64Encode": {
                         "type": "boolean",
-                        "description": "Base64 encoding of the rendered output. Defaults to `true`,\nand cannot be disabled if `gzip` is `true`.\n"
+                        "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n"
                     },
                     "boundary": {
                         "type": "string",
-                        "description": "Define the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.\n"
+                        "description": "Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.\n"
                     },
                     "gzip": {
                         "type": "boolean",
-                        "description": "Specify whether or not to gzip the rendered output. Defaults to `true`.\n"
+                        "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n"
                     },
                     "parts": {
                         "type": "array",
                         "items": {
                             "$ref": "#/types/cloudinit:index/getConfigPart:getConfigPart"
                         },
-                        "description": "A nested block type which adds a file to the generated\ncloud-init configuration. Use multiple `part` blocks to specify multiple\nfiles, which will be included in order of declaration in the final MIME\ndocument.\n"
+                        "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
                     }
                 },
-                "type": "object",
-                "required": [
-                    "parts"
-                ]
+                "type": "object"
             },
             "outputs": {
                 "description": "A collection of values returned by getConfig.\n",
                 "properties": {
                     "base64Encode": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n"
                     },
                     "boundary": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.\n"
                     },
                     "gzip": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n"
                     },
                     "id": {
                         "type": "string",
-                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                        "description": "[CRC-32](https://pkg.go.dev/hash/crc32) checksum of `rendered` cloud-init config.\n"
                     },
                     "parts": {
                         "type": "array",
                         "items": {
                             "$ref": "#/types/cloudinit:index/getConfigPart:getConfigPart"
-                        }
+                        },
+                        "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
                     },
                     "rendered": {
                         "type": "string",
@@ -248,9 +268,11 @@
                 },
                 "type": "object",
                 "required": [
-                    "parts",
-                    "rendered",
-                    "id"
+                    "base64Encode",
+                    "boundary",
+                    "gzip",
+                    "id",
+                    "rendered"
                 ]
             }
         }
