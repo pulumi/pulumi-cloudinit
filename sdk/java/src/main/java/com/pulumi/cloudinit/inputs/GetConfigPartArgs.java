@@ -5,6 +5,7 @@ package com.pulumi.cloudinit.inputs;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.core.internal.Codegen;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
 import java.util.Objects;
@@ -35,15 +36,15 @@ public final class GetConfigPartArgs extends com.pulumi.resources.ResourceArgs {
      * A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      * 
      */
-    @Import(name="contentType", required=true)
-    private Output<String> contentType;
+    @Import(name="contentType")
+    private @Nullable Output<String> contentType;
 
     /**
      * @return A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      * 
      */
-    public Output<String> contentType() {
-        return this.contentType;
+    public Optional<Output<String>> contentType() {
+        return Optional.ofNullable(this.contentType);
     }
 
     /**
@@ -130,7 +131,7 @@ public final class GetConfigPartArgs extends com.pulumi.resources.ResourceArgs {
          * @return builder
          * 
          */
-        public Builder contentType(Output<String> contentType) {
+        public Builder contentType(@Nullable Output<String> contentType) {
             $.contentType = contentType;
             return this;
         }
@@ -191,9 +192,7 @@ public final class GetConfigPartArgs extends com.pulumi.resources.ResourceArgs {
             if ($.content == null) {
                 throw new MissingRequiredPropertyException("GetConfigPartArgs", "content");
             }
-            if ($.contentType == null) {
-                throw new MissingRequiredPropertyException("GetConfigPartArgs", "contentType");
-            }
+            $.contentType = Codegen.stringProp("contentType").output().arg($.contentType).def("text/plain").getNullable();
             return $;
         }
     }

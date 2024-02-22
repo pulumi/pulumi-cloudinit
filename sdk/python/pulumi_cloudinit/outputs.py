@@ -91,7 +91,7 @@ class ConfigPart(dict):
 class GetConfigPartResult(dict):
     def __init__(__self__, *,
                  content: str,
-                 content_type: str,
+                 content_type: Optional[str] = None,
                  filename: Optional[str] = None,
                  merge_type: Optional[str] = None):
         """
@@ -101,7 +101,10 @@ class GetConfigPartResult(dict):
         :param str merge_type: A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
         """
         pulumi.set(__self__, "content", content)
-        pulumi.set(__self__, "content_type", content_type)
+        if content_type is None:
+            content_type = 'text/plain'
+        if content_type is not None:
+            pulumi.set(__self__, "content_type", content_type)
         if filename is not None:
             pulumi.set(__self__, "filename", filename)
         if merge_type is not None:
@@ -117,7 +120,7 @@ class GetConfigPartResult(dict):
 
     @property
     @pulumi.getter(name="contentType")
-    def content_type(self) -> str:
+    def content_type(self) -> Optional[str]:
         """
         A MIME-style content type to report in the header for the part. Defaults to `text/plain`
         """
