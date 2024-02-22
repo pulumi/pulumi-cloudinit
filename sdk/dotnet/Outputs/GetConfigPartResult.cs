@@ -20,7 +20,7 @@ namespace Pulumi.CloudInit.Outputs
         /// <summary>
         /// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
         /// </summary>
-        public readonly string ContentType;
+        public readonly string? ContentType;
         /// <summary>
         /// A filename to report in the header for the part.
         /// </summary>
@@ -34,7 +34,7 @@ namespace Pulumi.CloudInit.Outputs
         private GetConfigPartResult(
             string content,
 
-            string contentType,
+            string? contentType,
 
             string? filename,
 

@@ -21,8 +21,8 @@ namespace Pulumi.CloudInit.Inputs
         /// <summary>
         /// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
         /// </summary>
-        [Input("contentType", required: true)]
-        public Input<string> ContentType { get; set; } = null!;
+        [Input("contentType")]
+        public Input<string>? ContentType { get; set; }
 
         /// <summary>
         /// A filename to report in the header for the part.
@@ -38,6 +38,7 @@ namespace Pulumi.CloudInit.Inputs
 
         public GetConfigPartInputArgs()
         {
+            ContentType = "text/plain";
         }
         public static new GetConfigPartInputArgs Empty => new GetConfigPartInputArgs();
     }

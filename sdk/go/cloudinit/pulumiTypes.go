@@ -141,11 +141,24 @@ type GetConfigPart struct {
 	// Body content for the part.
 	Content string `pulumi:"content"`
 	// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
-	ContentType string `pulumi:"contentType"`
+	ContentType *string `pulumi:"contentType"`
 	// A filename to report in the header for the part.
 	Filename *string `pulumi:"filename"`
 	// A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
 	MergeType *string `pulumi:"mergeType"`
+}
+
+// Defaults sets the appropriate defaults for GetConfigPart
+func (val *GetConfigPart) Defaults() *GetConfigPart {
+	if val == nil {
+		return nil
+	}
+	tmp := *val
+	if tmp.ContentType == nil {
+		contentType_ := "text/plain"
+		tmp.ContentType = &contentType_
+	}
+	return &tmp
 }
 
 // GetConfigPartInput is an input type that accepts GetConfigPartArgs and GetConfigPartOutput values.
@@ -163,13 +176,24 @@ type GetConfigPartArgs struct {
 	// Body content for the part.
 	Content pulumi.StringInput `pulumi:"content"`
 	// A MIME-style content type to report in the header for the part. Defaults to `text/plain`
-	ContentType pulumi.StringInput `pulumi:"contentType"`
+	ContentType pulumi.StringPtrInput `pulumi:"contentType"`
 	// A filename to report in the header for the part.
 	Filename pulumi.StringPtrInput `pulumi:"filename"`
 	// A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
 	MergeType pulumi.StringPtrInput `pulumi:"mergeType"`
 }
 
+// Defaults sets the appropriate defaults for GetConfigPartArgs
+func (val *GetConfigPartArgs) Defaults() *GetConfigPartArgs {
+	if val == nil {
+		return nil
+	}
+	tmp := *val
+	if tmp.ContentType == nil {
+		tmp.ContentType = pulumi.StringPtr("text/plain")
+	}
+	return &tmp
+}
 func (GetConfigPartArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetConfigPart)(nil)).Elem()
 }
@@ -227,8 +251,8 @@ func (o GetConfigPartOutput) Content() pulumi.StringOutput {
 }
 
 // A MIME-style content type to report in the header for the part. Defaults to `text/plain`
-func (o GetConfigPartOutput) ContentType() pulumi.StringOutput {
-	return o.ApplyT(func(v GetConfigPart) string { return v.ContentType }).(pulumi.StringOutput)
+func (o GetConfigPartOutput) ContentType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetConfigPart) *string { return v.ContentType }).(pulumi.StringPtrOutput)
 }
 
 // A filename to report in the header for the part.

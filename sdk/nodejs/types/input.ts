@@ -5,6 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+import * as utilities from "../utilities";
+
 export interface ConfigPart {
     /**
      * Body content for the part.
@@ -42,6 +44,15 @@ export interface GetConfigPart {
      */
     mergeType?: string;
 }
+/**
+ * getConfigPartProvideDefaults sets the appropriate defaults for GetConfigPart
+ */
+export function getConfigPartProvideDefaults(val: GetConfigPart): GetConfigPart {
+    return {
+        ...val,
+        contentType: (val.contentType) ?? "text/plain",
+    };
+}
 
 export interface GetConfigPartArgs {
     /**
@@ -60,4 +71,13 @@ export interface GetConfigPartArgs {
      * A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
      */
     mergeType?: pulumi.Input<string>;
+}
+/**
+ * getConfigPartArgsProvideDefaults sets the appropriate defaults for GetConfigPartArgs
+ */
+export function getConfigPartArgsProvideDefaults(val: GetConfigPartArgs): GetConfigPartArgs {
+    return {
+        ...val,
+        contentType: (val.contentType) ?? "text/plain",
+    };
 }

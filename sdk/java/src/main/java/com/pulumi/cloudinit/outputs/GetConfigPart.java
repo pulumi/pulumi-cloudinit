@@ -21,7 +21,7 @@ public final class GetConfigPart {
      * @return A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      * 
      */
-    private String contentType;
+    private @Nullable String contentType;
     /**
      * @return A filename to report in the header for the part.
      * 
@@ -45,8 +45,8 @@ public final class GetConfigPart {
      * @return A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      * 
      */
-    public String contentType() {
-        return this.contentType;
+    public Optional<String> contentType() {
+        return Optional.ofNullable(this.contentType);
     }
     /**
      * @return A filename to report in the header for the part.
@@ -73,7 +73,7 @@ public final class GetConfigPart {
     @CustomType.Builder
     public static final class Builder {
         private String content;
-        private String contentType;
+        private @Nullable String contentType;
         private @Nullable String filename;
         private @Nullable String mergeType;
         public Builder() {}
@@ -94,10 +94,8 @@ public final class GetConfigPart {
             return this;
         }
         @CustomType.Setter
-        public Builder contentType(String contentType) {
-            if (contentType == null) {
-              throw new MissingRequiredPropertyException("GetConfigPart", "contentType");
-            }
+        public Builder contentType(@Nullable String contentType) {
+
             this.contentType = contentType;
             return this;
         }
