@@ -22,6 +22,7 @@ import (
 	_ "embed"
 
 	"github.com/hashicorp/terraform-provider-cloudinit/shim"
+
 	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	tfbridgetokens "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
@@ -90,10 +91,10 @@ func Provider() tfbridge.ProviderInfo {
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"cloudinit_config": {
 				Fields: map[string]*tfbridge.SchemaInfo{
-					"part": &tfbridge.SchemaInfo{
+					"part": {
 						Elem: &tfbridge.SchemaInfo{
 							Fields: map[string]*tfbridge.SchemaInfo{
-								"content_type": &tfbridge.SchemaInfo{
+								"content_type": {
 									Default: &tfbridge.DefaultInfo{
 										Value: "text/plain",
 									},

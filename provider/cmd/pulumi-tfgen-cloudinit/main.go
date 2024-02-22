@@ -15,8 +15,9 @@
 package main
 
 import (
-	cloudinit "github.com/pulumi/pulumi-cloudinit/provider"
 	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
+
+	cloudinit "github.com/pulumi/pulumi-cloudinit/provider"
 )
 
 func main() {

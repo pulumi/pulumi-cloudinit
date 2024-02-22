@@ -18,9 +18,12 @@ package main
 
 import (
 	"context"
+
 	_ "embed"
-	cloudinit "github.com/pulumi/pulumi-cloudinit/provider"
+
 	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
+
+	cloudinit "github.com/pulumi/pulumi-cloudinit/provider"
 )
 
 //go:embed schema-embed.json
