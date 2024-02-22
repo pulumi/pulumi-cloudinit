@@ -15,17 +15,18 @@
 package cloudinit
 
 import (
+	"fmt"
+	"path"
+
 	// embed is used to store bridge-metadata.json in the compiled binary
 	_ "embed"
-	"fmt"
+
 	"github.com/hashicorp/terraform-provider-cloudinit/shim"
-	"github.com/pulumi/pulumi-cloudinit/provider/pkg/version"
 	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	tfbridgetokens "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
-	"path/filepath"
-	"unicode"
+
+	"github.com/pulumi/pulumi-cloudinit/provider/pkg/version"
 )
 
 // all of the token components used below.
@@ -36,49 +37,22 @@ const (
 	mainMod = "index" // the y module
 )
 
-// makeMember manufactures a type token for the package and the given module and type.
-func makeMember(mod string, mem string) tokens.ModuleMember {
-	return tokens.ModuleMember(mainPkg + ":" + mod + ":" + mem)
-}
-
-// makeType manufactures a type token for the package and the given module and type.
-func makeType(mod string, typ string) tokens.Type {
-	return tokens.Type(makeMember(mod, typ))
-}
-
-// makeResource manufactures a standard resource token given a module and resource name.  It
-// automatically uses the main package and names the file by simply lower casing the resource's
-// first character.
-func makeResource(mod string, res string) tokens.Type {
-	fn := string(unicode.ToLower(rune(res[0]))) + res[1:]
-	return makeType(mod+"/"+fn, res)
-}
-
-// makeDataSource manufactures a standard resource token given a module and resource name.  It
-// automatically uses the main package and names the file by simply lower casing the data source's
-// first character.
-func makeDataSource(mod string, res string) tokens.ModuleMember {
-	fn := string(unicode.ToLower(rune(res[0]))) + res[1:]
-	return makeMember(mod+"/"+fn, res)
-}
+//go:embed cmd/pulumi-resource-cloudinit/bridge-metadata.json
+var metadata []byte
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
-	// Instantiate the Terraform provider
-	//p := shimv2.NewProvider(shim.NewProvider())
-
-	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
-		P:           pf.ShimProvider(shim.NewProvider()),
-		Name:        "cloudinit",
-		Version:     version.Version,
-		Description: "A Pulumi package for creating and managing cloudinit cloud resources.",
-		Keywords:    []string{"pulumi", "cloudinit"},
-		License:     "Apache-2.0",
-		Homepage:    "https://pulumi.io",
-		Repository:  "https://github.com/pulumi/pulumi-cloudinit",
-		GitHubOrg:   "hashicorp",
-		Config:      map[string]*tfbridge.SchemaInfo{},
+		P:            pf.ShimProvider(shim.NewProvider()),
+		Name:         "cloudinit",
+		Version:      version.Version,
+		Description:  "A Pulumi package for creating and managing cloudinit cloud resources.",
+		Keywords:     []string{"pulumi", "cloudinit"},
+		License:      "Apache-2.0",
+		Homepage:     "https://pulumi.io",
+		Repository:   "https://github.com/pulumi/pulumi-cloudinit",
+		GitHubOrg:    "hashicorp",
+		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 		JavaScript: &tfbridge.JavaScriptInfo{
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
@@ -88,17 +62,15 @@ func Provider() tfbridge.ProviderInfo {
 				"@types/mime": "^2.0.0",
 			},
 		},
-		Python: (func() *tfbridge.PythonInfo {
-			i := &tfbridge.PythonInfo{
-				Requires: map[string]string{
-					"pulumi": ">=3.0.0,<4.0.0",
-				}}
-			i.PyProject.Enabled = true
-			return i
-		})(),
+		Python: &tfbridge.PythonInfo{
+			Requires: map[string]string{
+				"pulumi": ">=3.0.0,<4.0.0",
+			},
+			PyProject: struct{ Enabled bool }{true},
+		},
 
 		Golang: &tfbridge.GolangInfo{
-			ImportBasePath: filepath.Join(
+			ImportBasePath: path.Join(
 				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", mainPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
@@ -114,7 +86,25 @@ func Provider() tfbridge.ProviderInfo {
 				"cloudinit": "CloudInit",
 			},
 		},
-		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
+
+		DataSources: map[string]*tfbridge.DataSourceInfo{
+			"cloudinit_config": {
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"part": &tfbridge.SchemaInfo{
+						Elem: &tfbridge.SchemaInfo{
+							Fields: map[string]*tfbridge.SchemaInfo{
+								"content_type": &tfbridge.SchemaInfo{
+									Default: &tfbridge.DefaultInfo{
+										Value: "text/plain",
+									},
+									MarkAsOptional: tfbridge.True(),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
 	}
 
 	prov.MustComputeTokens(tfbridgetokens.SingleModule("cloudinit_", mainMod,
@@ -125,6 +115,3 @@ func Provider() tfbridge.ProviderInfo {
 
 	return prov
 }
-
-//go:embed cmd/pulumi-resource-cloudinit/bridge-metadata.json
-var metadata []byte
