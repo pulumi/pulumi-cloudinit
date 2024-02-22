@@ -93,7 +93,8 @@
                 },
                 "contentType": {
                     "type": "string",
-                    "description": "A MIME-style content type to report in the header for the part. Defaults to `text/plain`\n"
+                    "description": "A MIME-style content type to report in the header for the part. Defaults to `text/plain`\n",
+                    "default": "text/plain"
                 },
                 "filename": {
                     "type": "string",
@@ -106,16 +107,8 @@
             },
             "type": "object",
             "required": [
-                "content",
-                "contentType"
-            ],
-            "language": {
-                "nodejs": {
-                    "requiredInputs": [
-                        "content"
-                    ]
-                }
-            }
+                "content"
+            ]
         }
     },
     "provider": {
