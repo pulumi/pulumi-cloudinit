@@ -9,9 +9,8 @@ replace (
 
 require (
 	github.com/hashicorp/terraform-provider-cloudinit/shim v0.0.0
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.27.0
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.74.0
-	github.com/pulumi/pulumi/sdk/v3 v3.105.0
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.29.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.76.0
 )
 
 require (
@@ -178,9 +177,10 @@ require (
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
 	github.com/pulumi/esc v0.6.2 // indirect
 	github.com/pulumi/pulumi-java/pkg v0.9.9 // indirect
-	github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.7 // indirect
+	github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.8 // indirect
 	github.com/pulumi/pulumi-yaml v1.5.0 // indirect
-	github.com/pulumi/pulumi/pkg/v3 v3.105.0 // indirect
+	github.com/pulumi/pulumi/pkg/v3 v3.107.0 // indirect
+	github.com/pulumi/pulumi/sdk/v3 v3.107.0 // indirect
 	github.com/pulumi/schema-tools v0.1.2 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
