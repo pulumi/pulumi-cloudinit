@@ -232,41 +232,41 @@
                 "description": "A collection of values returned by getConfig.\n",
                 "properties": {
                     "base64Encode": {
-                        "type": "boolean",
-                        "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n"
+                        "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n",
+                        "type": "boolean"
                     },
                     "boundary": {
-                        "type": "string",
-                        "description": "Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.\n"
+                        "description": "Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.\n",
+                        "type": "string"
                     },
                     "gzip": {
-                        "type": "boolean",
-                        "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n"
+                        "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n",
+                        "type": "boolean"
                     },
                     "id": {
-                        "type": "string",
-                        "description": "[CRC-32](https://pkg.go.dev/hash/crc32) checksum of `rendered` cloud-init config.\n"
+                        "description": "[CRC-32](https://pkg.go.dev/hash/crc32) checksum of `rendered` cloud-init config.\n",
+                        "type": "string"
                     },
                     "parts": {
-                        "type": "array",
+                        "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n",
                         "items": {
                             "$ref": "#/types/cloudinit:index/getConfigPart:getConfigPart"
                         },
-                        "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
+                        "type": "array"
                     },
                     "rendered": {
-                        "type": "string",
-                        "description": "The final rendered multi-part cloud-init config.\n"
+                        "description": "The final rendered multi-part cloud-init config.\n",
+                        "type": "string"
                     }
                 },
-                "type": "object",
                 "required": [
                     "base64Encode",
                     "boundary",
                     "gzip",
                     "id",
                     "rendered"
-                ]
+                ],
+                "type": "object"
             }
         }
     }
