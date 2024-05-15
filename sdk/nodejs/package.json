@@ -1,6 +1,6 @@
 {
     "name": "@pulumi/cloudinit",
-    "version": "${VERSION}",
+    "version": "1.0.0-alpha.0+dev",
     "description": "A Pulumi package for creating and managing cloudinit cloud resources.",
     "keywords": [
         "pulumi",
@@ -22,6 +22,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "cloudinit"
+        "name": "cloudinit",
+        "version": "1.0.0-alpha.0+dev"
     }
 }
