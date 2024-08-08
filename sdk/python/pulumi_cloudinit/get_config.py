@@ -109,7 +109,7 @@ class AwaitableGetConfigResult(GetConfigResult):
 def get_config(base64_encode: Optional[bool] = None,
                boundary: Optional[str] = None,
                gzip: Optional[bool] = None,
-               parts: Optional[Sequence[pulumi.InputType['GetConfigPartArgs']]] = None,
+               parts: Optional[Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict']]] = None,
                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetConfigResult:
     """
     Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
@@ -132,7 +132,7 @@ def get_config(base64_encode: Optional[bool] = None,
     :param bool base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
     :param str boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
     :param bool gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
-    :param Sequence[pulumi.InputType['GetConfigPartArgs']] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+    :param Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict']] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
     """
     __args__ = dict()
     __args__['base64Encode'] = base64_encode
@@ -155,7 +155,7 @@ def get_config(base64_encode: Optional[bool] = None,
 def get_config_output(base64_encode: Optional[pulumi.Input[Optional[bool]]] = None,
                       boundary: Optional[pulumi.Input[Optional[str]]] = None,
                       gzip: Optional[pulumi.Input[Optional[bool]]] = None,
-                      parts: Optional[pulumi.Input[Optional[Sequence[pulumi.InputType['GetConfigPartArgs']]]]] = None,
+                      parts: Optional[pulumi.Input[Optional[Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict']]]]] = None,
                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetConfigResult]:
     """
     Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
@@ -178,6 +178,6 @@ def get_config_output(base64_encode: Optional[pulumi.Input[Optional[bool]]] = No
     :param bool base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
     :param str boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
     :param bool gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
-    :param Sequence[pulumi.InputType['GetConfigPartArgs']] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+    :param Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict']] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
     """
     ...
