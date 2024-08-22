@@ -15,9 +15,9 @@
 package cloudinit
 
 import (
+	"bytes"
 	"fmt"
 	"path"
-
 	// embed is used to store bridge-metadata.json in the compiled binary
 	_ "embed"
 
@@ -54,6 +54,7 @@ func Provider() tfbridge.ProviderInfo {
 		Repository:   "https://github.com/pulumi/pulumi-cloudinit",
 		GitHubOrg:    "hashicorp",
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
+		DocRules:     &tfbridge.DocRuleInfo{EditRules: docEditRules},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
@@ -119,4 +120,21 @@ func Provider() tfbridge.ProviderInfo {
 	prov.SetAutonaming(255, "-")
 
 	return prov
+}
+
+func docEditRules(defaults []tfbridge.DocsEdit) []tfbridge.DocsEdit {
+	return append(
+		defaults,
+		removeDataSource,
+	)
+}
+
+// Tightens up content explanation
+var dataSource = []byte("data source, previously available as the `template_cloudinit_config` resource in the template provider,")
+var removeDataSource = tfbridge.DocsEdit{
+	Path: "index.md",
+	Edit: func(_ string, content []byte) ([]byte, error) {
+		content = bytes.ReplaceAll(content, dataSource, []byte("function"))
+		return content, nil
+	},
 }
