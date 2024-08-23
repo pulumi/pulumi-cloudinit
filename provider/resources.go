@@ -18,6 +18,7 @@ import (
 	"bytes"
 	"fmt"
 	"path"
+
 	// embed is used to store bridge-metadata.json in the compiled binary
 	_ "embed"
 
@@ -130,7 +131,8 @@ func docEditRules(defaults []tfbridge.DocsEdit) []tfbridge.DocsEdit {
 }
 
 // Tightens up content explanation
-var dataSource = []byte("data source, previously available as the `template_cloudinit_config` resource in the template provider,")
+var dataSource = []byte("data source, previously available as the `template_cloudinit_config` " +
+	"resource in the template provider,")
 var removeDataSource = tfbridge.DocsEdit{
 	Path: "index.md",
 	Edit: func(_ string, content []byte) ([]byte, error) {
