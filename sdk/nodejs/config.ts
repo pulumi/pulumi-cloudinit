@@ -8,7 +8,7 @@ import * as utilities from "./utilities";
 
 /**
  * > **This resource is deprecated** Please use the cloudinit.Config
- *   data source instead.
+ * data source instead.
  *
  * Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
  *
