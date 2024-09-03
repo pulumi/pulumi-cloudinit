@@ -53,7 +53,7 @@ namespace Pulumi.CloudInit
         /// ```yaml
         /// #cloud-config
         /// # See documentation for more configuration examples
-        /// # https://cloudinit.readthedocs.io/en/latest/reference/examples.html 
+        /// # https://cloudinit.readthedocs.io/en/latest/reference/examples.html
         /// 
         /// # Install arbitrary packages
         /// # https://cloudinit.readthedocs.io/en/latest/reference/examples.html#install-arbitrary-packages
@@ -117,7 +117,7 @@ namespace Pulumi.CloudInit
         /// ```yaml
         /// #cloud-config
         /// # See documentation for more configuration examples
-        /// # https://cloudinit.readthedocs.io/en/latest/reference/examples.html 
+        /// # https://cloudinit.readthedocs.io/en/latest/reference/examples.html
         /// 
         /// # Install arbitrary packages
         /// # https://cloudinit.readthedocs.io/en/latest/reference/examples.html#install-arbitrary-packages
