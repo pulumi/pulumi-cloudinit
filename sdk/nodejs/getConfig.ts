@@ -25,7 +25,6 @@ import * as utilities from "./utilities";
  */
 export function getConfig(args?: GetConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("cloudinit:index/getConfig:getConfig", {
         "base64Encode": args.base64Encode,
@@ -104,7 +103,14 @@ export interface GetConfigResult {
  * <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
  */
 export function getConfigOutput(args?: GetConfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConfigResult> {
-    return pulumi.output(args).apply((a: any) => getConfig(a, opts))
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("cloudinit:index/getConfig:getConfig", {
+        "base64Encode": args.base64Encode,
+        "boundary": args.boundary,
+        "gzip": args.gzip,
+        "parts": args.parts,
+    }, opts);
 }
 
 /**
