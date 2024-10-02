@@ -57,9 +57,6 @@ func Provider() tfbridge.ProviderInfo {
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 		DocRules:     &tfbridge.DocRuleInfo{EditRules: docEditRules},
 		JavaScript: &tfbridge.JavaScriptInfo{
-			Dependencies: map[string]string{
-				"@pulumi/pulumi": "^3.0.0",
-			},
 			DevDependencies: map[string]string{
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 				"@types/mime": "^2.0.0",
@@ -68,9 +65,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Python: &tfbridge.PythonInfo{
 			RespectSchemaVersion: true,
-			Requires: map[string]string{
-				"pulumi": ">=3.0.0,<4.0.0",
-			},
+
 			PyProject: struct{ Enabled bool }{true},
 		},
 
@@ -133,6 +128,7 @@ func docEditRules(defaults []tfbridge.DocsEdit) []tfbridge.DocsEdit {
 // Tightens up content explanation
 var dataSource = []byte("data source, previously available as the `template_cloudinit_config` " +
 	"resource in the template provider,")
+
 var removeDataSource = tfbridge.DocsEdit{
 	Path: "index.md",
 	Edit: func(_ string, content []byte) ([]byte, error) {
