@@ -4,15 +4,45 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
     'ConfigPartArgs',
+    'ConfigPartArgsDict',
     'GetConfigPartArgs',
+    'GetConfigPartArgsDict',
 ]
+
+MYPY = False
+
+if not MYPY:
+    class ConfigPartArgsDict(TypedDict):
+        content: pulumi.Input[str]
+        """
+        Body content for the part.
+        """
+        content_type: NotRequired[pulumi.Input[str]]
+        """
+        A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+        """
+        filename: NotRequired[pulumi.Input[str]]
+        """
+        A filename to report in the header for the part.
+        """
+        merge_type: NotRequired[pulumi.Input[str]]
+        """
+        A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+        """
+elif False:
+    ConfigPartArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ConfigPartArgs:
@@ -83,6 +113,27 @@ class ConfigPartArgs:
     def merge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "merge_type", value)
 
+
+if not MYPY:
+    class GetConfigPartArgsDict(TypedDict):
+        content: str
+        """
+        Body content for the part.
+        """
+        content_type: NotRequired[str]
+        """
+        A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+        """
+        filename: NotRequired[str]
+        """
+        A filename to report in the header for the part.
+        """
+        merge_type: NotRequired[str]
+        """
+        A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+        """
+elif False:
+    GetConfigPartArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class GetConfigPartArgs:
