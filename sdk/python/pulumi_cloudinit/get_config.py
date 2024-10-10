@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -149,9 +154,6 @@ def get_config(base64_encode: Optional[bool] = None,
         id=pulumi.get(__ret__, 'id'),
         parts=pulumi.get(__ret__, 'parts'),
         rendered=pulumi.get(__ret__, 'rendered'))
-
-
-@_utilities.lift_output_func(get_config)
 def get_config_output(base64_encode: Optional[pulumi.Input[Optional[bool]]] = None,
                       boundary: Optional[pulumi.Input[Optional[str]]] = None,
                       gzip: Optional[pulumi.Input[Optional[bool]]] = None,
@@ -180,4 +182,17 @@ def get_config_output(base64_encode: Optional[pulumi.Input[Optional[bool]]] = No
     :param bool gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
     :param Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict']] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
     """
-    ...
+    __args__ = dict()
+    __args__['base64Encode'] = base64_encode
+    __args__['boundary'] = boundary
+    __args__['gzip'] = gzip
+    __args__['parts'] = parts
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('cloudinit:index/getConfig:getConfig', __args__, opts=opts, typ=GetConfigResult)
+    return __ret__.apply(lambda __response__: GetConfigResult(
+        base64_encode=pulumi.get(__response__, 'base64_encode'),
+        boundary=pulumi.get(__response__, 'boundary'),
+        gzip=pulumi.get(__response__, 'gzip'),
+        id=pulumi.get(__response__, 'id'),
+        parts=pulumi.get(__response__, 'parts'),
+        rendered=pulumi.get(__response__, 'rendered')))
