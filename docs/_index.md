@@ -6,7 +6,7 @@ layout: package
 ---
 ## Installation
 
-The cloudinit provider is available as a package in all Pulumi languages:
+The Cloudinit provider is available as a package in all Pulumi languages:
 
 * JavaScript/TypeScript: [`@pulumi/cloudinit`](https://www.npmjs.com/package/@pulumi/cloudinit)
 * Python: [`pulumi-cloudinit`](https://pypi.org/project/pulumi-cloudinit/)
