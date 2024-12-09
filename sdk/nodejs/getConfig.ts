@@ -102,7 +102,7 @@ export interface GetConfigResult {
  *
  * <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
  */
-export function getConfigOutput(args?: GetConfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConfigResult> {
+export function getConfigOutput(args?: GetConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConfigResult> {
     args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("cloudinit:index/getConfig:getConfig", {
