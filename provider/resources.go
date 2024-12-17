@@ -47,6 +47,7 @@ func Provider() tfbridge.ProviderInfo {
 	prov := tfbridge.ProviderInfo{
 		P:            pf.ShimProvider(shim.NewProvider()),
 		Name:         "cloudinit",
+		DisplayName:  "cloud-init",
 		Version:      version.Version,
 		Description:  "A Pulumi package for creating and managing cloudinit cloud resources.",
 		Keywords:     []string{"pulumi", "cloudinit"},
