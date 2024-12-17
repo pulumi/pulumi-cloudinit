@@ -1,5 +1,6 @@
 {
     "name": "cloudinit",
+    "displayName": "cloud-init",
     "description": "A Pulumi package for creating and managing cloudinit cloud resources.",
     "keywords": [
         "pulumi",
