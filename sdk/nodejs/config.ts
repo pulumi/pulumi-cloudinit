@@ -14,7 +14,7 @@ import * as utilities from "./utilities";
  *
  * Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `userData` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
  *
- * This is not a generalized utility for producing multi-part MIME messages. It's feature set is specialized for cloud-init multi-part MIME messages.
+ * This is not a generalized utility for producing multi-part MIME messages. Its feature set is specialized for cloud-init multi-part MIME messages.
  *
  * ## Example Usage
  *
