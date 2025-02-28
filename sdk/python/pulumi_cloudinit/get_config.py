@@ -121,7 +121,7 @@ def get_config(base64_encode: Optional[bool] = None,
 
     Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
 
-    This is not a generalized utility for producing multi-part MIME messages. It's feature set is specialized for cloud-init multi-part MIME messages.
+    This is not a generalized utility for producing multi-part MIME messages. Its feature set is specialized for cloud-init multi-part MIME messages.
 
     ## Example Usage
 
@@ -164,7 +164,7 @@ def get_config_output(base64_encode: Optional[pulumi.Input[Optional[bool]]] = No
 
     Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
 
-    This is not a generalized utility for producing multi-part MIME messages. It's feature set is specialized for cloud-init multi-part MIME messages.
+    This is not a generalized utility for producing multi-part MIME messages. Its feature set is specialized for cloud-init multi-part MIME messages.
 
     ## Example Usage
 
