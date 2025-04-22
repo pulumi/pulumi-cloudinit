@@ -1,10 +1,12 @@
 module github.com/hashicorp/terraform-provider-cloudinit/shim
 
-go 1.22.7
+go 1.23.7
+
+toolchain go1.23.8
 
 require (
-	github.com/hashicorp/terraform-plugin-framework v1.14.0
-	github.com/hashicorp/terraform-provider-cloudinit v1.0.1-0.20250227140723-f53b19128c81
+	github.com/hashicorp/terraform-plugin-framework v1.14.1
+	github.com/hashicorp/terraform-provider-cloudinit v1.0.1-0.20250421195453-1f6bee5db5ee
 )
 
 require (
@@ -19,7 +21,7 @@ require (
 	github.com/stretchr/testify v1.8.3 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
-	golang.org/x/sys v0.29.0 // indirect
+	golang.org/x/sys v0.31.0 // indirect
 )
 
 replace (
