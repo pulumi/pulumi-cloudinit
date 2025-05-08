@@ -15,10 +15,8 @@ export const getConfig: typeof import("./getConfig").getConfig = null as any;
 export const getConfigOutput: typeof import("./getConfig").getConfigOutput = null as any;
 utilities.lazyLoad(exports, ["getConfig","getConfigOutput"], () => require("./getConfig"));
 
-export { ProviderArgs } from "./provider";
-export type Provider = import("./provider").Provider;
-export const Provider: typeof import("./provider").Provider = null as any;
-utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+export * from "./provider";
+import { Provider } from "./provider";
 
 
 // Export sub-modules:
