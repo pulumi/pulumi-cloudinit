@@ -57,23 +57,23 @@ export class Config extends pulumi.CustomResource {
     /**
      * Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
      */
-    public readonly base64Encode!: pulumi.Output<boolean>;
+    declare public readonly base64Encode: pulumi.Output<boolean>;
     /**
      * Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
      */
-    public readonly boundary!: pulumi.Output<string>;
+    declare public readonly boundary: pulumi.Output<string>;
     /**
      * Specify whether or not to gzip the `rendered` output. Defaults to `true`.
      */
-    public readonly gzip!: pulumi.Output<boolean>;
+    declare public readonly gzip: pulumi.Output<boolean>;
     /**
      * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      */
-    public readonly parts!: pulumi.Output<outputs.ConfigPart[] | undefined>;
+    declare public readonly parts: pulumi.Output<outputs.ConfigPart[] | undefined>;
     /**
      * The final rendered multi-part cloud-init config.
      */
-    public /*out*/ readonly rendered!: pulumi.Output<string>;
+    declare public /*out*/ readonly rendered: pulumi.Output<string>;
 
     /**
      * Create a Config resource with the given unique name, arguments, and options.
@@ -88,17 +88,17 @@ export class Config extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConfigState | undefined;
-            resourceInputs["base64Encode"] = state ? state.base64Encode : undefined;
-            resourceInputs["boundary"] = state ? state.boundary : undefined;
-            resourceInputs["gzip"] = state ? state.gzip : undefined;
-            resourceInputs["parts"] = state ? state.parts : undefined;
-            resourceInputs["rendered"] = state ? state.rendered : undefined;
+            resourceInputs["base64Encode"] = state?.base64Encode;
+            resourceInputs["boundary"] = state?.boundary;
+            resourceInputs["gzip"] = state?.gzip;
+            resourceInputs["parts"] = state?.parts;
+            resourceInputs["rendered"] = state?.rendered;
         } else {
             const args = argsOrState as ConfigArgs | undefined;
-            resourceInputs["base64Encode"] = args ? args.base64Encode : undefined;
-            resourceInputs["boundary"] = args ? args.boundary : undefined;
-            resourceInputs["gzip"] = args ? args.gzip : undefined;
-            resourceInputs["parts"] = args ? args.parts : undefined;
+            resourceInputs["base64Encode"] = args?.base64Encode;
+            resourceInputs["boundary"] = args?.boundary;
+            resourceInputs["gzip"] = args?.gzip;
+            resourceInputs["parts"] = args?.parts;
             resourceInputs["rendered"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
