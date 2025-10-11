@@ -118,11 +118,11 @@
     },
     "resources": {
         "cloudinit:index/config:Config": {
-            "description": "\u003e **This resource is deprecated** Please use the cloudinit.Config\n  data source instead.\n\nRenders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).\n\nCloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.\n\nThis is not a generalized utility for producing multi-part MIME messages. Its feature set is specialized for cloud-init multi-part MIME messages.\n\n{{% examples %}}\n## Example Usage\n\n### Config\n```terraform\nresource \"cloudinit_config\" \"foobar\" {\n  gzip          = false\n  base64_encode = false\n\n  part {\n    filename     = \"hello-script.sh\"\n    content_type = \"text/x-shellscript\"\n\n    content = file(\"${path.module}/hello-script.sh\")\n  }\n\n  part {\n    filename     = \"cloud-config.yaml\"\n    content_type = \"text/cloud-config\"\n\n    content = file(\"${path.module}/cloud-config.yaml\")\n  }\n}\n```\n\n### hello-script.sh\n```shell\n#!/bin/sh\necho \"Hello World! I'm starting up now at $(date -R)!\"\n```\n\n### cloud-config.yaml\n```yaml\n#cloud-config\n# See documentation for more configuration examples\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html \n\n# Install arbitrary packages\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#install-arbitrary-packages\npackages:\n  - python\n# Run commands on first boot\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#run-commands-on-first-boot\nruncmd:\n - [ ls, -l, / ]\n - [ sh, -xc, \"echo $(date) ': hello world!'\" ]\n - [ sh, -c, echo \"=========hello world=========\" ]\n - ls -l /root\n```\n\n\u003c!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --\u003e\n\n{{% /examples %}}",
+            "description": "\u003e **This resource is deprecated** Please use the\u003cspan pulumi-lang-nodejs=\" cloudinit.Config\n\" pulumi-lang-dotnet=\" cloudinit.Config\n\" pulumi-lang-go=\" Config\n\" pulumi-lang-python=\" Config\n\" pulumi-lang-yaml=\" cloudinit.Config\n\" pulumi-lang-java=\" cloudinit.Config\n\"\u003e cloudinit.Config\n\u003c/span\u003e  data source instead.\n\nRenders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).\n\nCloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as \u003cspan pulumi-lang-nodejs=\"`userData`\" pulumi-lang-dotnet=\"`UserData`\" pulumi-lang-go=\"`userData`\" pulumi-lang-python=\"`user_data`\" pulumi-lang-yaml=\"`userData`\" pulumi-lang-java=\"`userData`\"\u003e`user_data`\u003c/span\u003e for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.\n\nThis is not a generalized utility for producing multi-part MIME messages. Its feature set is specialized for cloud-init multi-part MIME messages.\n\n{{% examples %}}\n## Example Usage\n\n### Config\n```terraform\nresource \"cloudinit_config\" \"foobar\" {\n  gzip          = false\n  base64_encode = false\n\n  part {\n    filename     = \"hello-script.sh\"\n    content_type = \"text/x-shellscript\"\n\n    content = file(\"${path.module}/hello-script.sh\")\n  }\n\n  part {\n    filename     = \"cloud-config.yaml\"\n    content_type = \"text/cloud-config\"\n\n    content = file(\"${path.module}/cloud-config.yaml\")\n  }\n}\n```\n\n### hello-script.sh\n```shell\n#!/bin/sh\necho \"Hello World! I'm starting up now at $(date -R)!\"\n```\n\n### cloud-config.yaml\n```yaml\n#cloud-config\n# See documentation for more configuration examples\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html \n\n# Install arbitrary packages\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#install-arbitrary-packages\npackages:\n  - python\n# Run commands on first boot\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#run-commands-on-first-boot\nruncmd:\n - [ ls, -l, / ]\n - [ sh, -xc, \"echo $(date) ': hello world!'\" ]\n - [ sh, -c, echo \"=========hello world=========\" ]\n - ls -l /root\n```\n\n\u003c!-- This schema was originally generated with tfplugindocs, then modified manually to ensure \u003cspan pulumi-lang-nodejs=\"`part`\" pulumi-lang-dotnet=\"`Part`\" pulumi-lang-go=\"`part`\" pulumi-lang-python=\"`part`\" pulumi-lang-yaml=\"`part`\" pulumi-lang-java=\"`part`\"\u003e`part`\u003c/span\u003e block list is noted as Required --\u003e\n\n{{% /examples %}}",
             "properties": {
                 "base64Encode": {
                     "type": "boolean",
-                    "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n"
+                    "description": "Specify whether or not to base64 encode the \u003cspan pulumi-lang-nodejs=\"`rendered`\" pulumi-lang-dotnet=\"`Rendered`\" pulumi-lang-go=\"`rendered`\" pulumi-lang-python=\"`rendered`\" pulumi-lang-yaml=\"`rendered`\" pulumi-lang-java=\"`rendered`\"\u003e`rendered`\u003c/span\u003e output. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e, and cannot be disabled if gzip is \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                 },
                 "boundary": {
                     "type": "string",
@@ -130,14 +130,14 @@
                 },
                 "gzip": {
                     "type": "boolean",
-                    "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n"
+                    "description": "Specify whether or not to gzip the \u003cspan pulumi-lang-nodejs=\"`rendered`\" pulumi-lang-dotnet=\"`Rendered`\" pulumi-lang-go=\"`rendered`\" pulumi-lang-python=\"`rendered`\" pulumi-lang-yaml=\"`rendered`\" pulumi-lang-java=\"`rendered`\"\u003e`rendered`\u003c/span\u003e output. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                 },
                 "parts": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/cloudinit:index/ConfigPart:ConfigPart"
                     },
-                    "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
+                    "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple \u003cspan pulumi-lang-nodejs=\"`part`\" pulumi-lang-dotnet=\"`Part`\" pulumi-lang-go=\"`part`\" pulumi-lang-python=\"`part`\" pulumi-lang-yaml=\"`part`\" pulumi-lang-java=\"`part`\"\u003e`part`\u003c/span\u003e blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
                 },
                 "rendered": {
                     "type": "string",
@@ -153,7 +153,7 @@
             "inputProperties": {
                 "base64Encode": {
                     "type": "boolean",
-                    "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n"
+                    "description": "Specify whether or not to base64 encode the \u003cspan pulumi-lang-nodejs=\"`rendered`\" pulumi-lang-dotnet=\"`Rendered`\" pulumi-lang-go=\"`rendered`\" pulumi-lang-python=\"`rendered`\" pulumi-lang-yaml=\"`rendered`\" pulumi-lang-java=\"`rendered`\"\u003e`rendered`\u003c/span\u003e output. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e, and cannot be disabled if gzip is \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                 },
                 "boundary": {
                     "type": "string",
@@ -161,14 +161,14 @@
                 },
                 "gzip": {
                     "type": "boolean",
-                    "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n"
+                    "description": "Specify whether or not to gzip the \u003cspan pulumi-lang-nodejs=\"`rendered`\" pulumi-lang-dotnet=\"`Rendered`\" pulumi-lang-go=\"`rendered`\" pulumi-lang-python=\"`rendered`\" pulumi-lang-yaml=\"`rendered`\" pulumi-lang-java=\"`rendered`\"\u003e`rendered`\u003c/span\u003e output. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                 },
                 "parts": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/cloudinit:index/ConfigPart:ConfigPart"
                     },
-                    "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
+                    "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple \u003cspan pulumi-lang-nodejs=\"`part`\" pulumi-lang-dotnet=\"`Part`\" pulumi-lang-go=\"`part`\" pulumi-lang-python=\"`part`\" pulumi-lang-yaml=\"`part`\" pulumi-lang-java=\"`part`\"\u003e`part`\u003c/span\u003e blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
                 }
             },
             "stateInputs": {
@@ -176,7 +176,7 @@
                 "properties": {
                     "base64Encode": {
                         "type": "boolean",
-                        "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n"
+                        "description": "Specify whether or not to base64 encode the \u003cspan pulumi-lang-nodejs=\"`rendered`\" pulumi-lang-dotnet=\"`Rendered`\" pulumi-lang-go=\"`rendered`\" pulumi-lang-python=\"`rendered`\" pulumi-lang-yaml=\"`rendered`\" pulumi-lang-java=\"`rendered`\"\u003e`rendered`\u003c/span\u003e output. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e, and cannot be disabled if gzip is \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                     },
                     "boundary": {
                         "type": "string",
@@ -184,14 +184,14 @@
                     },
                     "gzip": {
                         "type": "boolean",
-                        "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n"
+                        "description": "Specify whether or not to gzip the \u003cspan pulumi-lang-nodejs=\"`rendered`\" pulumi-lang-dotnet=\"`Rendered`\" pulumi-lang-go=\"`rendered`\" pulumi-lang-python=\"`rendered`\" pulumi-lang-yaml=\"`rendered`\" pulumi-lang-java=\"`rendered`\"\u003e`rendered`\u003c/span\u003e output. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                     },
                     "parts": {
                         "type": "array",
                         "items": {
                             "$ref": "#/types/cloudinit:index/ConfigPart:ConfigPart"
                         },
-                        "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
+                        "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple \u003cspan pulumi-lang-nodejs=\"`part`\" pulumi-lang-dotnet=\"`Part`\" pulumi-lang-go=\"`part`\" pulumi-lang-python=\"`part`\" pulumi-lang-yaml=\"`part`\" pulumi-lang-java=\"`part`\"\u003e`part`\u003c/span\u003e blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
                     },
                     "rendered": {
                         "type": "string",
@@ -204,13 +204,13 @@
     },
     "functions": {
         "cloudinit:index/getConfig:getConfig": {
-            "description": "Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).\n\nCloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.\n\nThis is not a generalized utility for producing multi-part MIME messages. Its feature set is specialized for cloud-init multi-part MIME messages.\n\n{{% examples %}}\n## Example Usage\n\n### Config\n```terraform\ndata \"cloudinit_config\" \"foobar\" {\n  gzip          = false\n  base64_encode = false\n\n  part {\n    filename     = \"hello-script.sh\"\n    content_type = \"text/x-shellscript\"\n\n    content = file(\"${path.module}/hello-script.sh\")\n  }\n\n  part {\n    filename     = \"cloud-config.yaml\"\n    content_type = \"text/cloud-config\"\n\n    content = file(\"${path.module}/cloud-config.yaml\")\n  }\n}\n```\n\n### hello-script.sh\n```shell\n#!/bin/sh\necho \"Hello World! I'm starting up now at $(date -R)!\"\n```\n\n### cloud-config.yaml\n```yaml\n#cloud-config\n# See documentation for more configuration examples\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html \n\n# Install arbitrary packages\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#install-arbitrary-packages\npackages:\n  - python\n# Run commands on first boot\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#run-commands-on-first-boot\nruncmd:\n - [ ls, -l, / ]\n - [ sh, -xc, \"echo $(date) ': hello world!'\" ]\n - [ sh, -c, echo \"=========hello world=========\" ]\n - ls -l /root\n```\n\n\u003c!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --\u003e\n\n{{% /examples %}}",
+            "description": "Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).\n\nCloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as \u003cspan pulumi-lang-nodejs=\"`userData`\" pulumi-lang-dotnet=\"`UserData`\" pulumi-lang-go=\"`userData`\" pulumi-lang-python=\"`user_data`\" pulumi-lang-yaml=\"`userData`\" pulumi-lang-java=\"`userData`\"\u003e`user_data`\u003c/span\u003e for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.\n\nThis is not a generalized utility for producing multi-part MIME messages. Its feature set is specialized for cloud-init multi-part MIME messages.\n\n{{% examples %}}\n## Example Usage\n\n### Config\n```terraform\ndata \"cloudinit_config\" \"foobar\" {\n  gzip          = false\n  base64_encode = false\n\n  part {\n    filename     = \"hello-script.sh\"\n    content_type = \"text/x-shellscript\"\n\n    content = file(\"${path.module}/hello-script.sh\")\n  }\n\n  part {\n    filename     = \"cloud-config.yaml\"\n    content_type = \"text/cloud-config\"\n\n    content = file(\"${path.module}/cloud-config.yaml\")\n  }\n}\n```\n\n### hello-script.sh\n```shell\n#!/bin/sh\necho \"Hello World! I'm starting up now at $(date -R)!\"\n```\n\n### cloud-config.yaml\n```yaml\n#cloud-config\n# See documentation for more configuration examples\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html \n\n# Install arbitrary packages\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#install-arbitrary-packages\npackages:\n  - python\n# Run commands on first boot\n# https://cloudinit.readthedocs.io/en/latest/reference/examples.html#run-commands-on-first-boot\nruncmd:\n - [ ls, -l, / ]\n - [ sh, -xc, \"echo $(date) ': hello world!'\" ]\n - [ sh, -c, echo \"=========hello world=========\" ]\n - ls -l /root\n```\n\n\u003c!-- This schema was originally generated with tfplugindocs, then modified manually to ensure \u003cspan pulumi-lang-nodejs=\"`part`\" pulumi-lang-dotnet=\"`Part`\" pulumi-lang-go=\"`part`\" pulumi-lang-python=\"`part`\" pulumi-lang-yaml=\"`part`\" pulumi-lang-java=\"`part`\"\u003e`part`\u003c/span\u003e block list is noted as Required --\u003e\n\n{{% /examples %}}",
             "inputs": {
                 "description": "A collection of arguments for invoking getConfig.\n",
                 "properties": {
                     "base64Encode": {
                         "type": "boolean",
-                        "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n"
+                        "description": "Specify whether or not to base64 encode the \u003cspan pulumi-lang-nodejs=\"`rendered`\" pulumi-lang-dotnet=\"`Rendered`\" pulumi-lang-go=\"`rendered`\" pulumi-lang-python=\"`rendered`\" pulumi-lang-yaml=\"`rendered`\" pulumi-lang-java=\"`rendered`\"\u003e`rendered`\u003c/span\u003e output. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e, and cannot be disabled if gzip is \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                     },
                     "boundary": {
                         "type": "string",
@@ -218,14 +218,14 @@
                     },
                     "gzip": {
                         "type": "boolean",
-                        "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n"
+                        "description": "Specify whether or not to gzip the \u003cspan pulumi-lang-nodejs=\"`rendered`\" pulumi-lang-dotnet=\"`Rendered`\" pulumi-lang-go=\"`rendered`\" pulumi-lang-python=\"`rendered`\" pulumi-lang-yaml=\"`rendered`\" pulumi-lang-java=\"`rendered`\"\u003e`rendered`\u003c/span\u003e output. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                     },
                     "parts": {
                         "type": "array",
                         "items": {
                             "$ref": "#/types/cloudinit:index/getConfigPart:getConfigPart"
                         },
-                        "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
+                        "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple \u003cspan pulumi-lang-nodejs=\"`part`\" pulumi-lang-dotnet=\"`Part`\" pulumi-lang-go=\"`part`\" pulumi-lang-python=\"`part`\" pulumi-lang-yaml=\"`part`\" pulumi-lang-java=\"`part`\"\u003e`part`\u003c/span\u003e blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
                     }
                 },
                 "type": "object"
@@ -234,7 +234,7 @@
                 "description": "A collection of values returned by getConfig.\n",
                 "properties": {
                     "base64Encode": {
-                        "description": "Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.\n",
+                        "description": "Specify whether or not to base64 encode the \u003cspan pulumi-lang-nodejs=\"`rendered`\" pulumi-lang-dotnet=\"`Rendered`\" pulumi-lang-go=\"`rendered`\" pulumi-lang-python=\"`rendered`\" pulumi-lang-yaml=\"`rendered`\" pulumi-lang-java=\"`rendered`\"\u003e`rendered`\u003c/span\u003e output. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e, and cannot be disabled if gzip is \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n",
                         "type": "boolean"
                     },
                     "boundary": {
@@ -242,15 +242,15 @@
                         "type": "string"
                     },
                     "gzip": {
-                        "description": "Specify whether or not to gzip the `rendered` output. Defaults to `true`.\n",
+                        "description": "Specify whether or not to gzip the \u003cspan pulumi-lang-nodejs=\"`rendered`\" pulumi-lang-dotnet=\"`Rendered`\" pulumi-lang-go=\"`rendered`\" pulumi-lang-python=\"`rendered`\" pulumi-lang-yaml=\"`rendered`\" pulumi-lang-java=\"`rendered`\"\u003e`rendered`\u003c/span\u003e output. Defaults to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n",
                         "type": "boolean"
                     },
                     "id": {
-                        "description": "[CRC-32](https://pkg.go.dev/hash/crc32) checksum of `rendered` cloud-init config.\n",
+                        "description": "[CRC-32](https://pkg.go.dev/hash/crc32) checksum of \u003cspan pulumi-lang-nodejs=\"`rendered`\" pulumi-lang-dotnet=\"`Rendered`\" pulumi-lang-go=\"`rendered`\" pulumi-lang-python=\"`rendered`\" pulumi-lang-yaml=\"`rendered`\" pulumi-lang-java=\"`rendered`\"\u003e`rendered`\u003c/span\u003e cloud-init config.\n",
                         "type": "string"
                     },
                     "parts": {
-                        "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n",
+                        "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple \u003cspan pulumi-lang-nodejs=\"`part`\" pulumi-lang-dotnet=\"`Part`\" pulumi-lang-go=\"`part`\" pulumi-lang-python=\"`part`\" pulumi-lang-yaml=\"`part`\" pulumi-lang-java=\"`part`\"\u003e`part`\u003c/span\u003e blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n",
                         "items": {
                             "$ref": "#/types/cloudinit:index/getConfigPart:getConfigPart"
                         },

@@ -14,7 +14,7 @@ namespace Pulumi.CloudInit
         /// <summary>
         /// Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
         /// 
-        /// Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
+        /// Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `UserData` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
         /// 
         /// This is not a generalized utility for producing multi-part MIME messages. Its feature set is specialized for cloud-init multi-part MIME messages.
         /// 
@@ -68,7 +68,7 @@ namespace Pulumi.CloudInit
         ///  - ls -l /root
         /// ```
         /// 
-        /// &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --&gt;
+        /// &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `Part` block list is noted as Required --&gt;
         /// 
         /// {{% /examples %}}
         /// </summary>
@@ -78,7 +78,7 @@ namespace Pulumi.CloudInit
         /// <summary>
         /// Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
         /// 
-        /// Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
+        /// Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `UserData` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
         /// 
         /// This is not a generalized utility for producing multi-part MIME messages. Its feature set is specialized for cloud-init multi-part MIME messages.
         /// 
@@ -132,7 +132,7 @@ namespace Pulumi.CloudInit
         ///  - ls -l /root
         /// ```
         /// 
-        /// &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --&gt;
+        /// &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `Part` block list is noted as Required --&gt;
         /// 
         /// {{% /examples %}}
         /// </summary>
@@ -142,7 +142,7 @@ namespace Pulumi.CloudInit
         /// <summary>
         /// Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
         /// 
-        /// Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `user_data` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
+        /// Cloud-init is a commonly-used startup configuration utility for cloud compute instances. It accepts configuration via provider-specific user data mechanisms, such as `UserData` for Amazon EC2 instances. Multi-part MIME is one of the data formats it accepts. For more information, see [User-Data Formats](https://cloudinit.readthedocs.io/en/latest/explanation/format.html) in the cloud-init manual.
         /// 
         /// This is not a generalized utility for producing multi-part MIME messages. Its feature set is specialized for cloud-init multi-part MIME messages.
         /// 
@@ -196,7 +196,7 @@ namespace Pulumi.CloudInit
         ///  - ls -l /root
         /// ```
         /// 
-        /// &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required --&gt;
+        /// &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `Part` block list is noted as Required --&gt;
         /// 
         /// {{% /examples %}}
         /// </summary>
@@ -208,7 +208,7 @@ namespace Pulumi.CloudInit
     public sealed class GetConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+        /// Specify whether or not to base64 encode the `Rendered` output. Defaults to `True`, and cannot be disabled if gzip is `True`.
         /// </summary>
         [Input("base64Encode")]
         public bool? Base64Encode { get; set; }
@@ -220,7 +220,7 @@ namespace Pulumi.CloudInit
         public string? Boundary { get; set; }
 
         /// <summary>
-        /// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+        /// Specify whether or not to gzip the `Rendered` output. Defaults to `True`.
         /// </summary>
         [Input("gzip")]
         public bool? Gzip { get; set; }
@@ -229,7 +229,7 @@ namespace Pulumi.CloudInit
         private List<Inputs.GetConfigPartArgs>? _parts;
 
         /// <summary>
-        /// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+        /// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `Part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
         /// </summary>
         public List<Inputs.GetConfigPartArgs> Parts
         {
@@ -246,7 +246,7 @@ namespace Pulumi.CloudInit
     public sealed class GetConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+        /// Specify whether or not to base64 encode the `Rendered` output. Defaults to `True`, and cannot be disabled if gzip is `True`.
         /// </summary>
         [Input("base64Encode")]
         public Input<bool>? Base64Encode { get; set; }
@@ -258,7 +258,7 @@ namespace Pulumi.CloudInit
         public Input<string>? Boundary { get; set; }
 
         /// <summary>
-        /// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+        /// Specify whether or not to gzip the `Rendered` output. Defaults to `True`.
         /// </summary>
         [Input("gzip")]
         public Input<bool>? Gzip { get; set; }
@@ -267,7 +267,7 @@ namespace Pulumi.CloudInit
         private InputList<Inputs.GetConfigPartInputArgs>? _parts;
 
         /// <summary>
-        /// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+        /// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `Part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
         /// </summary>
         public InputList<Inputs.GetConfigPartInputArgs> Parts
         {
@@ -286,7 +286,7 @@ namespace Pulumi.CloudInit
     public sealed class GetConfigResult
     {
         /// <summary>
-        /// Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
+        /// Specify whether or not to base64 encode the `Rendered` output. Defaults to `True`, and cannot be disabled if gzip is `True`.
         /// </summary>
         public readonly bool Base64Encode;
         /// <summary>
@@ -294,15 +294,15 @@ namespace Pulumi.CloudInit
         /// </summary>
         public readonly string Boundary;
         /// <summary>
-        /// Specify whether or not to gzip the `rendered` output. Defaults to `true`.
+        /// Specify whether or not to gzip the `Rendered` output. Defaults to `True`.
         /// </summary>
         public readonly bool Gzip;
         /// <summary>
-        /// [CRC-32](https://pkg.go.dev/hash/crc32) checksum of `rendered` cloud-init config.
+        /// [CRC-32](https://pkg.go.dev/hash/crc32) checksum of `Rendered` cloud-init config.
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+        /// A nested block type which adds a file to the generated cloud-init configuration. Use multiple `Part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetConfigPartResult> Parts;
         /// <summary>
