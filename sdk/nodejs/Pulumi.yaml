@@ -1,0 +1,3 @@
+name: cloudinit
+description: A Pulumi resource provider for cloudinit.
+language: nodejs
