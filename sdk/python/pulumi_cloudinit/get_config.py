@@ -82,7 +82,7 @@ class GetConfigResult:
 
     @_builtins.property
     @pulumi.getter
-    def parts(self) -> Optional[Sequence['outputs.GetConfigPartResult']]:
+    def parts(self) -> Sequence['outputs.GetConfigPartResult']:
         """
         A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
         """
@@ -157,7 +157,7 @@ def get_config(base64_encode: Optional[_builtins.bool] = None,
 def get_config_output(base64_encode: Optional[pulumi.Input[Optional[_builtins.bool]]] = None,
                       boundary: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
                       gzip: Optional[pulumi.Input[Optional[_builtins.bool]]] = None,
-                      parts: Optional[pulumi.Input[Optional[Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict']]]]] = None,
+                      parts: Optional[pulumi.Input[Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict']]]] = None,
                       opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetConfigResult]:
     """
     Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).

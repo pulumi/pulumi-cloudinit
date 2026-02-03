@@ -21,25 +21,36 @@ __all__ = ['ConfigArgs', 'Config']
 @pulumi.input_type
 class ConfigArgs:
     def __init__(__self__, *,
+                 parts: pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]],
                  base64_encode: Optional[pulumi.Input[_builtins.bool]] = None,
                  boundary: Optional[pulumi.Input[_builtins.str]] = None,
-                 gzip: Optional[pulumi.Input[_builtins.bool]] = None,
-                 parts: Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]] = None):
+                 gzip: Optional[pulumi.Input[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Config resource.
+        :param pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
         :param pulumi.Input[_builtins.bool] base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
         :param pulumi.Input[_builtins.str] boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
         :param pulumi.Input[_builtins.bool] gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
-        :param pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
         """
+        pulumi.set(__self__, "parts", parts)
         if base64_encode is not None:
             pulumi.set(__self__, "base64_encode", base64_encode)
         if boundary is not None:
             pulumi.set(__self__, "boundary", boundary)
         if gzip is not None:
             pulumi.set(__self__, "gzip", gzip)
-        if parts is not None:
-            pulumi.set(__self__, "parts", parts)
+
+    @_builtins.property
+    @pulumi.getter
+    def parts(self) -> pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]:
+        """
+        A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+        """
+        return pulumi.get(self, "parts")
+
+    @parts.setter
+    def parts(self, value: pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]):
+        pulumi.set(self, "parts", value)
 
     @_builtins.property
     @pulumi.getter(name="base64Encode")
@@ -76,18 +87,6 @@ class ConfigArgs:
     @gzip.setter
     def gzip(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "gzip", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def parts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]]:
-        """
-        A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
-        """
-        return pulumi.get(self, "parts")
-
-    @parts.setter
-    def parts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]]):
-        pulumi.set(self, "parts", value)
 
 
 @pulumi.input_type
@@ -220,7 +219,7 @@ class Config(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: Optional[ConfigArgs] = None,
+                 args: ConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         > **This resource is deprecated** Please use the Config
@@ -273,6 +272,8 @@ class Config(pulumi.CustomResource):
             __props__.__dict__["base64_encode"] = base64_encode
             __props__.__dict__["boundary"] = boundary
             __props__.__dict__["gzip"] = gzip
+            if parts is None and not opts.urn:
+                raise TypeError("Missing required property 'parts'")
             __props__.__dict__["parts"] = parts
             __props__.__dict__["rendered"] = None
         super(Config, __self__).__init__(
@@ -340,7 +341,7 @@ class Config(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter
-    def parts(self) -> pulumi.Output[Optional[Sequence['outputs.ConfigPart']]]:
+    def parts(self) -> pulumi.Output[Sequence['outputs.ConfigPart']]:
         """
         A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
         """
