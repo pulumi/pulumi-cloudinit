@@ -70,7 +70,7 @@ namespace Pulumi.CloudInit
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Config(string name, ConfigArgs? args = null, CustomResourceOptions? options = null)
+        public Config(string name, ConfigArgs args, CustomResourceOptions? options = null)
             : base("cloudinit:index/config:Config", name, args ?? new ConfigArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -126,7 +126,7 @@ namespace Pulumi.CloudInit
         [Input("gzip")]
         public Input<bool>? Gzip { get; set; }
 
-        [Input("parts")]
+        [Input("parts", required: true)]
         private InputList<Inputs.ConfigPartArgs>? _parts;
 
         /// <summary>

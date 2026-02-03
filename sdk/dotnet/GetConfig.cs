@@ -72,7 +72,7 @@ namespace Pulumi.CloudInit
         /// 
         /// {{% /examples %}}
         /// </summary>
-        public static Task<GetConfigResult> InvokeAsync(GetConfigArgs? args = null, InvokeOptions? options = null)
+        public static Task<GetConfigResult> InvokeAsync(GetConfigArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConfigResult>("cloudinit:index/getConfig:getConfig", args ?? new GetConfigArgs(), options.WithDefaults());
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Pulumi.CloudInit
         /// 
         /// {{% /examples %}}
         /// </summary>
-        public static Output<GetConfigResult> Invoke(GetConfigInvokeArgs? args = null, InvokeOptions? options = null)
+        public static Output<GetConfigResult> Invoke(GetConfigInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigResult>("cloudinit:index/getConfig:getConfig", args ?? new GetConfigInvokeArgs(), options.WithDefaults());
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace Pulumi.CloudInit
         [Input("gzip")]
         public bool? Gzip { get; set; }
 
-        [Input("parts")]
+        [Input("parts", required: true)]
         private List<Inputs.GetConfigPartArgs>? _parts;
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Pulumi.CloudInit
         [Input("gzip")]
         public Input<bool>? Gzip { get; set; }
 
-        [Input("parts")]
+        [Input("parts", required: true)]
         private InputList<Inputs.GetConfigPartInputArgs>? _parts;
 
         /// <summary>

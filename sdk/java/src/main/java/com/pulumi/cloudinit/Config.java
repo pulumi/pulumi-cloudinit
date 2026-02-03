@@ -14,7 +14,6 @@ import com.pulumi.core.internal.Codegen;
 import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
-import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
@@ -87,14 +86,14 @@ public class Config extends com.pulumi.resources.CustomResource {
      * 
      */
     @Export(name="parts", refs={List.class,ConfigPart.class}, tree="[0,1]")
-    private Output</* @Nullable */ List<ConfigPart>> parts;
+    private Output<List<ConfigPart>> parts;
 
     /**
      * @return A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      * 
      */
-    public Output<Optional<List<ConfigPart>>> parts() {
-        return Codegen.optional(this.parts);
+    public Output<List<ConfigPart>> parts() {
+        return this.parts;
     }
     /**
      * The final rendered multi-part cloud-init config.
@@ -123,7 +122,7 @@ public class Config extends com.pulumi.resources.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param args The arguments to use to populate this resource's properties.
      */
-    public Config(java.lang.String name, @Nullable ConfigArgs args) {
+    public Config(java.lang.String name, ConfigArgs args) {
         this(name, args, null);
     }
     /**
@@ -132,7 +131,7 @@ public class Config extends com.pulumi.resources.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param options A bag of options that control this resource's behavior.
      */
-    public Config(java.lang.String name, @Nullable ConfigArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    public Config(java.lang.String name, ConfigArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         super("cloudinit:index/config:Config", name, makeArgs(args, options), makeResourceOptions(options, Codegen.empty()), false);
     }
 
@@ -140,7 +139,7 @@ public class Config extends com.pulumi.resources.CustomResource {
         super("cloudinit:index/config:Config", name, state, makeResourceOptions(options, id), false);
     }
 
-    private static ConfigArgs makeArgs(@Nullable ConfigArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    private static ConfigArgs makeArgs(ConfigArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         if (options != null && options.getUrn().isPresent()) {
             return null;
         }

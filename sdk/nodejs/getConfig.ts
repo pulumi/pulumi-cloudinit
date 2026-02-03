@@ -23,8 +23,7 @@ import * as utilities from "./utilities";
  *
  * <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
  */
-export function getConfig(args?: GetConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigResult> {
-    args = args || {};
+export function getConfig(args: GetConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("cloudinit:index/getConfig:getConfig", {
         "base64Encode": args.base64Encode,
@@ -53,7 +52,7 @@ export interface GetConfigArgs {
     /**
      * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      */
-    parts?: inputs.GetConfigPart[];
+    parts: inputs.GetConfigPart[];
 }
 
 /**
@@ -79,7 +78,7 @@ export interface GetConfigResult {
     /**
      * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      */
-    readonly parts?: outputs.GetConfigPart[];
+    readonly parts: outputs.GetConfigPart[];
     /**
      * The final rendered multi-part cloud-init config.
      */
@@ -102,8 +101,7 @@ export interface GetConfigResult {
  *
  * <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
  */
-export function getConfigOutput(args?: GetConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConfigResult> {
-    args = args || {};
+export function getConfigOutput(args: GetConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConfigResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("cloudinit:index/getConfig:getConfig", {
         "base64Encode": args.base64Encode,
@@ -132,5 +130,5 @@ export interface GetConfigOutputArgs {
     /**
      * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      */
-    parts?: pulumi.Input<pulumi.Input<inputs.GetConfigPartArgs>[]>;
+    parts: pulumi.Input<pulumi.Input<inputs.GetConfigPartArgs>[]>;
 }
