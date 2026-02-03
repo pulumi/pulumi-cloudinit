@@ -10,7 +10,6 @@ import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
-import javax.annotation.Nullable;
 
 @CustomType
 public final class GetConfigResult {
@@ -38,7 +37,7 @@ public final class GetConfigResult {
      * @return A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      * 
      */
-    private @Nullable List<GetConfigPart> parts;
+    private List<GetConfigPart> parts;
     /**
      * @return The final rendered multi-part cloud-init config.
      * 
@@ -79,7 +78,7 @@ public final class GetConfigResult {
      * 
      */
     public List<GetConfigPart> parts() {
-        return this.parts == null ? List.of() : this.parts;
+        return this.parts;
     }
     /**
      * @return The final rendered multi-part cloud-init config.
@@ -102,7 +101,7 @@ public final class GetConfigResult {
         private String boundary;
         private Boolean gzip;
         private String id;
-        private @Nullable List<GetConfigPart> parts;
+        private List<GetConfigPart> parts;
         private String rendered;
         public Builder() {}
         public Builder(GetConfigResult defaults) {
@@ -148,8 +147,10 @@ public final class GetConfigResult {
             return this;
         }
         @CustomType.Setter
-        public Builder parts(@Nullable List<GetConfigPart> parts) {
-
+        public Builder parts(List<GetConfigPart> parts) {
+            if (parts == null) {
+              throw new MissingRequiredPropertyException("GetConfigResult", "parts");
+            }
             this.parts = parts;
             return this;
         }

@@ -69,7 +69,7 @@ export class Config extends pulumi.CustomResource {
     /**
      * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      */
-    declare public readonly parts: pulumi.Output<outputs.ConfigPart[] | undefined>;
+    declare public readonly parts: pulumi.Output<outputs.ConfigPart[]>;
     /**
      * The final rendered multi-part cloud-init config.
      */
@@ -82,7 +82,7 @@ export class Config extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args?: ConfigArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args: ConfigArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ConfigArgs | ConfigState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -95,6 +95,9 @@ export class Config extends pulumi.CustomResource {
             resourceInputs["rendered"] = state?.rendered;
         } else {
             const args = argsOrState as ConfigArgs | undefined;
+            if (args?.parts === undefined && !opts.urn) {
+                throw new Error("Missing required property 'parts'");
+            }
             resourceInputs["base64Encode"] = args?.base64Encode;
             resourceInputs["boundary"] = args?.boundary;
             resourceInputs["gzip"] = args?.gzip;
@@ -151,5 +154,5 @@ export interface ConfigArgs {
     /**
      * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      */
-    parts?: pulumi.Input<pulumi.Input<inputs.ConfigPart>[]>;
+    parts: pulumi.Input<pulumi.Input<inputs.ConfigPart>[]>;
 }

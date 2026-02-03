@@ -7,6 +7,7 @@ import (
 	"context"
 	"reflect"
 
+	"errors"
 	"github.com/pulumi/pulumi-cloudinit/sdk/go/cloudinit/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
@@ -49,9 +50,12 @@ type Config struct {
 func NewConfig(ctx *pulumi.Context,
 	name string, args *ConfigArgs, opts ...pulumi.ResourceOption) (*Config, error) {
 	if args == nil {
-		args = &ConfigArgs{}
+		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.Parts == nil {
+		return nil, errors.New("invalid value for required argument 'Parts'")
+	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Config
 	err := ctx.RegisterResource("cloudinit:index/config:Config", name, args, &resource, opts...)

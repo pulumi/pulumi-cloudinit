@@ -6,6 +6,7 @@ package com.pulumi.cloudinit.inputs;
 import com.pulumi.cloudinit.inputs.GetConfigPartArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
@@ -67,15 +68,15 @@ public final class GetConfigArgs extends com.pulumi.resources.InvokeArgs {
      * A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      * 
      */
-    @Import(name="parts")
-    private @Nullable Output<List<GetConfigPartArgs>> parts;
+    @Import(name="parts", required=true)
+    private Output<List<GetConfigPartArgs>> parts;
 
     /**
      * @return A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
      * 
      */
-    public Optional<Output<List<GetConfigPartArgs>>> parts() {
-        return Optional.ofNullable(this.parts);
+    public Output<List<GetConfigPartArgs>> parts() {
+        return this.parts;
     }
 
     private GetConfigArgs() {}
@@ -174,7 +175,7 @@ public final class GetConfigArgs extends com.pulumi.resources.InvokeArgs {
          * @return builder
          * 
          */
-        public Builder parts(@Nullable Output<List<GetConfigPartArgs>> parts) {
+        public Builder parts(Output<List<GetConfigPartArgs>> parts) {
             $.parts = parts;
             return this;
         }
@@ -200,6 +201,9 @@ public final class GetConfigArgs extends com.pulumi.resources.InvokeArgs {
         }
 
         public GetConfigArgs build() {
+            if ($.parts == null) {
+                throw new MissingRequiredPropertyException("GetConfigArgs", "parts");
+            }
             return $;
         }
     }
