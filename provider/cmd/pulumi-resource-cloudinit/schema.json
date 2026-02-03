@@ -148,6 +148,7 @@
                 "base64Encode",
                 "boundary",
                 "gzip",
+                "parts",
                 "rendered"
             ],
             "inputProperties": {
@@ -171,6 +172,9 @@
                     "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple \u003cspan pulumi-lang-nodejs=\"`part`\" pulumi-lang-dotnet=\"`Part`\" pulumi-lang-go=\"`part`\" pulumi-lang-python=\"`part`\" pulumi-lang-yaml=\"`part`\" pulumi-lang-java=\"`part`\"\u003e`part`\u003c/span\u003e blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
                 }
             },
+            "requiredInputs": [
+                "parts"
+            ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Config resources.\n",
                 "properties": {
@@ -228,7 +232,10 @@
                         "description": "A nested block type which adds a file to the generated cloud-init configuration. Use multiple \u003cspan pulumi-lang-nodejs=\"`part`\" pulumi-lang-dotnet=\"`Part`\" pulumi-lang-go=\"`part`\" pulumi-lang-python=\"`part`\" pulumi-lang-yaml=\"`part`\" pulumi-lang-java=\"`part`\"\u003e`part`\u003c/span\u003e blocks to specify multiple files, which will be included in order of declaration in the final MIME document.\n"
                     }
                 },
-                "type": "object"
+                "type": "object",
+                "required": [
+                    "parts"
+                ]
             },
             "outputs": {
                 "description": "A collection of values returned by getConfig.\n",
@@ -266,6 +273,7 @@
                     "boundary",
                     "gzip",
                     "id",
+                    "parts",
                     "rendered"
                 ],
                 "type": "object"
