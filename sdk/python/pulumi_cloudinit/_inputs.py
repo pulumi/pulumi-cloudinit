@@ -21,28 +21,23 @@ __all__ = [
     'GetConfigPartArgsDict',
 ]
 
-MYPY = False
-
-if not MYPY:
-    class ConfigPartArgsDict(TypedDict):
-        content: pulumi.Input[_builtins.str]
-        """
-        Body content for the part.
-        """
-        content_type: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A MIME-style content type to report in the header for the part. Defaults to `text/plain`
-        """
-        filename: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A filename to report in the header for the part.
-        """
-        merge_type: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
-        """
-elif False:
-    ConfigPartArgsDict: TypeAlias = Mapping[str, Any]
+class ConfigPartArgsDict(TypedDict):
+    content: pulumi.Input[_builtins.str]
+    """
+    Body content for the part.
+    """
+    content_type: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+    """
+    filename: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A filename to report in the header for the part.
+    """
+    merge_type: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+    """
 
 @pulumi.input_type
 class ConfigPartArgs:
@@ -114,26 +109,23 @@ class ConfigPartArgs:
         pulumi.set(self, "merge_type", value)
 
 
-if not MYPY:
-    class GetConfigPartArgsDict(TypedDict):
-        content: _builtins.str
-        """
-        Body content for the part.
-        """
-        content_type: NotRequired[_builtins.str]
-        """
-        A MIME-style content type to report in the header for the part. Defaults to `text/plain`
-        """
-        filename: NotRequired[_builtins.str]
-        """
-        A filename to report in the header for the part.
-        """
-        merge_type: NotRequired[_builtins.str]
-        """
-        A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
-        """
-elif False:
-    GetConfigPartArgsDict: TypeAlias = Mapping[str, Any]
+class GetConfigPartArgsDict(TypedDict):
+    content: _builtins.str
+    """
+    Body content for the part.
+    """
+    content_type: NotRequired[_builtins.str]
+    """
+    A MIME-style content type to report in the header for the part. Defaults to `text/plain`
+    """
+    filename: NotRequired[_builtins.str]
+    """
+    A filename to report in the header for the part.
+    """
+    merge_type: NotRequired[_builtins.str]
+    """
+    A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
+    """
 
 @pulumi.input_type
 class GetConfigPartArgs:
