@@ -27,6 +27,7 @@ class ConfigArgs:
                  gzip: Optional[pulumi.Input[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Config resource.
+
         :param pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
         :param pulumi.Input[_builtins.bool] base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
         :param pulumi.Input[_builtins.str] boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
@@ -99,6 +100,7 @@ class _ConfigState:
                  rendered: Optional[pulumi.Input[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering Config resources.
+
         :param pulumi.Input[_builtins.bool] base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
         :param pulumi.Input[_builtins.str] boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
         :param pulumi.Input[_builtins.bool] gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
@@ -208,6 +210,7 @@ class Config(pulumi.CustomResource):
 
         <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
@@ -240,6 +243,7 @@ class Config(pulumi.CustomResource):
         ### cloud-config.yaml
 
         <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
+
 
         :param str resource_name: The name of the resource.
         :param ConfigArgs args: The arguments to use to populate this resource's properties.
