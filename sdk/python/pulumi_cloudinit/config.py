@@ -22,9 +22,9 @@ __all__ = ['ConfigArgs', 'Config']
 class ConfigArgs:
     def __init__(__self__, *,
                  parts: pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]],
-                 base64_encode: Optional[pulumi.Input[_builtins.bool]] = None,
-                 boundary: Optional[pulumi.Input[_builtins.str]] = None,
-                 gzip: Optional[pulumi.Input[_builtins.bool]] = None):
+                 base64_encode: pulumi.Input[Optional[_builtins.bool]] = None,
+                 boundary: pulumi.Input[Optional[_builtins.str]] = None,
+                 gzip: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a Config resource.
 
@@ -55,49 +55,49 @@ class ConfigArgs:
 
     @_builtins.property
     @pulumi.getter(name="base64Encode")
-    def base64_encode(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def base64_encode(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
         """
         return pulumi.get(self, "base64_encode")
 
     @base64_encode.setter
-    def base64_encode(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def base64_encode(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "base64_encode", value)
 
     @_builtins.property
     @pulumi.getter
-    def boundary(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def boundary(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
         """
         return pulumi.get(self, "boundary")
 
     @boundary.setter
-    def boundary(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def boundary(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "boundary", value)
 
     @_builtins.property
     @pulumi.getter
-    def gzip(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def gzip(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Specify whether or not to gzip the `rendered` output. Defaults to `true`.
         """
         return pulumi.get(self, "gzip")
 
     @gzip.setter
-    def gzip(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def gzip(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "gzip", value)
 
 
 @pulumi.input_type
 class _ConfigState:
     def __init__(__self__, *,
-                 base64_encode: Optional[pulumi.Input[_builtins.bool]] = None,
-                 boundary: Optional[pulumi.Input[_builtins.str]] = None,
-                 gzip: Optional[pulumi.Input[_builtins.bool]] = None,
-                 parts: Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]] = None,
-                 rendered: Optional[pulumi.Input[_builtins.str]] = None):
+                 base64_encode: pulumi.Input[Optional[_builtins.bool]] = None,
+                 boundary: pulumi.Input[Optional[_builtins.str]] = None,
+                 gzip: pulumi.Input[Optional[_builtins.bool]] = None,
+                 parts: pulumi.Input[Optional[Sequence[pulumi.Input['ConfigPartArgs']]]] = None,
+                 rendered: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering Config resources.
 
@@ -120,62 +120,62 @@ class _ConfigState:
 
     @_builtins.property
     @pulumi.getter(name="base64Encode")
-    def base64_encode(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def base64_encode(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
         """
         return pulumi.get(self, "base64_encode")
 
     @base64_encode.setter
-    def base64_encode(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def base64_encode(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "base64_encode", value)
 
     @_builtins.property
     @pulumi.getter
-    def boundary(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def boundary(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
         """
         return pulumi.get(self, "boundary")
 
     @boundary.setter
-    def boundary(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def boundary(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "boundary", value)
 
     @_builtins.property
     @pulumi.getter
-    def gzip(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def gzip(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Specify whether or not to gzip the `rendered` output. Defaults to `true`.
         """
         return pulumi.get(self, "gzip")
 
     @gzip.setter
-    def gzip(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def gzip(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "gzip", value)
 
     @_builtins.property
     @pulumi.getter
-    def parts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]]:
+    def parts(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['ConfigPartArgs']]]]:
         """
         A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
         """
         return pulumi.get(self, "parts")
 
     @parts.setter
-    def parts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ConfigPartArgs']]]]):
+    def parts(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['ConfigPartArgs']]]]):
         pulumi.set(self, "parts", value)
 
     @_builtins.property
     @pulumi.getter
-    def rendered(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def rendered(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The final rendered multi-part cloud-init config.
         """
         return pulumi.get(self, "rendered")
 
     @rendered.setter
-    def rendered(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def rendered(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "rendered", value)
 
 
@@ -185,10 +185,10 @@ class Config(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 base64_encode: Optional[pulumi.Input[_builtins.bool]] = None,
-                 boundary: Optional[pulumi.Input[_builtins.str]] = None,
-                 gzip: Optional[pulumi.Input[_builtins.bool]] = None,
-                 parts: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict']]]]] = None,
+                 base64_encode: pulumi.Input[Optional[_builtins.bool]] = None,
+                 boundary: pulumi.Input[Optional[_builtins.str]] = None,
+                 gzip: pulumi.Input[Optional[_builtins.bool]] = None,
+                 parts: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict']]]]] = None,
                  __props__=None):
         """
         > **This resource is deprecated** Please use the Config
@@ -260,10 +260,10 @@ class Config(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 base64_encode: Optional[pulumi.Input[_builtins.bool]] = None,
-                 boundary: Optional[pulumi.Input[_builtins.str]] = None,
-                 gzip: Optional[pulumi.Input[_builtins.bool]] = None,
-                 parts: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict']]]]] = None,
+                 base64_encode: pulumi.Input[Optional[_builtins.bool]] = None,
+                 boundary: pulumi.Input[Optional[_builtins.str]] = None,
+                 gzip: pulumi.Input[Optional[_builtins.bool]] = None,
+                 parts: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -290,11 +290,11 @@ class Config(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            base64_encode: Optional[pulumi.Input[_builtins.bool]] = None,
-            boundary: Optional[pulumi.Input[_builtins.str]] = None,
-            gzip: Optional[pulumi.Input[_builtins.bool]] = None,
-            parts: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict']]]]] = None,
-            rendered: Optional[pulumi.Input[_builtins.str]] = None) -> 'Config':
+            base64_encode: pulumi.Input[Optional[_builtins.bool]] = None,
+            boundary: pulumi.Input[Optional[_builtins.str]] = None,
+            gzip: pulumi.Input[Optional[_builtins.bool]] = None,
+            parts: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict']]]]] = None,
+            rendered: pulumi.Input[Optional[_builtins.str]] = None) -> 'Config':
         """
         Get an existing Config resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

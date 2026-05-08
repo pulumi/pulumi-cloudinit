@@ -26,15 +26,15 @@ class ConfigPartArgsDict(TypedDict):
     """
     Body content for the part.
     """
-    content_type: NotRequired[pulumi.Input[_builtins.str]]
+    content_type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     A MIME-style content type to report in the header for the part. Defaults to `text/plain`
     """
-    filename: NotRequired[pulumi.Input[_builtins.str]]
+    filename: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     A filename to report in the header for the part.
     """
-    merge_type: NotRequired[pulumi.Input[_builtins.str]]
+    merge_type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
     """
@@ -43,9 +43,9 @@ class ConfigPartArgsDict(TypedDict):
 class ConfigPartArgs:
     def __init__(__self__, *,
                  content: pulumi.Input[_builtins.str],
-                 content_type: Optional[pulumi.Input[_builtins.str]] = None,
-                 filename: Optional[pulumi.Input[_builtins.str]] = None,
-                 merge_type: Optional[pulumi.Input[_builtins.str]] = None):
+                 content_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 filename: pulumi.Input[Optional[_builtins.str]] = None,
+                 merge_type: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] content: Body content for the part.
         :param pulumi.Input[_builtins.str] content_type: A MIME-style content type to report in the header for the part. Defaults to `text/plain`
@@ -74,38 +74,38 @@ class ConfigPartArgs:
 
     @_builtins.property
     @pulumi.getter(name="contentType")
-    def content_type(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def content_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A MIME-style content type to report in the header for the part. Defaults to `text/plain`
         """
         return pulumi.get(self, "content_type")
 
     @content_type.setter
-    def content_type(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def content_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "content_type", value)
 
     @_builtins.property
     @pulumi.getter
-    def filename(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def filename(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A filename to report in the header for the part.
         """
         return pulumi.get(self, "filename")
 
     @filename.setter
-    def filename(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def filename(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "filename", value)
 
     @_builtins.property
     @pulumi.getter(name="mergeType")
-    def merge_type(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def merge_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
         """
         return pulumi.get(self, "merge_type")
 
     @merge_type.setter
-    def merge_type(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def merge_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "merge_type", value)
 
 
