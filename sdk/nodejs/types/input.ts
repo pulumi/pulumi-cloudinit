@@ -15,15 +15,15 @@ export interface ConfigPart {
     /**
      * A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      */
-    contentType?: pulumi.Input<string>;
+    contentType?: pulumi.Input<string | undefined>;
     /**
      * A filename to report in the header for the part.
      */
-    filename?: pulumi.Input<string>;
+    filename?: pulumi.Input<string | undefined>;
     /**
      * A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
      */
-    mergeType?: pulumi.Input<string>;
+    mergeType?: pulumi.Input<string | undefined>;
 }
 
 export interface GetConfigPart {
@@ -62,15 +62,15 @@ export interface GetConfigPartArgs {
     /**
      * A MIME-style content type to report in the header for the part. Defaults to `text/plain`
      */
-    contentType?: pulumi.Input<string>;
+    contentType?: pulumi.Input<string | undefined>;
     /**
      * A filename to report in the header for the part.
      */
-    filename?: pulumi.Input<string>;
+    filename?: pulumi.Input<string | undefined>;
     /**
      * A value for the `X-Merge-Type` header of the part, to control [cloud-init merging behavior](https://cloudinit.readthedocs.io/en/latest/reference/merging.html).
      */
-    mergeType?: pulumi.Input<string>;
+    mergeType?: pulumi.Input<string | undefined>;
 }
 /**
  * getConfigPartArgsProvideDefaults sets the appropriate defaults for GetConfigPartArgs
