@@ -9,7 +9,7 @@ replace (
 
 require (
 	github.com/hashicorp/terraform-provider-cloudinit/shim v0.0.0
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.130.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.131.0
 )
 
 require (
