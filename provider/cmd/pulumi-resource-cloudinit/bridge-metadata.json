@@ -24,6 +24,11 @@
         }
     },
     "auto-settings": {},
+    "default-resource-schema-fixups": {
+        "resources": {
+            "cloudinit_config": {}
+        }
+    },
     "renames": {
         "resources": {
             "cloudinit:index/config:Config": "cloudinit_config"
