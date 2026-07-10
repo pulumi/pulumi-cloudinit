@@ -133,7 +133,6 @@ def get_config(base64_encode: Optional[_builtins.bool] = None,
 
     <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
 
-
     :param _builtins.bool base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
     :param _builtins.str boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
     :param _builtins.bool gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
@@ -175,7 +174,6 @@ def get_config_output(base64_encode: pulumi.Input[Optional[Optional[_builtins.bo
     ### cloud-config.yaml
 
     <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
-
 
     :param _builtins.bool base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
     :param _builtins.str boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.

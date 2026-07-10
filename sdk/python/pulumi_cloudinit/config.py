@@ -210,7 +210,6 @@ class Config(pulumi.CustomResource):
 
         <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
 
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
@@ -243,7 +242,6 @@ class Config(pulumi.CustomResource):
         ### cloud-config.yaml
 
         <!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `part` block list is noted as Required -->
-
 
         :param str resource_name: The name of the resource.
         :param ConfigArgs args: The arguments to use to populate this resource's properties.
