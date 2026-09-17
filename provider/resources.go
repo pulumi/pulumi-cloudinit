@@ -46,7 +46,7 @@ var metadata []byte
 func Provider() tfbridge.ProviderInfo {
 	prov := tfbridge.ProviderInfo{
 		P:            pf.ShimProvider(shim.NewProvider()),
-		Name:         "cloudinit",
+		Name:         mainPkg,
 		DisplayName:  "cloud-init",
 		Version:      version.Version,
 		Description:  "A Pulumi package for creating and managing cloudinit cloud resources.",
