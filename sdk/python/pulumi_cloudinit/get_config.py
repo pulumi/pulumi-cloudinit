@@ -114,7 +114,7 @@ class AwaitableGetConfigResult(GetConfigResult):
 def get_config(base64_encode: Optional[_builtins.bool] = None,
                boundary: Optional[_builtins.str] = None,
                gzip: Optional[_builtins.bool] = None,
-               parts: Optional[Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict']]] = None,
+               parts: Optional[Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict', 'outputs.GetConfigPartResult']]] = None,
                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetConfigResult:
     """
     Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
@@ -136,7 +136,7 @@ def get_config(base64_encode: Optional[_builtins.bool] = None,
     :param _builtins.bool base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
     :param _builtins.str boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
     :param _builtins.bool gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
-    :param Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict']] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+    :param Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict', 'outputs.GetConfigPartResult']] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
     """
     __args__ = dict()
     __args__['base64Encode'] = base64_encode
@@ -156,7 +156,7 @@ def get_config(base64_encode: Optional[_builtins.bool] = None,
 def get_config_output(base64_encode: pulumi.Input[Optional[Optional[_builtins.bool]]] = None,
                       boundary: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
                       gzip: pulumi.Input[Optional[Optional[_builtins.bool]]] = None,
-                      parts: pulumi.Input[Optional[Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict']]]] = None,
+                      parts: pulumi.Input[Optional[Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict', 'outputs.GetConfigPartResult']]]] = None,
                       opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetConfigResult]:
     """
     Renders a [multi-part MIME configuration](https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive) for use with [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
@@ -178,7 +178,7 @@ def get_config_output(base64_encode: pulumi.Input[Optional[Optional[_builtins.bo
     :param _builtins.bool base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
     :param _builtins.str boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
     :param _builtins.bool gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
-    :param Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict']] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+    :param Sequence[Union['GetConfigPartArgs', 'GetConfigPartArgsDict', 'outputs.GetConfigPartResult']] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
     """
     __args__ = dict()
     __args__['base64Encode'] = base64_encode
