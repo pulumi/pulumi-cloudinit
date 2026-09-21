@@ -188,7 +188,7 @@ class Config(pulumi.CustomResource):
                  base64_encode: pulumi.Input[Optional[_builtins.bool]] = None,
                  boundary: pulumi.Input[Optional[_builtins.str]] = None,
                  gzip: pulumi.Input[Optional[_builtins.bool]] = None,
-                 parts: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict']]]]] = None,
+                 parts: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict', 'outputs.ConfigPart']]]]] = None,
                  __props__=None):
         """
         > **This resource is deprecated** Please use the Config
@@ -215,7 +215,7 @@ class Config(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
         :param pulumi.Input[_builtins.str] boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
         :param pulumi.Input[_builtins.bool] gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict']]]] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict', 'outputs.ConfigPart']]]] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
         """
         ...
     @overload
@@ -261,7 +261,7 @@ class Config(pulumi.CustomResource):
                  base64_encode: pulumi.Input[Optional[_builtins.bool]] = None,
                  boundary: pulumi.Input[Optional[_builtins.str]] = None,
                  gzip: pulumi.Input[Optional[_builtins.bool]] = None,
-                 parts: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict']]]]] = None,
+                 parts: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict', 'outputs.ConfigPart']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -291,7 +291,7 @@ class Config(pulumi.CustomResource):
             base64_encode: pulumi.Input[Optional[_builtins.bool]] = None,
             boundary: pulumi.Input[Optional[_builtins.str]] = None,
             gzip: pulumi.Input[Optional[_builtins.bool]] = None,
-            parts: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict']]]]] = None,
+            parts: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict', 'outputs.ConfigPart']]]]] = None,
             rendered: pulumi.Input[Optional[_builtins.str]] = None) -> 'Config':
         """
         Get an existing Config resource's state with the given name, id, and optional extra
@@ -303,7 +303,7 @@ class Config(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] base64_encode: Specify whether or not to base64 encode the `rendered` output. Defaults to `true`, and cannot be disabled if gzip is `true`.
         :param pulumi.Input[_builtins.str] boundary: Specify the Writer's default boundary separator. Defaults to `MIMEBOUNDARY`.
         :param pulumi.Input[_builtins.bool] gzip: Specify whether or not to gzip the `rendered` output. Defaults to `true`.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict']]]] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict', 'outputs.ConfigPart']]]] parts: A nested block type which adds a file to the generated cloud-init configuration. Use multiple `part` blocks to specify multiple files, which will be included in order of declaration in the final MIME document.
         :param pulumi.Input[_builtins.str] rendered: The final rendered multi-part cloud-init config.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
