@@ -317,6 +317,22 @@ class Config(pulumi.CustomResource):
         __props__.__dict__["rendered"] = rendered
         return Config(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            base64_encode: pulumi.Input[Optional[_builtins.bool]] = None,
+            boundary: pulumi.Input[Optional[_builtins.str]] = None,
+            gzip: pulumi.Input[Optional[_builtins.bool]] = None,
+            parts: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ConfigPartArgs', 'ConfigPartArgsDict', 'outputs.ConfigPart']]]]] = None,
+            rendered: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["base64Encode"] = base64_encode
+        __props__["boundary"] = boundary
+        __props__["gzip"] = gzip
+        __props__["parts"] = parts
+        __props__["rendered"] = rendered
+        return pulumi.runtime.exists_resource(None, 'cloudinit:index/config:Config', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="base64Encode")
     def base64_encode(self) -> pulumi.Output[_builtins.bool]:

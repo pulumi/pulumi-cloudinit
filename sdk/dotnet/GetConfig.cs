@@ -69,7 +69,6 @@ namespace Pulumi.CloudInit
         /// ```
         /// 
         /// &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `Part` block list is noted as Required --&gt;
-        /// 
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetConfigResult> InvokeAsync(GetConfigArgs args, InvokeOptions? options = null)
@@ -133,7 +132,6 @@ namespace Pulumi.CloudInit
         /// ```
         /// 
         /// &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `Part` block list is noted as Required --&gt;
-        /// 
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetConfigResult> Invoke(GetConfigInvokeArgs args, InvokeOptions? options = null)
@@ -197,7 +195,6 @@ namespace Pulumi.CloudInit
         /// ```
         /// 
         /// &lt;!-- This schema was originally generated with tfplugindocs, then modified manually to ensure `Part` block list is noted as Required --&gt;
-        /// 
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetConfigResult> Invoke(GetConfigInvokeArgs args, InvokeOutputOptions options)
